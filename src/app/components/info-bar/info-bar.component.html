@@ -1,0 +1,22 @@
+<ul>
+	<li class="fix">
+		<div>Fixe</div>
+		<div [amount]="[totals.fixed]"></div>
+	</li>
+	<li class="income">
+		<div>A venir</div>
+		<div [amount]="[totals.income, {alwaysSign: true, color: true}]"></div>
+	</li>
+	<li class="epargne">
+		<div>Epargne</div>
+		<div [amount]="[totals.thrift]"></div>
+	</li>
+	<li class="variable">
+		<div>Actions</div>
+		<div [amount]="[totals.stocks]"></div>
+	</li>
+	<li class="total">
+		<div>Avoirs totaux</div>
+		<div [amount]="[total]"></div>
+	</li>
+</ul>

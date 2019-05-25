@@ -1,0 +1,14 @@
+<div>
+	<div>Derniers :</div>
+	<ul>
+		<li *ngFor="let item of lastItems">{{ item.date }} : {{ item.title }}</li>
+	</ul>
+	<div>Compte :
+		<select [(ngModel)]="account">
+			<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }}</option>
+		</select>
+	</div>
+	<textarea [(ngModel)]="parsingText" cols="60" rows="30"></textarea>
+	<button (click)="parse()">Parser !</button>
+</div>
+<update-list [items]="result" [account]="account" canAdd="true"></update-list>

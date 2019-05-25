@@ -1,0 +1,28 @@
+<div class="data" *ngIf="!add && header">
+	<div>Total : <span [amount]="[total, {alwaysSign: true, color: true}]"></span></div>
+	<div>Moyenne : <span [amount]="[average, {alwaysSign: true, color: true}]"></span></div>
+	<div class="six-sigma">
+		<input type="checkbox" id="six-sigma" name="six-sigma" [(ngModel)]="sigma" (change)="refresh()" />
+		<label for="six-sigma">6-σ</label>
+	</div>
+</div>
+<canvas baseChart #baseChart="base-chart"
+	[datasets]="displayData"
+	[labels]="displayLabels"
+	[options]="options"
+	[legend]="displayData.length > 1"
+	chartType="line"></canvas>
+<div class="tabs" [hidden]="offFilters.length === 2">
+	<ng-container *ngIf="offFilters.indexOf('Jour') === -1">
+		<input type="radio" name="tab" id="chart-day" value="Jour" [(ngModel)]="group" (change)="refresh()"/>
+		<label for="chart-day">Jour</label>
+	</ng-container>
+	<ng-container *ngIf="offFilters.indexOf('Mois') === -1">
+		<input type="radio" name="tab" id="chart-month" value="Mois" [(ngModel)]="group" (change)="refresh()"/>
+		<label for="chart-month">Mois</label>
+	</ng-container>
+	<ng-container *ngIf="offFilters.indexOf('Année') === -1">
+		<input type="radio" name="tab" id="chart-year" value="Année" [(ngModel)]="group" (change)="refresh()"/>
+		<label for="chart-year">Année</label>
+	</ng-container>
+</div>

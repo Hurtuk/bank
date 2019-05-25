@@ -1,0 +1,30 @@
+.type {
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+	display: block;
+}
+
+.add {
+	color: lightgray;
+	border: 1px solid lightgray;
+	border-radius: 100%;
+	width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.4em;
+	text-align: center;
+	cursor: pointer;
+	
+	&:hover {
+		color: gray;
+		border-color: gray;
+	}
+}
+
+.big {
+	width: 64px;
+	height: 64px;
+}

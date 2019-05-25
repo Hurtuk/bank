@@ -1,0 +1,40 @@
+@import '../../shared/styles/colors';
+
+:host {
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 0;
+}
+
+.content {
+	display: flex;
+	flex: 1;
+}
+
+bk-chart {
+	flex: 1 1 0;
+	width: calc(100% - 600px);
+	max-height: 600px;
+}
+
+.types {
+	width: 600px;
+
+	ul {
+		list-style-type: none;
+
+		li {
+			display: inline-block;
+			
+			label {
+				margin: 5px;
+			}
+		}
+
+		&:first-child {
+			label {
+				margin: 5px 25px !important;
+			}
+		}
+	}
+}

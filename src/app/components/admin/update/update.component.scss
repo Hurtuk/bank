@@ -1,0 +1,19 @@
+.closed {
+	text-decoration: line-through;
+}
+
+label {
+	span {
+		display: block;
+		width: 40px;
+		height: 40px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		float: left;
+	}
+}
+
+update-list {
+	display: block;
+}

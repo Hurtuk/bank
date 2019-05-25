@@ -1,0 +1,18 @@
+<div class="tabs">
+	<ng-container *ngFor="let a of accounts">
+		<input type="radio" name="tab" [id]="'account-tab-' + a.id" [value]="a.id" [checked]="account == a" (change)="account = a; updateYears()"/>
+		<label [for]="'account-tab-' + a.id" [class.closed]="a.opened != 1">
+			<span [style.backgroundImage]="'url(./assets/images/structures/' + a.bank + '.png)'"></span>
+			{{ a.name }}
+		</label>
+	</ng-container>
+</div>
+<div class="tabs" *ngIf="years">
+	<ng-container *ngFor="let y of years">
+		<input type="radio" name="years" [id]="'year-' + y" [value]="y" [(ngModel)]="year" (change)="updateContent()"/>
+		<label [for]="'year-' + y">
+			{{ y }}
+		</label>
+	</ng-container>
+</div>
+<update-list [items]="result" [account]="account" [allIncome]="true"></update-list>

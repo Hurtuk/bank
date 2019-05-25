@@ -1,0 +1,54 @@
+<div class="panel">
+	<h1>Fixe</h1>
+	<ul>
+		<li *ngFor="let fix of fixAccounts">
+			<span [style.backgroundImage]="'url(./assets/images/structures/' + fix.bank + '.png)'"></span>
+			<div class="account-name">{{ fix.name }}</div>
+			<div class="account-sum" [amount]="[fix.amount]"></div>
+		</li>
+	</ul>
+	<h2>Remboursements à venir</h2>
+	<table>
+		<tr *ngFor="let inc of income">
+			<td>
+				<type *ngFor="let t of inc.types" [icon]="t"></type>
+			</td>
+			<td>{{ inc.date | date: 'dd/MM' }}</td>
+			<td>{{ inc.title }}</td>
+			<td [amount]="[-inc.amount, {alwaysSign: true, color: true}]"></td>
+		</tr>
+	</table>
+</div>
+<div class="top-panel">
+	<div>
+		<div class="panel">
+			<h1>Epargne</h1>
+			<ul>
+				<li *ngFor="let thr of thriftAccounts">
+					<span [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
+					<div class="account-name">{{ thr.name }}</div>
+					<div class="account-sum" [amount]="[thr.amount]"></div>
+				</li>
+			</ul>
+		</div>
+		<div class="panel">
+			<h1>Actions</h1>
+			<ul>
+				<li *ngFor="let sto of stocks">
+					<span [style.backgroundImage]="'url(./assets/images/structures/' + sto.code + '.png)'"></span>
+					<div [amount]="[sto.value]"></div>
+					<div class="stocks-count">{{ sto.count }}</div>
+					<div class="account-sum" [amount]="[sto.value * sto.count]"></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div>
+		<bk-chart
+			initialData="totalData"
+			fillWith="prev"
+			[offFilters]="['Mois', 'Année']"
+			[add]="true"
+			[chartOptions]="chartOptions"></bk-chart>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+@import '../../shared/styles/colors';
+
+:host {
+	background-color: $color-primary;
+	color: white;
+	display: block;
+	overflow: auto;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 2px;
+	width: 80%;
+	min-width: 992px;
+	float: right;
+
+	li {
+		display: inline-block;
+
+		+ li {
+			margin-left: 4%;
+		}
+
+		&:last-child {
+			float: right;
+			margin-right: 10px;
+		}
+
+		div {
+			font-size: 1.3em;
+			text-align: right;
+			line-height: 1em;
+
+			&:first-child {
+				font-size: .7em;
+				line-height: .8em;
+				margin-top: 3px;
+				text-transform: uppercase;
+				margin-bottom: 1px;
+			}
+		}
+	}
+}

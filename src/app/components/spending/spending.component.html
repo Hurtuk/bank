@@ -1,0 +1,26 @@
+<h1>Dépenses</h1>
+<div class="content">
+	<div class="types">
+		<ul>
+			<ng-container *ngFor="let t of types; let i = index">
+				<li *ngIf="i < 3">
+					<input type="checkbox" [id]="'type-' + t.id" name="types" (change)="toggleType(t)" />
+					<label [for]="'type-' + t.id">
+						<type [icon]="t" size="big"></type>
+					</label>
+				</li>
+			</ng-container>
+		</ul>
+		<ul>
+			<ng-container *ngFor="let t of types; let i = index">
+				<li *ngIf="i >= 3">
+					<input type="checkbox" [id]="'type-' + t.id" name="types" (change)="toggleType(t)" />
+					<label [for]="'type-' + t.id">
+						<type [icon]="t"></type>
+					</label>
+				</li>
+			</ng-container>
+		</ul>
+	</div>
+	<bk-chart initialData="typesChartData"></bk-chart>
+</div>

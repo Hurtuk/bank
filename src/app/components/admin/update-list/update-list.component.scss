@@ -1,0 +1,49 @@
+@import '../../../shared/styles/colors';
+
+table {
+	margin: 0 auto;
+}
+
+td {
+	text-align: center;
+	white-space: nowrap;
+
+	type {
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+input {
+	&[type=date] {
+		width: 125px;
+	}
+
+	&[type=text] {
+		width: 210px;
+	}
+
+	&[type=number] {
+		width: 80px;
+		text-align: right;
+	}
+}
+
+.popup {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(255, 255, 255, .95);
+
+	h1 {
+		cursor: pointer;
+		min-height: 2em;
+	}
+
+	> div {
+		width: 60%;
+		margin: 0 auto;
+	}
+}

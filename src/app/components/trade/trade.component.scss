@@ -1,0 +1,154 @@
+:host {
+	flex-direction: column;
+	height: 100%;
+	flex: 1 0 0;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+.content {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	height: calc(100vh - 123px);
+}
+
+.current,
+.benefit {
+	display: flex;
+
+	> bk-chart {
+		flex: 1;
+		max-height: 280px;
+	}
+
+	> div {
+		flex: 0 0 20%;
+	}
+}
+
+.current {
+	flex: 1 1 auto;
+}
+
+.bought {
+	flex: 0 0 auto;
+}
+
+.benefit {
+	flex: 1 1 auto;
+}
+
+.action-icon {
+	display: block;
+	width: 50px;
+	height: 50px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.action-row {
+	max-width: 150px;
+	padding-right: 50px;
+	margin: 0 auto;
+	position: relative;
+
+	.action-icon {
+		float: left;
+
+		+ div {
+			font-size: .7em;
+			text-align: right;
+
+			+ div {
+				position: absolute;
+				left: calc(100% - 40px);
+				bottom: 0;
+				line-height: 30px;
+
+				+ div {
+					font-size: 1.4em;
+					line-height: 30px;
+				}
+			}
+		}
+	}
+}
+
+.bought {
+	margin-bottom: 92px;
+
+	> div {
+		display: flex;
+		justify-content: space-evenly;
+
+		> div {
+			text-align: center;
+			font-size: .8em;
+
+			> div {
+				&:nth-child(2) {
+					span {
+						font-size: 1.5em;
+						margin-right: 10px;
+						margin-left: 10px;
+			
+						&:first-child {
+							width: 30px;
+							height: 30px;
+							display: inline-block;
+							vertical-align: top;
+						}
+			
+						&:last-child {
+							font-weight: bold;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.benefit {
+	> div {
+		> div {
+			position: relative;
+			text-align: center;
+			width: 340px;
+			margin: 0 auto;
+			font-size: .9em;
+			padding-left: 22px;
+
+			> div {
+				> div {
+					&:first-of-type {
+						display: flex;
+
+						> div {
+							margin: 0 10px;
+							flex: 1;
+							text-align: center;
+						}
+					}
+				}
+
+				&:last-child {
+					font-size: 1.5em;
+					margin-top: 20px;
+				}
+			}
+
+			.action-icon {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 35px;
+				height: 35px;
+			}
+		}
+	}
+}

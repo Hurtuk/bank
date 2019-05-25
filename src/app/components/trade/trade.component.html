@@ -1,0 +1,57 @@
+<h1>Bourse</h1>
+<div class="content">
+	<div class="current">
+		<bk-chart
+			[header]="false"
+			[offFilters]="['Mois', 'Année']"
+			initialData="currentsData"
+			fillWith="prev"
+			[minimum]="80"></bk-chart>
+		<div>
+			<h2>Cours</h2>
+			<div *ngFor="let cur of currents" class="action-row">
+				<span [style.backgroundImage]="'url(./assets/images/structures/' + cur.action + '.png)'" class="action-icon"></span>
+				<div>{{ cur.valueDate.date | date:'dd/MM/yyyy'}}</div>
+				<div [amount]="[getPercent(cur.prevValueDate.value, cur.valueDate.value), {color: true, alwaysSign: true, sign: '%'}]"></div>
+				<div [amount]="[cur.valueDate.value]"></div>
+			</div>
+		</div>
+	</div>
+	<div class="bought">
+		<h2>Transactions</h2>
+		<div>
+			<div *ngFor="let ba of bought">
+				<div>{{ ba.date | date:'dd/MM/yyyy'}}</div>
+				<div>
+					<span [style.backgroundImage]="'url(./assets/images/structures/' + ba.action + '.png)'" class="action-icon"></span>
+					<span>{{ (ba.count >= 0 ? '+' : '') + ba.count }}</span> = <span>{{ ba.total + ' actions' }}</span>
+				</div>
+				<div>
+					<span [amount]="[ba.value]"></span>
+					(Ø <span [amount]="[ba.value / ba.count]"></span>)
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="benefit">
+		<div>
+			<h2>Bénéfices</h2>
+			<div>
+				<div *ngFor="let b of benefit">
+					<span [style.backgroundImage]="'url(./assets/images/structures/' + b.action + '.png)'" class="action-icon"></span>
+					<div>
+						<div>Achat : <span [amount]="[b.total]"></span></div>
+						<div>Valeur : <span [amount]="[b.value]"></span></div>
+					</div>
+					<div>Bénéfice : <span [amount]="[b.value - b.total, {color: true, alwaysSign: true}]"></span></div>
+				</div>
+				<div>Total : <span [amount]="[benefitTotal, {color: true, alwaysSign: true}]"></span></div>
+			</div>
+		</div>
+		<bk-chart
+			[header]="false"
+			[offFilters]="['Mois', 'Année']"
+			initialData="benefitData"
+			fillWith="prev"></bk-chart>
+	</div>
+</div>

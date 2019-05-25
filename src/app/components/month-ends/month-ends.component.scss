@@ -1,0 +1,56 @@
+@import '../../shared/styles/colors';
+
+.content {
+	display: flex;
+}
+
+.chart {
+	flex: 3;
+	padding: 0 50px;
+}
+
+.tables {
+	flex: 2;
+	padding: 0 50px;
+
+	td,
+	th {
+		padding: 5px 10px;
+
+		&:first-child {
+			text-align: left;
+			padding-right: 15px;
+		}
+	}
+
+	thead {
+		th {
+			color: $color-tertiary;
+			text-transform: uppercase;
+			font-weight: 100;
+			font-size: 1.2em;
+		}
+	}
+
+	tbody {
+		td,
+		th {
+			font-size: 1.2em;
+		}
+
+		&:not(:first-of-type) {
+			td,
+			th {
+				font-size: .9em;
+			}
+		}
+
+		tr {
+			&:first-child {
+				> * {
+					padding-top: 20px;
+				}
+			}
+		}
+	}
+}

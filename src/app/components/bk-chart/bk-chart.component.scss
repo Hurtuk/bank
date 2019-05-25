@@ -1,0 +1,47 @@
+@import '../../shared/styles/colors';
+
+:host {
+	//display: flex;
+	//flex-direction: column;
+}
+
+canvas {
+	display: block;
+	//flex: 1 0 0;
+	//height: calc(100% - 96px) !important;
+}
+
+.data {
+	flex: 0 0 auto;
+
+	> div {
+		display: inline-block;
+		margin: 0 20px;
+		font-size: 1.4em;
+	}
+}
+
+.tabs {
+	flex: 0 0 auto;
+}
+
+.six-sigma {
+	float: right;
+
+	input {
+		display: none;
+
+		&:checked {
+			+ label {
+				color: $color-secondary;
+			}
+		}
+	}
+
+	label {
+		font-weight: bold;
+		color: lightgray;
+		cursor: pointer;
+		font-size: .9em;
+	}
+}

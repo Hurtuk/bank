@@ -1,0 +1,38 @@
+<h1>Fins de mois</h1>
+<div class="content">
+	<div class="chart">
+		<div class="tabs">
+			<input type="radio" name="tab" id="total-chart" value="Total" [(ngModel)]="operation" (change)="refresh()"/>
+			<label for="total-chart">Total</label>
+			<input type="radio" name="tab" id="compare-chart" value="Superposés" [(ngModel)]="operation" (change)="refresh()"/>
+			<label for="compare-chart">Superposés</label>
+		</div>
+		<bk-chart initialData="monthEndsData" [offFilters]="['Jour']" [comparison]="true"></bk-chart>
+	</div>
+	<div class="tables">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th *ngFor="let d of data">{{d.year}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Total</th>
+					<td *ngFor="let d of data" [amount]="[d.total, {color: true, alwaysSign: true}]"></td>
+				</tr>
+				<tr>
+					<th>Moyenne</th>
+					<td *ngFor="let d of data" [amount]="[d.average, {color: true, alwaysSign: true}]"></td>
+				</tr>
+			</tbody>
+			<tbody *ngIf="data">
+				<tr *ngFor="let m of data[0].months; let i = index">
+					<th>{{getMonth(m.month)}}</th>
+					<td *ngFor="let d of data" [amount]="[d.months[i] ? d.months[i].value : '', {color: true, alwaysSign: true}]"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

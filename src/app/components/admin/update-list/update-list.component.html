@@ -1,0 +1,65 @@
+<table>
+	<thead>
+		<tr>
+			<th>Types</th>
+			<th>Date</th>
+			<th>Titre</th>
+			<th>Montant</th>
+			<th>Variable</th>
+			<th>Rembourse</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngIf="canAdd">
+			<td colspan="7">
+				<button (click)="add()">Nouvelle ligne</button>
+			</td>
+		</tr>
+		<tr *ngFor="let r of items">
+			<td>
+				<type *ngFor="let t of r.types" [icon]="t"></type>
+				<type (click)="openPopup(r)"></type>
+			</td>
+			<td>
+				<input [ngModel]="r.date | date:'yyyy-MM-dd'" (ngModelChange)="r.date = $event" type="date" (change)="r.updated = true"/>
+			</td>
+			<td>
+				<input type="text" [(ngModel)]="r.title" (change)="r.updated = true"/>
+			</td>
+			<td>
+				<input type="number" [(ngModel)]="r.amount" (change)="r.updated = true"/>
+			</td>
+			<td>
+				<input type="number" [(ngModel)]="r.variable" (change)="r.updated = true"/>
+			</td>
+			<td>
+				<select [(ngModel)]="r.refunding" (change)="r.updated = true">
+					<option *ngFor="let f of refundable" [ngValue]="f.id">{{f.title + ' ' + f.amount + '€'}}</option>
+				</select>
+			</td>
+			<td>
+				<button (click)="removeRow(r)">-</button>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot *ngIf="items">
+		<tr>
+			<td colspan="7">
+				<button (click)="save()">Enregistrer</button>
+				<div *ngIf="success">Données enregistrées !</div>
+			</td>
+		</tr>
+	</tfoot>
+</table>
+<div class="popup" *ngIf="popupOpened">
+	<h1 (click)="closePopup()">{{ popupOpenedFor.title }}</h1>
+	<div class="types">
+		<ng-container *ngFor="let t of types">
+			<input type="checkbox" [id]="'type-' + t.id" name="types" [checked]="currentHasType(t)" (change)="toggleType(t)" />
+			<label [for]="'type-' + t.id">
+				<type [icon]="t" size="big"></type>
+			</label>
+		</ng-container>
+	</div>
+</div>
