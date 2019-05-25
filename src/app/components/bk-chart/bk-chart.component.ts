@@ -232,6 +232,16 @@ export class BkChartComponent implements OnInit {
 				if (this.add) {
 					this.addValues();
 				}
+				// TODO Fix
+				if (!this.minimum && !this.receivedData.some(rd => rd.data.some(d => d.value < 0))) {
+					this.options.scales = {
+						yAxes: [{
+							ticks: {
+								min: 0
+							}
+						}]
+					};
+				}
 				this.refresh();
 			}
 		});

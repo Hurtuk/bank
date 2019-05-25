@@ -7,6 +7,11 @@
 .chart {
 	flex: 3;
 	padding: 0 50px;
+
+	bk-chart {
+		display: block;
+		height: 500px;
+	}
 }
 
 .tables {

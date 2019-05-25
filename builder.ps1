@@ -1,16 +1,19 @@
 <# README
-The purpose of this script is to build a standard Angular app then publish it on a server with SFTP.
+	The purpose of this script is to build a standard Angular app then publish it on a server with SFTP.
 
-DISCLAIMER: The $PATH variable is really important, because the script firstly removes the remote folder with that name,
+DISCLAIMER
+	The $PATH variable is really important, because the script firstly removes the remote folder with that name,
 	so please don't feed it with ".", "*" or "", unless your server is entirely dedicated to the app.
 
-The script can require the execution of this command:
+REQUIREMENTS
+	The script can require the execution of this command:
 	Set-ExecutionPolicy RemoteSigned
 	
-Also, it requires the module Posh-ssh:
+	Also, it requires the module Posh-ssh:
 	https://www.it-connect.fr/posh-ssh-connexion-ssh-depuis-powershell-sous-windows/
 	
-Author: Nicolas Lethuillier
+AUTHOR
+	Nicolas Lethuillier
 #>
 
 # Project constants
@@ -23,9 +26,6 @@ $PATH = 'bank'
 # SFTP Credential
 $Password = ConvertTo-SecureString $SFTP_PASSWORD -AsPlainText -Force
 $Credential = New-Object System.Management.Automation.PSCredential ($SFTP_USER, $Password)
-
-# Go at the project root
-cd ..
 
 # Build Angular app (by default in /dist/$PATH)
 ng build
@@ -70,6 +70,3 @@ foreach ($item in $uploadFiles) {
 
 #Disconnect all SFTP Sessions
 Get-SFTPSession | % { Remove-SFTPSession -SessionId ($_.SessionId) }
-
-# Go back to the builder folder
-cd ../../builder
