@@ -31,7 +31,7 @@ $Credential = New-Object System.Management.Automation.PSCredential ($SFTP_USER, 
 ng build
 
 # Go at the built app root
-cd "./dist/$PATH"
+cd "./dist"
 
 # Update the base href of index
 (Get-Content index.html).replace("<base href=`"/`">", "<base href=`"/$PATH/`">") | Set-Content index.html
