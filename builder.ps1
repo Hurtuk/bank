@@ -1,4 +1,5 @@
-<# README
+<#
+README
 	The purpose of this script is to build a standard Angular app then publish it on a server with SFTP.
 
 DISCLAIMER
@@ -28,13 +29,10 @@ $Password = ConvertTo-SecureString $SFTP_PASSWORD -AsPlainText -Force
 $Credential = New-Object System.Management.Automation.PSCredential ($SFTP_USER, $Password)
 
 # Build Angular app (by default in /dist/$PATH)
-ng build
+ng build --baseHref="/$PATH/"
 
 # Go at the built app root
 cd "./dist"
-
-# Update the base href of index
-(Get-Content index.html).replace("<base href=`"/`">", "<base href=`"/$PATH/`">") | Set-Content index.html
 
 # Establish the SFTP connection
 $ThisSession = New-SFTPSession -ComputerName $SFTP_HOST -Credential $Credential
