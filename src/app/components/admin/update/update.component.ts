@@ -11,18 +11,18 @@ import { AmountsService } from '../../../shared/services/amounts.service';
 export class UpdateComponent implements OnInit {
 	public result: {
 		id: number,
-		types: string[],
+		types: {image: string, id: number, name: string}[],
 		date: Date,
 		title: string,
 		amount: number,
 		variable: number,
 		refunding: number,
-		updated: boolean
+		updated?: boolean
 	}[];
-	public accounts = [];
-	public account: any;
+	public accounts: {id: number, name: string}[] = [];
+	public account: {id: number, name: string};
 	public year = (new Date()).getFullYear();
-	public years: number[];
+	public years: string[];
 
 	constructor(
 		private accountsService: AccountsService,

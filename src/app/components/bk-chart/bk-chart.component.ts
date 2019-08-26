@@ -14,14 +14,14 @@ import { DateService } from '../../shared/services/date.service';
  * 	{data: {date: Date, value: number}[], label: string}[]
  */
 export class BkChartComponent implements OnInit {
-	@ViewChild('baseChart') chart: BaseChartDirective;
+	@ViewChild('baseChart', { static: true }) chart: BaseChartDirective;
 
 	@Input() initialData: string;
 	@Input() offFilters = [];
 	@Input() comparison = false;
 	@Input() fillWith = 'zeros';
 	@Input() add = false;
-	@Input() chartOptions: {option: string, value: any}[][];
+	@Input() chartOptions: {option: string, value: string | number}[][];
 	@Input() header = true;
 	@Input() minimum: number;
 
@@ -30,8 +30,8 @@ export class BkChartComponent implements OnInit {
 	public total: number;
 	public average: number;
 
-	public displayData: any[] = [{data: [], label: 'new'}];
-	public displayLabels: any[] = [];
+	public displayData = [{data: [], label: 'new'}];
+	public displayLabels: string[] = [];
 	public options: any = {
 		responsive: true,
 		maintainAspectRatio: false
@@ -147,7 +147,7 @@ export class BkChartComponent implements OnInit {
 				if (!this.comparison || this.data.length <= 1) {
 					this.displayLabels = this.data[0].data.map(d => d.date.getDate() + ' ' + this.dateService.months[d.date.getMonth()] + ' ' + d.date.getFullYear());
 				} else {
-					this.displayLabels = this.data[0].data.map(d => d.date.getDate());
+					this.displayLabels = this.data[0].data.map(d => d.date.getDate().toString());
 				}
 				break;
 			case 'Mois':
@@ -158,7 +158,7 @@ export class BkChartComponent implements OnInit {
 				}
 				break;
 			case 'Année':
-				this.displayLabels = this.data[0].data.map(d => d.date.getFullYear());
+				this.displayLabels = this.data[0].data.map(d => d.date.getFullYear().toString());
 				break;
 		}
 	}

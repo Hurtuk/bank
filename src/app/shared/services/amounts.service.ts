@@ -1,79 +1,86 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UrlBuilderService } from './url-builder.service';
 
-import { Observable, Subject } from 'rxjs';
-import 'rxjs/add/operator/map';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AmountsService {
-	public totals = new Subject<any>();
+	public totals = new BehaviorSubject({fixed: 0, thrift: 0, income: 0, stocks: 0});
 
 	constructor(
-		private http: Http,
+		private http: HttpClient,
 		private urlBuilder: UrlBuilderService
 	) { }
 
-	public updateTotals(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getTotals'))
-			.map(response => this.totals.next(response.json().data));
+	public updateTotals(): Observable<{fixed: number, thrift: number, income: number, stocks: number}> {
+		return this.http.get<{fixed: number, thrift: number, income: number, stocks: number}>(this.urlBuilder.buildUrl('getTotals'))
+			.pipe(tap(totals => this.totals.next(totals)));
 	}
 
-	public getHomeValues(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getHomeValues'))
-			.map(response => response.json().data);
+	public getHomeValues(): Observable<{
+		fixed: {amount: number, bank: string, name: string}[],
+		thrift: {amount: number, bank: string, name: string}[],
+		income: {id: number, date: Date, amount: number, types: string[], title: string}[],
+		stocks: {code: string, count: number, value: number}[]
+	}> {
+		return this.http.get<{
+			fixed: {amount: number, bank: string, name: string}[],
+			thrift: {amount: number, bank: string, name: string}[],
+			income: {id: number, date: Date, amount: number, types: string[], title: string}[],
+			stocks: {code: string, count: number, value: number}[]
+		}>(this.urlBuilder.buildUrl('getHomeValues'));
 	}
 
-	public getTransactionsByAccountAndYear(idAccount: number, year: number): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getTransactionsByAccountAndYear', idAccount, year))
-			.map(response => response.json().data);
+	public getTransactionsByAccountAndYear(idAccount: number, year: number): Observable<{
+		id: number, date: Date, title: string, amount: number, variable: number, refunding: number,
+		types: {image: string, id: number, name: string}[]
+	}[]> {
+		return this.http.get<{
+			id: number, date: Date, title: string, amount: number, variable: number, refunding: number,
+			types: {image: string, id: number, name: string}[]
+		}[]>(this.urlBuilder.buildUrl('getTransactionsByAccountAndYear', idAccount, year));
 	}
 
-	public getAllVariables(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getAllVariables'))
-			.map(response => response.json().data);
+	public getAllVariables(): Observable<{id: number, date: Date, amount: number, title: string}[]> {
+		return this.http.get<{id: number, date: Date, amount: number, title: string}[]>(this.urlBuilder.buildUrl('getAllVariables'));
 	}
 
-	public getAllSpending(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getAllSpending'))
-			.map(response => response.json().data);
+	public getAllSpending(): Observable<{date: Date, amount: number, types: string[]}[]> {
+		return this.http.get<{date: Date, amount: number, types: string[]}[]>(this.urlBuilder.buildUrl('getAllSpending'));
 	}
 
-	public getMonthEnds(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getMonthEnds'))
-			.map(response => response.json().data);
+	public getMonthEnds(): Observable<{year: string, months: {month: number, value: number}[]}[]> {
+		return this.http.get<{year: string, months: {month: number, value: number}[]}[]>(this.urlBuilder.buildUrl('getMonthEnds'));
 	}
 
-	public getTotalData(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getTotalData'))
-			.map(response => response.json().data);
+	public getTotalData(): Observable<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[]}> {
+		return this.http.get<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[]}>(this.urlBuilder.buildUrl('getTotalData'));
 	}
 
-	public getCurrentsData(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getCurrents'))
-			.map(response => response.json().data);
+	public getCurrentsData(): Observable<{label: string, data: {date: Date, value: number}[]}[]> {
+		return this.http.get<{label: string, data: {date: Date, value: number}[]}[]>(this.urlBuilder.buildUrl('getCurrents'));
 	}
 
-	public getBenefit(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getBenefit'))
-			.map(response => response.json().data);
+	public getBenefit(): Observable<{date: Date, value: number}[]> {
+		return this.http.get<{date: Date, value: number}[]>(this.urlBuilder.buildUrl('getBenefit'));
 	}
 
-	public getBoughtActions(): Observable<any> {
-		return this.http.get(this.urlBuilder.buildUrl('getBoughtActions'))
-			.map(response => response.json().data);
+	public getBoughtActions(): Observable<{action: string, date: Date, value: number, count: number}[]> {
+		return this.http.get<{action: string, date: Date, value: number, count: number}[]>(this.urlBuilder.buildUrl('getBoughtActions'));
 	}
 
-	public save(account: number, rows: any[]): Observable<any> {
+	public save(account: number, rows: any[]): Observable<void> {
 		const body = {
 			account,
 			data: rows
 		};
-		const headers = new Headers(
-			{
-				'Content-Type': 'application/json'
-			});
-		return this.http.post(this.urlBuilder.buildUrl('save'), body, new RequestOptions({ headers: headers }))
-						.map(() => this.updateTotals().subscribe());
+		const headers = new HttpHeaders();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post(this.urlBuilder.buildUrl('save'), body, { headers: headers })
+						.pipe(map(() => {
+							this.updateTotals().subscribe();
+						}));
 	}
 }

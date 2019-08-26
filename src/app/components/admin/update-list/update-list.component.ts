@@ -17,7 +17,7 @@ export class UpdateListComponent implements OnInit {
 		amount: number,
 		variable: number,
 		refunding: number,
-		updated: boolean
+		updated?: boolean
 	}[];
 	@Input() account: number;
 	@Input() canAdd: boolean;

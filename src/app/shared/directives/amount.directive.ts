@@ -13,7 +13,6 @@ import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 export class AmountDirective implements OnChanges {
 	@Input() amount: any[] = [];
 	private elementRef: ElementRef;
-	private changes: MutationObserver;
 
 	constructor(el: ElementRef) {
 		this.elementRef = el;

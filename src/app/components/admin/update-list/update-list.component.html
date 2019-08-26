@@ -18,7 +18,7 @@
 		</tr>
 		<tr *ngFor="let r of items">
 			<td>
-				<type *ngFor="let t of r.types" [icon]="t"></type>
+				<type *ngFor="let t of r.types" [icon]="t.image"></type>
 				<type (click)="openPopup(r)"></type>
 			</td>
 			<td>

@@ -10,7 +10,6 @@ import { AmountDirective } from './shared/directives/amount.directive';
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 import { UrlBuilderService } from './shared/services/url-builder.service';
 import { AmountsService } from './shared/services/amounts.service';
-import { HttpModule } from '@angular/http';
 import { HomeComponent } from './components/home/home.component';
 import { TypesService } from './shared/services/types.service';
 import { AccountsService } from './shared/services/accounts.service';
@@ -25,6 +24,8 @@ import { AuthGuard } from './shared/services/auth-guard.service';
 import { AuthService } from './shared/services/auth.service';
 import { LoginComponent } from './components/admin/login/login.component';
 import { AdminModule } from './admin.module';
+import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from 'src/interceptors';
 
 @NgModule({
 	declarations: [
@@ -42,8 +43,8 @@ import { AdminModule } from './admin.module';
 	],
 	imports: [
 		BrowserModule,
+		HttpClientModule,
 		AppRoutingModule,
-		HttpModule,
 		FormsModule,
 		ChartsModule,
 		AdminModule
@@ -57,6 +58,7 @@ import { AdminModule } from './admin.module';
 		DateService,
 		AuthGuard,
 		AuthService,
+		httpInterceptorProviders
 	],
 	bootstrap: [AppComponent]
 })

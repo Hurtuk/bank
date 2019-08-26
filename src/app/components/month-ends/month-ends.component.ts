@@ -10,7 +10,7 @@ import { DateService } from '../../shared/services/date.service';
 })
 
 export class MonthEndsComponent implements OnInit {
-	private data: {year: number, total: number, average: number, months: {month: number, value: any}[]}[];
+	private data: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
 	private operation = 'Total';
 
 	constructor(
@@ -22,18 +22,16 @@ export class MonthEndsComponent implements OnInit {
 	private refresh() {
 		switch (this.operation) {
 			case 'Total':
-				this.chartsService.monthEndsData.next(
-					[{
-						label: 'Fins de mois',
-						data: this.data.reduce((prev, current) => prev.concat(current.months.map(m => ({date: new Date(current.year, m.month - 1, 1), value: Number.parseFloat(m.value)}))), [])
-					}]
-				);
+				this.chartsService.monthEndsData.next([{
+					label: 'Fins de mois',
+					data: this.data.reduce((prev, current) => prev.concat(current.months.map(m => ({date: new Date(parseInt(current.year), m.month - 1, 1), value: m.value}))), [])
+				}]);
 				break;
 			case 'Superposés':
 				this.chartsService.monthEndsData.next(
 					this.data.map(d => ({
 						label: d.year,
-						data: d.months.map(m => ({date: new Date(d.year, m.month - 1, 1), value: Number.parseFloat(m.value)}))
+						data: d.months.map(m => ({date: new Date(parseInt(d.year), m.month - 1, 1), value: m.value}))
 					}))
 				);
 				break;
@@ -48,7 +46,7 @@ export class MonthEndsComponent implements OnInit {
 		this.amountsService.getMonthEnds().subscribe(x => {
 			this.data = x;
 			this.data.forEach(d => {
-				d.total = d.months.reduce((prev, current) => prev + Number.parseFloat(current.value), 0);
+				d.total = d.months.reduce((prev, current) => prev + current.value, 0);
 				d.average = d.total / d.months.length;
 			});
 			this.refresh();

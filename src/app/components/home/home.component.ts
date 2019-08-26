@@ -14,10 +14,9 @@ export class HomeComponent implements OnInit {
 	public thriftAccounts: {bank: string, name: string, amount: number}[];
 	public stocks: {code: string, value: number, count: number}[];
 
-	public chartData: any[];
 	public chartOptions = [
-		[{option: 'borderColor', value: '#00FF00'},
-			{option: 'backgroundColor', value: '#00FF00'},
+		[{option: 'borderColor', value: '#437EFF'},
+			{option: 'backgroundColor', value: '#437EFF'},
 			{option: 'borderWidth', value: 1}],
 		[{option: 'fill', value: false},
 			{option: 'borderWidth', value: 1}],
@@ -44,34 +43,10 @@ export class HomeComponent implements OnInit {
 		this.amountsService.getTotalData().subscribe(val =>
 			this.chartsService.totalData.next(
 				[
-					{
-						label: 'Fixe',
-						data: val.fixed.map(x => ({
-							date: new Date(x.date),
-							value: x.value
-						}))
-					},
-					{
-						label: 'A venir',
-						data: val.income.map(x => ({
-							date: new Date(x.date),
-							value: -x.value
-						}))
-					},
-					{
-						label: 'Epargne',
-						data: val.thrift.map(x => ({
-							date: new Date(x.date),
-							value: x.value
-						}))
-					},
-					{
-						label: 'Actions',
-						data: val.variable.map(x => ({
-							date: new Date(x.date),
-							value: x.value
-						}))
-					}
+					{ label: 'Fixe', data: val.fixed },
+					{ label: 'A venir', data: val.income.map(i => ({date: i.date, value: -i.value})) },
+					{ label: 'Epargne', data: val.thrift },
+					{ label: 'Actions', data: val.variable }
 				]
 			)
 		);

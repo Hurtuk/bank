@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TypesService } from '../../shared/services/types.service';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
-import { Subject } from '../../../../node_modules/rxjs';
 
 @Component({
 	selector: 'spending',
@@ -11,12 +10,12 @@ import { Subject } from '../../../../node_modules/rxjs';
 })
 
 export class SpendingComponent implements OnInit {
-	public types: any[];
-	public selectedTypes = [];
-	public data = [];
+	public types: { id: number; tag: string; image: string; total: number; }[];
+	public selectedTypes: { id: number; tag?: string; image?: string; total?: number; }[] = [];
+	public data: { date: Date; amount: number; types: string[]; }[] = [];
 
-	public groups: ['Comparaison', 'Addition'];
-	public group: 'Comparaison';
+	public groups = ['Comparaison', 'Addition'];
+	public group = 'Comparaison';
 
 	constructor(
 		private typesService: TypesService,
@@ -25,16 +24,13 @@ export class SpendingComponent implements OnInit {
 	) { }
 
 	public isSelectedType(type, types = this.selectedTypes) {
-		if (typeof types[0] === 'string') {
-			return types.some(x => x === type.id);
-		}
+		console.log(type, types);
 		return types.some(x => x.id === type.id);
 	}
 
 	public toggleType(type) {
 		if (this.isSelectedType(type)) {
-			const t = this.selectedTypes.find(x => x.id === type.id);
-			const index = this.selectedTypes.indexOf(t);
+			const index = this.selectedTypes.findIndex(x => x.id === type.id);
 			if (index !== -1) {
 				this.selectedTypes.splice(index, 1);
 			}
@@ -45,13 +41,16 @@ export class SpendingComponent implements OnInit {
 	}
 
 	private updateData() {
-		const sentData = [];
-		if (this.group = 'Comparaison') {
+		const sentData: {label: string, data: {date: Date, value: number}[]}[] = [];
+		if (this.group === 'Comparaison') {
 			for (const t of this.selectedTypes) {
 				sentData.push({
-					data: this.data.filter(d => this.isSelectedType(t, d.types)).map(d => ({date: new Date(d.date), value: Number.parseFloat(d.amount)})),
+					data: this.data
+						.filter(d => this.isSelectedType(t, d.types.map(ty => ({id: parseInt(ty)}))))
+						.map(d => ({date: d.date, value: d.amount})),
 					label: t.tag
 				});
+				console.log(sentData);
 			}
 		}
 		this.chartsService.typesChartData.next(sentData);

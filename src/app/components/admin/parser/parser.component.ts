@@ -19,9 +19,9 @@ export class ParserComponent implements OnInit {
 		refunding: number,
 		updated: boolean
 	}[];
-	public accounts = [];
-	public account: any;
-	public lastItems: any[];
+	public accounts: {id: number, name: string}[] = [];
+	public account: {id: number, name: string};
+	public lastItems: {date: Date, title: string}[];
 
 	constructor(
 		private accountsService: AccountsService

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
+import { forkJoin } from 'rxjs';
 
 @Component({
 	selector: 'trade',
@@ -11,11 +10,17 @@ import 'rxjs/add/observable/forkJoin';
 })
 
 export class TradeComponent implements OnInit {
-	private currents: any[];
-	private bought: any[];
-	private benefit: any[];
-	private benefitTotal: number;
-	private percent: number;
+	public currents: { action: string, valueDate: { value: number, date: Date }, prevValueDate: { value: number, date: Date } }[];
+	public bought: {
+		action: string;
+		date: Date;
+		value: number;
+		count: number;
+		total?: number;
+	}[];
+	public benefit: {action: string, total: number, value: number}[];
+	public benefitTotal: number;
+	public percent: number;
 
 	constructor(
 		private amountsService: AmountsService,
@@ -36,7 +41,7 @@ export class TradeComponent implements OnInit {
 				data: d.map(dd => ({date: new Date(dd.date), value: dd.value}))
 			}])
 		);
-		Observable.forkJoin([
+		forkJoin([
 			this.amountsService.getCurrentsData(),
 			this.amountsService.getBoughtActions()
 		]).subscribe(d => {
@@ -46,11 +51,11 @@ export class TradeComponent implements OnInit {
 			})));
 			this.bought = d[1];
 			this.bought.forEach((b, index) =>
-				b.total = Number.parseInt(b.count) + (index ? Number.parseInt(this.bought[index - 1].total) : 0)
+				b.total = b.count + (index ? this.bought[index - 1].total : 0)
 			);
 			this.benefit = this.currents.map(a => ({
 				action: a.action,
-				total: this.bought.reduce((prev, current) => prev += Number.parseFloat(current.value), 0),
+				total: this.bought.reduce((prev, current) => prev += current.value, 0),
 				value: this.bought[this.bought.length - 1].total * this.currents[this.currents.length - 1].valueDate.value
 			}));
 			this.benefitTotal = this.benefit.reduce((prev, current) => prev += (current.value - current.total), 0);
