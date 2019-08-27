@@ -24,7 +24,6 @@ export class SpendingComponent implements OnInit {
 	) { }
 
 	public isSelectedType(type, types = this.selectedTypes) {
-		console.log(type, types);
 		return types.some(x => x.id === type.id);
 	}
 
@@ -50,7 +49,6 @@ export class SpendingComponent implements OnInit {
 						.map(d => ({date: d.date, value: d.amount})),
 					label: t.tag
 				});
-				console.log(sentData);
 			}
 		}
 		this.chartsService.typesChartData.next(sentData);

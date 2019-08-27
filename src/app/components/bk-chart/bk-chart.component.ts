@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ChartsService } from '../../shared/services/charts.service';
-import { BaseChartDirective } from 'ng2-charts';
+import { BaseChartDirective, Label } from 'ng2-charts';
 import { DateService } from '../../shared/services/date.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class BkChartComponent implements OnInit {
 	public average: number;
 
 	public displayData = [{data: [], label: 'new'}];
-	public displayLabels: string[] = [];
+	public displayLabels: Date[] = [];
 	public options: any = {
 		responsive: true,
 		maintainAspectRatio: false
@@ -141,7 +141,7 @@ export class BkChartComponent implements OnInit {
 		return Object.keys(dataByDate).map(group => ({date: new Date(group), value: dataByDate[group]}));
 	}
 
-	private calculateDisplayLabels() {
+	/*private calculateDisplayLabels() {
 		switch (this.group) {
 			case 'Jour':
 				if (!this.comparison || this.data.length <= 1) {
@@ -159,6 +159,28 @@ export class BkChartComponent implements OnInit {
 				break;
 			case 'Année':
 				this.displayLabels = this.data[0].data.map(d => d.date.getFullYear().toString());
+				break;
+		}
+	}*/
+
+	private calculateDisplayLabels() {
+		switch (this.group) {
+			case 'Jour':
+				if (!this.comparison || this.data.length <= 1) {
+					this.displayLabels = this.data[0].data.map(d => d.date);
+				} else {
+					this.displayLabels = this.data[0].data.map(d => d.date);
+				}
+				break;
+			case 'Mois':
+				if (!this.comparison || this.data.length <= 1) {
+					this.displayLabels = this.data[0].data.map(d => d.date);
+				} else {
+					this.displayLabels = this.data[0].data.map(d => d.date);
+				}
+				break;
+			case 'Année':
+				this.displayLabels = this.data[0].data.map(d => d.date);
 				break;
 		}
 	}
@@ -181,6 +203,7 @@ export class BkChartComponent implements OnInit {
 		this.calculateTotal();
 		setTimeout(() => {
 			if (this.chart !== undefined) {
+				this.options.scales.xAxes[0].time.unit = this.group === 'Année' ? 'year': 'month';
 				if (this.chartOptions) {
 					this.chartOptions.forEach((opt, index) => {
 						opt.forEach(option => {
@@ -208,14 +231,20 @@ export class BkChartComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.options.scales = {
+			xAxes: [{
+				type: 'time',
+				time: {
+					unit: this.group === 'Année' ? 'year': 'month',
+				}
+			}]
+		};
 		if (this.minimum) {
-			this.options.scales = {
-				yAxes: [{
-					ticks: {
-						min: this.minimum
-					}
-				}]
-			};
+			this.options.scales.yAxes = [{
+				ticks: {
+					min: this.minimum
+				}
+			}];
 		}
 		this.group = this.offFilters.indexOf('Mois') === -1 ? 'Mois' : 'Jour';
 		this.chartsService[this.initialData].subscribe(x => {
@@ -234,13 +263,11 @@ export class BkChartComponent implements OnInit {
 				}
 				// TODO Fix
 				if (!this.minimum && !this.receivedData.some(rd => rd.data.some(d => d.value < 0))) {
-					this.options.scales = {
-						yAxes: [{
-							ticks: {
-								min: 0
-							}
-						}]
-					};
+					this.options.scales.yAxes = [{
+						ticks: {
+							min: 0
+						}
+					}];
 				}
 				this.refresh();
 			}

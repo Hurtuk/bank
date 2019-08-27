@@ -29,7 +29,7 @@ $Password = ConvertTo-SecureString $SFTP_PASSWORD -AsPlainText -Force
 $Credential = New-Object System.Management.Automation.PSCredential ($SFTP_USER, $Password)
 
 # Build Angular app (by default in /dist/$PATH)
-ng build --baseHref="/$PATH/"
+ng build --baseHref="/$PATH/" --prod
 
 # Go at the built app root
 cd "./dist"

@@ -10,8 +10,8 @@ import { DateService } from '../../shared/services/date.service';
 })
 
 export class MonthEndsComponent implements OnInit {
-	private data: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
-	private operation = 'Total';
+	public data: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
+	public operation = 'Total';
 
 	constructor(
 		private amountsService: AmountsService,
@@ -19,7 +19,7 @@ export class MonthEndsComponent implements OnInit {
 		private dateService: DateService
 	) { }
 
-	private refresh() {
+	public refresh() {
 		switch (this.operation) {
 			case 'Total':
 				this.chartsService.monthEndsData.next([{
