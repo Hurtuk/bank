@@ -1,7 +1,7 @@
 <div>
 	<div>Derniers :</div>
 	<ul>
-		<li *ngFor="let item of lastItems">{{ item.date }} : {{ item.title }}</li>
+		<li *ngFor="let item of lastItems">{{ item.date | date:'dd/MM/yyyy' }} : {{ item.title }} : {{ item.value }}</li>
 	</ul>
 	<div>Compte :
 		<select [(ngModel)]="account">

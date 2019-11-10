@@ -34,11 +34,11 @@ export class AmountsService {
 	}
 
 	public getTransactionsByAccountAndYear(idAccount: number, year: number): Observable<{
-		id: number, date: Date, title: string, amount: number, variable: number, refunding: number,
+		id: number, date: Date, title: string, amount: number, variable: number, refunding: number, loan: number,
 		types: {image: string, id: number, name: string}[]
 	}[]> {
 		return this.http.get<{
-			id: number, date: Date, title: string, amount: number, variable: number, refunding: number,
+			id: number, date: Date, title: string, amount: number, variable: number, refunding: number, loan: number,
 			types: {image: string, id: number, name: string}[]
 		}[]>(this.urlBuilder.buildUrl('getTransactionsByAccountAndYear', idAccount, year));
 	}
@@ -69,6 +69,10 @@ export class AmountsService {
 
 	public getBoughtActions(): Observable<{action: string, date: Date, value: number, count: number}[]> {
 		return this.http.get<{action: string, date: Date, value: number, count: number}[]>(this.urlBuilder.buildUrl('getBoughtActions'));
+	}
+
+	public getLoans(): Observable<{id: number, title: string, amount: number, until: Date, image: string, refunds: any[]}[]> {
+		return this.http.get<{id: number, title: string, amount: number, until: Date, image: string, refunds: any[]}[]>(this.urlBuilder.buildUrl('getLoans'));
 	}
 
 	public save(account: number, rows: any[]): Observable<void> {

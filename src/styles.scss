@@ -6,10 +6,10 @@ html, body {
 	margin: 0;
 	font-family: 'Open Sans';
 	height: 100vh;
+	color: #333;
 }
 
-[amount],
-[ng-reflect-amount] {
+.amount {
 	font-weight: bold;
 	text-align: right;
 	white-space: nowrap;

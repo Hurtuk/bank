@@ -1,0 +1,45 @@
+.loan-row {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+
+    > div {
+        flex: 1;
+    }
+
+    .image-container {
+        position: relative;
+
+        img {
+            filter: grayscale(1);
+            opacity: .5;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .image {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .bar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: right;
+        line-height: 0;
+        font-weight: bold;
+        border-bottom: 2px solid lightgray;
+    }
+}

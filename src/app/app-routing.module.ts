@@ -5,11 +5,13 @@ import { SpendingComponent } from './components/spending/spending.component';
 import { MonthEndsComponent } from './components/month-ends/month-ends.component';
 import { TradeComponent } from './components/trade/trade.component';
 import { LoginComponent } from './components/admin/login/login.component';
+import { LoansComponent } from './components/loans/loans.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'spending', component: SpendingComponent },
 	{ path: 'month-ends', component: MonthEndsComponent },
+	{ path: 'loans', component: LoansComponent },
 	{ path: 'trade', component: TradeComponent },
 	{ path: 'login', component: LoginComponent }
 ];

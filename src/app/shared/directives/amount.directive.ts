@@ -31,11 +31,11 @@ export class AmountDirective implements OnChanges {
 
 	private formatAmount() {
 		if (this.amount) {
-			const value = this.amount[0];
+			const value = parseFloat(this.amount[0]);
 			const options = this.amount.length > 1 ? this.amount[1]: {};
 			if (value && !isNaN(value)) {
 				const decimal = Math.abs(Math.round((value % 1 * 100)));
-				const integer = Math.floor(value);
+				const integer = value >= 0 ? Math.floor(value): Math.ceil(value);
 				let result;
 
 				// No space
@@ -60,7 +60,9 @@ export class AmountDirective implements OnChanges {
 				}
 
 				// Sign
-				this.elementRef.nativeElement.innerText = result.replace(/\./gi, ',') + ' ' + (options.sign ? options.sign : '€');
+				this.elementRef.nativeElement.innerHTML = result.replace(/\./gi, ',') + '&nbsp;' + (options.sign ? options.sign : '€');
+
+				this.elementRef.nativeElement.classList.add('amount');
 			}
 		}
 	}

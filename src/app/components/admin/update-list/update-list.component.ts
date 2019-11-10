@@ -23,6 +23,7 @@ export class UpdateListComponent implements OnInit {
 	@Input() canAdd: boolean;
 	@Input() allIncome: boolean;
 	public refundable: any[];
+	public loans: any[];
 	public popupOpened: boolean;
 	public types: {id: number, image: string}[];
 	public popupOpenedFor: any;
@@ -100,6 +101,9 @@ export class UpdateListComponent implements OnInit {
 				this.refundable = x.income;
 			});
 		}
+		this.amountsService.getLoans().subscribe(x => {
+			this.loans = x;
+		});
 		this.typesService.getTypes().subscribe(x => this.types = x);
 		this.typesService.getTypes().subscribe();
 	}

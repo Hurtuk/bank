@@ -7,6 +7,7 @@
 			<th>Montant</th>
 			<th>Variable</th>
 			<th>Rembourse</th>
+			<th>Prêt</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -39,13 +40,19 @@
 				</select>
 			</td>
 			<td>
+				<select [(ngModel)]="r.loan" (change)="r.updated = true">
+					<option></option>
+					<option *ngFor="let l of loans" [ngValue]="l.id">{{l.title}}</option>
+				</select>
+			</td>
+			<td>
 				<button (click)="removeRow(r)">-</button>
 			</td>
 		</tr>
 	</tbody>
 	<tfoot *ngIf="items">
 		<tr>
-			<td colspan="7">
+			<td colspan="8">
 				<button (click)="save()">Enregistrer</button>
 				<div *ngIf="success">Données enregistrées !</div>
 			</td>
