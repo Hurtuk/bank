@@ -17,6 +17,7 @@ export class UpdateListComponent implements OnInit {
 		amount: number,
 		variable: number,
 		refunding: number,
+		loan: number,
 		updated?: boolean
 	}[];
 	@Input() account: number;
@@ -64,6 +65,7 @@ export class UpdateListComponent implements OnInit {
 			amount: 0,
 			variable: 0,
 			refunding: null,
+			loan: null,
 			updated: true
 		});
 	}

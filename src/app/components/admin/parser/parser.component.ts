@@ -17,6 +17,7 @@ export class ParserComponent implements OnInit {
 		amount: number,
 		variable: number,
 		refunding: number,
+		loan: number,
 		updated: boolean
 	}[];
 	public accounts: {id: number, name: string}[] = [];
@@ -60,6 +61,7 @@ export class ParserComponent implements OnInit {
 					amount: Number.parseFloat(amount),
 					variable: 0,
 					refunding: null,
+					loan: null,
 					updated: true
 				});
 			}
