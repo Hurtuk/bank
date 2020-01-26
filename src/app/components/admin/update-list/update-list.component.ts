@@ -50,7 +50,7 @@ export class UpdateListComponent implements OnInit {
 	}
 
 	public currentHasType(type) {
-		return this.popupOpenedFor.types.some(x => x.id === type.id);
+		return this.popupOpenedFor.types.some(x => parseInt(x.id) === type.id);
 	}
 
 	public add() {
@@ -83,7 +83,7 @@ export class UpdateListComponent implements OnInit {
 	public toggleType(type) {
 		this.popupOpenedFor.updated = true;
 		if (this.currentHasType(type)) {
-			const t = this.popupOpenedFor.types.find(x => x.id === type.id);
+			const t = this.popupOpenedFor.types.find(x => parseInt(x.id) === type.id);
 			const index = this.popupOpenedFor.types.indexOf(t);
 			if (index !== -1) {
 				this.popupOpenedFor.types.splice(index, 1);

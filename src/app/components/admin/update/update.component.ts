@@ -34,6 +34,7 @@ export class UpdateComponent implements OnInit {
 	}
 
 	public updateYears() {
+		this.year = 0;
 		this.accountsService.getAccountYears(this.account.id).subscribe(x => this.years = x);
 		this.result = [];
 	}
