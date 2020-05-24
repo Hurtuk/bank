@@ -27,6 +27,7 @@ import { AdminModule } from './admin.module';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from 'src/interceptors';
 import { LoansComponent } from './components/loans/loans.component';
+import { ForecastComponent } from './components/forecast/forecast.component';
 
 @NgModule({
 	declarations: [
@@ -40,6 +41,7 @@ import { LoansComponent } from './components/loans/loans.component';
 		TradeComponent,
 		LoginComponent,
 		LoansComponent,
+		ForecastComponent,
 
 		AmountDirective
 	],

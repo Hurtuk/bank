@@ -11,4 +11,4 @@
 	<textarea [(ngModel)]="parsingText" cols="60" rows="30"></textarea>
 	<button (click)="parse()">Parser !</button>
 </div>
-<update-list [items]="result" [account]="account" canAdd="true"></update-list>
+<update-list [items]="result" [account]="account" [canAdd]="true" [addAllowed]="!!account" ></update-list>

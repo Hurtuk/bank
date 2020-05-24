@@ -198,27 +198,36 @@ export class BkChartComponent implements OnInit {
 				label: d.label
 			});
 		}
-		this.calculateDisplayData();
-		this.calculateDisplayLabels();
-		this.calculateTotal();
-		setTimeout(() => {
-			if (this.chart !== undefined) {
-				this.options.scales.xAxes[0].time.unit = this.group === 'Année' ? 'year': 'month';
-				if (this.chartOptions) {
-					this.chartOptions.forEach((opt, index) => {
-						opt.forEach(option => {
-							this.displayData[index][option.option] = option.value;
+		if (this.data.length) {
+			this.calculateDisplayData();
+			this.calculateDisplayLabels();
+			this.calculateTotal();
+			setTimeout(() => {
+				if (this.chart !== undefined) {
+					this.options.scales.xAxes[0].time.unit = this.group === 'Année' ? 'year': 'month';
+					if (this.chartOptions) {
+						this.chartOptions.forEach((opt, index) => {
+							opt.forEach(option => {
+								this.displayData[index][option.option] = option.value;
+							});
 						});
-					});
+					}
+					if (this.group === 'Jour') {
+						this.chart.datasets.forEach(d => d.pointRadius = 0);
+					}
+					this.chart.ngOnDestroy();
+					this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
+					this.chart.chart.update();
 				}
-				if (this.group === 'Jour') {
-					this.chart.datasets.forEach(d => d.pointRadius = 0);
-				}
-				this.chart.ngOnDestroy();
-				this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
-				this.chart.chart.update();
-			}
-		}, 0);
+			}, 0);
+		} else {
+			this.total = 0;
+			this.average = 0;
+			this.displayData = [];
+			this.chart.ngOnDestroy();
+			this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
+			this.chart.chart.update();
+		}
 	}
 
 	public addValues() {
@@ -269,8 +278,8 @@ export class BkChartComponent implements OnInit {
 						}
 					}];
 				}
-				this.refresh();
 			}
+			this.refresh();
 		});
 	}
 }

@@ -47,6 +47,10 @@ export class AmountsService {
 		return this.http.get<{id: number, date: Date, amount: number, title: string}[]>(this.urlBuilder.buildUrl('getAllVariables'));
 	}
 
+	public getSpendingsByType(idType: number): Observable<{title: string, amount: number, date: Date}[]> {
+		return this.http.get<{title: string, amount: number, date: Date}[]>(this.urlBuilder.buildUrl('getSpendingsByType', idType));
+	}
+
 	public getAllSpending(): Observable<{date: Date, amount: number, types: string[]}[]> {
 		return this.http.get<{date: Date, amount: number, types: string[]}[]>(this.urlBuilder.buildUrl('getAllSpending'));
 	}
@@ -86,5 +90,9 @@ export class AmountsService {
 						.pipe(map(() => {
 							this.updateTotals().subscribe();
 						}));
+	}
+
+	public getForecast(): Observable<{tag: {id: string, title: string}, current: number, expected: number, forecast: number, previous: number}[]> {
+		return this.http.get<{tag: {id: string, title: string}, current: number, expected: number, forecast: number, previous: number}[]>(this.urlBuilder.buildUrl('getForecast'));
 	}
 }

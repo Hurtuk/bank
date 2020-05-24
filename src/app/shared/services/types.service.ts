@@ -14,4 +14,8 @@ export class TypesService {
 	public getTypes(): Observable<{id: number, tag: string, image: string, total: number}[]> {
 		return this.http.get<{id: number, tag: string, image: string, total: number}[]>(this.urlBuilder.buildUrl('getTypes'));
 	}
+
+	public getTypesFromTransacTitle(title: string): Observable<number[]> {
+		return this.http.get<number[]>(this.urlBuilder.buildUrl('getTypesFromTransacTitle', title));
+	}
 }

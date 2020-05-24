@@ -14,6 +14,10 @@ export class SpendingComponent implements OnInit {
 	public selectedTypes: { id: number; tag?: string; image?: string; total?: number; }[] = [];
 	public data: { date: Date; amount: number; types: string[]; }[] = [];
 
+	public spendings: { title: string; amount: number; date: Date }[];
+	public displaySpendings: { title: string; amount: number; date: Date }[];
+	public searchSpending: string;
+
 	public groups = ['Comparaison', 'Addition'];
 	public group = 'Comparaison';
 
@@ -37,6 +41,25 @@ export class SpendingComponent implements OnInit {
 			this.selectedTypes.push(type);
 		}
 		this.updateData();
+		
+		// Spendings list
+		if (this.selectedTypes.length === 1) {
+			this.amountsService.getSpendingsByType(this.selectedTypes[0].id).subscribe(sp => {
+				this.spendings = sp;
+				this.searchSpending = "";
+				this.search();
+			});
+		} else {
+			this.spendings = null;
+		}
+	}
+
+	public search() {
+		if (!this.searchSpending) {
+			this.displaySpendings = this.spendings.slice(0, 10);
+		} else {
+			this.displaySpendings = this.spendings.filter(s => s.title.toUpperCase().indexOf(this.searchSpending.toUpperCase()) !== -1).slice(0, 10);
+		}
 	}
 
 	private updateData() {

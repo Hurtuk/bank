@@ -26,7 +26,7 @@
 				<input [ngModel]="r.date | date:'yyyy-MM-dd'" (ngModelChange)="r.date = $event" type="date" (change)="r.updated = true"/>
 			</td>
 			<td>
-				<input type="text" [(ngModel)]="r.title" (change)="r.updated = true"/>
+				<input type="text" [(ngModel)]="r.title" (change)="autoSetTypes(r); r.updated = true"/>
 			</td>
 			<td>
 				<input type="number" [(ngModel)]="r.amount" (change)="r.updated = true"/>
@@ -36,6 +36,7 @@
 			</td>
 			<td>
 				<select [(ngModel)]="r.refunding" (change)="r.updated = true">
+					<option></option>
 					<option *ngFor="let f of refundable" [ngValue]="f.id">{{f.title + ' ' + f.amount + '€'}}</option>
 				</select>
 			</td>
@@ -53,7 +54,7 @@
 	<tfoot *ngIf="items">
 		<tr>
 			<td colspan="8">
-				<button (click)="save()">Enregistrer</button>
+				<button (click)="save()" [disabled]="!addAllowed">Enregistrer</button>
 				<div *ngIf="success">Données enregistrées !</div>
 			</td>
 		</tr>

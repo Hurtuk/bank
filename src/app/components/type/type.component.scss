@@ -3,6 +3,7 @@
 	height: 32px;
 	background-size: contain;
 	display: block;
+	margin: 0 auto;
 }
 
 .add {
@@ -22,6 +23,11 @@
 		color: gray;
 		border-color: gray;
 	}
+}
+
+.medium {
+	width: 45px;
+	height: 45px;
 }
 
 .big {

@@ -57,7 +57,7 @@ h2 {
 }
 
 .types {
-	input {
+	input[type=checkbox] {
 		display: none;
 
 		&:checked {

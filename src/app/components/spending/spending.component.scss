@@ -28,6 +28,18 @@ bk-chart {
 			
 			label {
 				margin: 5px;
+				position: relative;
+
+				span {
+					color: #ccc;
+					font-weight: bold;
+					font-size: .7em;
+					position: absolute;
+					top: auto;
+					bottom: 0;
+					left: 0;
+					right: 0;
+				}
 			}
 		}
 
@@ -35,6 +47,30 @@ bk-chart {
 			label {
 				margin: 5px 25px !important;
 			}
+		}
+	}
+}
+
+.spendings-list {
+	margin: 0 auto;
+	border-collapse: collapse;
+
+	tr {
+		&.month-0 + .month-1,
+		&.month-1 + .month-0 {
+			td {
+				border-top: 1px solid lightgray;
+			}
+		}
+	}
+
+	td {
+		&:first-child {
+			font-weight: bold;
+		}
+		
+		&:nth-child(2) {
+			text-align: left;
 		}
 	}
 }

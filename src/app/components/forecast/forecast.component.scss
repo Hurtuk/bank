@@ -1,0 +1,114 @@
+$lightgreen: transparentize(green, .5);
+$lightred: transparentize(red, .6);
+
+table {
+    margin: 0 auto;
+
+    tbody {
+        td {
+            height: 65px;
+
+            &:first-child {
+                text-align: center;
+                width: 115px;
+                font-weight: bold;
+                font-size: .8em;
+                color: darkgray;
+            }
+
+            &:last-child {
+                font-size: .7em;
+                text-align: left;
+                padding-top: 5px;
+            }
+        }
+    }
+
+    tfoot {
+        font-size: 1.5em;
+
+        td {
+            text-align: right;
+        }
+    }
+}
+
+.meter {
+    width: 500px;
+    height: 10px;
+    background-color: #f3f3f3;
+    position: relative;
+
+    .amount {
+        font-size: .8em;
+    }
+
+    .done {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background-color: $lightred;
+
+        &.positive {
+            background-color: $lightgreen;
+
+            span {
+                &::after {
+                    border-top-color: $lightgreen;
+                }
+            }
+        }
+
+        span {
+            position: absolute;
+            width: 100px;
+            text-align: center;
+            right: -50px;
+            top: -28px;
+
+            &::after {
+                content: '';
+                width: 0;
+                border-top: 10px solid $lightred;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .expected {
+        position: absolute;
+        top: 38px;
+
+        span {
+            position: absolute;
+            width: 100px;
+            text-align: center;
+            right: -50px;
+            top: -28px;
+
+            &::before {
+                content: '';
+                width: 0;
+                border-bottom: 10px solid gray;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+                display: block;
+                margin: 0 auto;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                height: 10px;
+                border-right: 2px solid white;
+                left: 0;
+                width: calc(50% - 1px);
+                top: -10px;
+            }
+        }
+    }
+}

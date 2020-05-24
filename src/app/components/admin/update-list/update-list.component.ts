@@ -23,6 +23,7 @@ export class UpdateListComponent implements OnInit {
 	@Input() account: number;
 	@Input() canAdd: boolean;
 	@Input() allIncome: boolean;
+	@Input() addAllowed = true;
 	public refundable: any[];
 	public loans: any[];
 	public popupOpened: boolean;
@@ -78,6 +79,16 @@ export class UpdateListComponent implements OnInit {
 				this.items = this.items.filter(d => d.updated);
 				this.items.forEach(d => d.updated = false);
 			});
+	}
+
+	public autoSetTypes(item) {
+		this.typesService.getTypesFromTransacTitle(item.title).subscribe(types => {
+			if (types) {
+				types.forEach(type => {
+					item.types.push(this.types.find(t => t.id == type))
+				});
+			}
+		});
 	}
 
 	public toggleType(type) {
