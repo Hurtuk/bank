@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 
 @Component({
@@ -15,8 +15,4 @@ export class LoansComponent {
     constructor(
         private amountService: AmountsService
     ) { }
-
-    public getRefunded(loan: any): number {
-        return -loan.refunds.reduce((prev, cur) => prev + parseFloat(cur.value), 0);
-    }
 }

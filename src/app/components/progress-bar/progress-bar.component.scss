@@ -1,0 +1,26 @@
+@import '../../shared/styles/colors';
+
+$bar-height: 20px;
+
+.full-length {
+    position: relative;
+    height: $bar-height;
+    background-color: lightgray;
+}
+
+.current-length {
+    height: $bar-height;
+    background-color: $color-tertiary;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: right;
+
+    span {
+        color: white !important;
+        font-size: 14px;
+        margin-right: 5px;
+        margin-left: 5px;
+        display: block;
+    }
+}

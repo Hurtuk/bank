@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from 'src/interceptors';
 import { LoansComponent } from './components/loans/loans.component';
 import { ForecastComponent } from './components/forecast/forecast.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
 	declarations: [
@@ -42,6 +43,7 @@ import { ForecastComponent } from './components/forecast/forecast.component';
 		LoginComponent,
 		LoansComponent,
 		ForecastComponent,
+		ProgressBarComponent,
 
 		AmountDirective
 	],

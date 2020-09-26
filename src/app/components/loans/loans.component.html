@@ -1,17 +1,12 @@
 <div *ngFor="let loan of loans | async" class="loan-row">
     <div class="image-container">
         <img [src]="'assets/images/loans/' + loan.image"/>
-        <div class="image" [style.backgroundImage]="'url(assets/images/loans/' + loan.image + ')'" [style.top.%]="100 * (loan.amount - getRefunded(loan)) / loan.amount"></div>
-        <span class="bar" [style.top.%]="100 * (loan.amount - getRefunded(loan)) / loan.amount">{{Math.floor(100 - 100 * (loan.amount - getRefunded(loan)) / loan.amount)}}%</span>
+        <div class="image" [style.backgroundImage]="'url(assets/images/loans/' + loan.image + ')'" [style.top.%]="100 * (loan.to_refund - loan.refund) / loan.to_refund"></div>
+        <span class="bar" [style.top.%]="100 * (loan.to_refund - loan.refund) / loan.to_refund">{{Math.floor(100 - 100 * (loan.to_refund - loan.refund) / loan.to_refund)}}%</span>
     </div>
     <div class="infos">
         <h1>{{loan.title}}</h1>
-        <h2>Empruntés : <span [amount]="[loan.amount]"></span></h2>
-        <ul>
-            <ng-container *ngFor="let r of loan.refunds; let i = index"><li *ngIf="i < 5">{{ r.date | date:'dd/MM/yy' }} : <span [amount]="[r.value]"></span></li></ng-container>
-            <li>...</li>
-            <li>Remboursé : <span [amount]="[getRefunded(loan)]"></span></li>
-            <li>Reste <span [amount]="[1.0407 * (loan.amount - getRefunded(loan))]"></span> en <strong>{{ Math.floor(1.0407 * (loan.amount - getRefunded(loan)) / -loan.refunds[0].value) }}</strong> mensualités</li>
-        </ul>
+        <div>Empruntés : <span [amount]="[loan.amount]"></span> à <strong>{{ loan.rate }}%</strong>, soit à rembourser : <span [amount]="[loan.to_refund]"></span></div>
+        <app-progress-bar [full]="loan.to_refund" [current]="loan.refund"></app-progress-bar>
     </div>
 </div>

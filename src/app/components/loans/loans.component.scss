@@ -9,12 +9,15 @@
 
     .image-container {
         position: relative;
+        margin: 0 50px;
+        flex: 0 0 330px;
 
         img {
             filter: grayscale(1);
             opacity: .5;
             display: block;
             margin: 0 auto;
+            height: 200px;
         }
 
         .image {
@@ -24,13 +27,8 @@
             right: 0;
             background-position: bottom center;
             background-repeat: no-repeat;
+            background-size: auto 200px;
         }
-    }
-
-    ul {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
     }
 
     .bar {
@@ -41,5 +39,10 @@
         line-height: 0;
         font-weight: bold;
         border-bottom: 2px solid lightgray;
+    }
+
+    app-progress-bar {
+        display: block;
+        margin: 5px 10%;
     }
 }

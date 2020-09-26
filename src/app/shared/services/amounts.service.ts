@@ -75,8 +75,8 @@ export class AmountsService {
 		return this.http.get<{action: string, date: Date, value: number, count: number}[]>(this.urlBuilder.buildUrl('getBoughtActions'));
 	}
 
-	public getLoans(): Observable<{id: number, title: string, amount: number, until: Date, image: string, refunds: any[]}[]> {
-		return this.http.get<{id: number, title: string, amount: number, until: Date, image: string, refunds: any[]}[]>(this.urlBuilder.buildUrl('getLoans'));
+	public getLoans(): Observable<{id: number, title: string, amount: number, to_refund: number, rate: number, until: Date, image: string, refund: number}[]> {
+		return this.http.get<{id: number, title: string, amount: number, to_refund: number, rate: number, until: Date, image: string, refund: number}[]>(this.urlBuilder.buildUrl('getLoans'));
 	}
 
 	public save(account: number, rows: any[]): Observable<void> {
