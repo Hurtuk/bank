@@ -23,7 +23,7 @@
 				<type (click)="openPopup(r)"></type>
 			</td>
 			<td>
-				<input [ngModel]="r.date | date:'yyyy-MM-dd'" (ngModelChange)="r.date = $event" type="text" (change)="r.updated = true"/>
+				<input [ngModel]="r.date | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="r.date = $event" type="datetime-local" (change)="r.updated = true"/>
 			</td>
 			<td>
 				<input type="text" [(ngModel)]="r.title" (change)="autoSetTypes(r); r.updated = true"/>

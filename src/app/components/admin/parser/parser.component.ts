@@ -45,7 +45,7 @@ export class ParserComponent implements OnInit {
 			if (r.indexOf('/') !== -1) {
 				// Date
 				dateData = data[0].split('/');
-				date = new Date(Number.parseInt(dateData[2]), Number.parseInt(dateData[1]) - 1, Number.parseInt(dateData[0]));
+				date = new Date(Number.parseInt(dateData[2]), Number.parseInt(dateData[1]) - 1, Number.parseInt(dateData[0]), 9, 30, 0);
 				// Title
 				title = data[1];
 			}
