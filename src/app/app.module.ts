@@ -29,6 +29,8 @@ import { httpInterceptorProviders } from 'src/interceptors';
 import { LoansComponent } from './components/loans/loans.component';
 import { ForecastComponent } from './components/forecast/forecast.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { RealEstateComponent } from './components/real-estate/real-estate.component';
+import { TaxesComponent } from './components/taxes/taxes.component';
 
 @NgModule({
 	declarations: [
@@ -44,6 +46,8 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 		LoansComponent,
 		ForecastComponent,
 		ProgressBarComponent,
+		RealEstateComponent,
+		TaxesComponent,
 
 		AmountDirective
 	],

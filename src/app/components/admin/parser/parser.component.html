@@ -5,7 +5,7 @@
 	</ul>
 	<div>Compte :
 		<select [(ngModel)]="account">
-			<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }}</option>
+			<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
 		</select>
 	</div>
 	<textarea [(ngModel)]="parsingText" cols="60" rows="30"></textarea>

@@ -1,0 +1,36 @@
+<h1>Site Arpège</h1>
+<div class="content" *ngIf="realEstateData">
+    <div class="year" *ngFor="let y of realEstateData">
+        <table>
+            <caption>{{ y.year }}</caption>
+            <tbody>
+                <tr *ngFor="let row of y.data">
+                    <td>{{row.date | date:'dd/MM/yy'}}</td>
+                    <td>{{row.title}}</td>
+                    <td [amount]="row.value < 0 ? [row.value, {alwaysSign: true, color: true}] : null"></td>
+                    <td [amount]="row.value >= 0 ? [row.value, {alwaysSign: true, color: true}] : null"></td>
+                    <td>{{ row.value > 0 && row.taxexempt == "1" ? '*' : '' }}</td>
+                </tr>
+            </tbody>
+            <tbody class="total">
+                <tr>
+                    <th colspan="2">Total</th>
+                    <th [amount]="[y.total.minus ? y.total.minus : 0, {alwaysSign: true, color: true}]"></th>
+                    <th [amount]="[y.total.plus ? y.total.plus : 0, {alwaysSign: true, color: true}]"></th>
+                </tr>
+                <tr>
+                    <td colspan="2">dont défiscalisables</td>
+                    <td [amount]="[y.taxexempt, {color: true}]"></td>
+                </tr>
+            </tbody>
+            <tbody class="deficits" *ngIf="y.previousDeficit">
+                <tr>
+                    <td colspan="2">Déficit précédent</td>
+                    <td [amount]="[y.previousDeficit]"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="to-declare">A déclarer : <span [amount]="[y.todeclare, {alwaysSign: true, color: true}]"></span></div>
+        <div class="profitability">Rendement net-net : <span>{{y.profitability ? y.profitability : 0 | percent:'1.1-1'}}</span></div>
+    </div>
+</div>

@@ -32,7 +32,7 @@ export class TradeComponent implements OnInit {
 			({
 				action: d.label,
 				valueDate: d.data[d.data.length - 1],
-				prevValueDate: d.data[d.data.length - 2]
+				prevValueDate: d.data[d.data.length - 2] ? d.data[d.data.length - 2] : null
 			})
 		));
 		this.amountsService.getBenefit().subscribe(d =>

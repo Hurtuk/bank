@@ -1,0 +1,49 @@
+@import '../../shared/styles/colors.scss';
+
+.content {
+    text-align: left;
+
+    .year {
+        display: inline-block;
+        margin: 0 30px;
+    }
+
+    .to-declare {
+        text-align: center;
+        border: 3px solid #333;
+        padding: 3px 10px;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+}
+
+caption {
+    color: $color-tertiary;
+    padding-bottom: 10px;
+}
+
+td, th {
+    text-align: left;
+    padding: 0 5px;
+
+    &.amount {
+        text-align: right;
+    }
+}
+
+.total,
+.deficits {
+    td, th {
+        text-align: right;
+    }
+}
+
+tbody + tbody > tr:first-child > * {
+    padding-top: 10px;
+}
+
+.profitability {
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+}

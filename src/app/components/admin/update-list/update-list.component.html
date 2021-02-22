@@ -8,6 +8,8 @@
 			<th>Variable</th>
 			<th>Rembourse</th>
 			<th>Prêt</th>
+			<th>Défiscalisable</th>
+			<th>Calcul<br/>rendement</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -45,6 +47,12 @@
 					<option></option>
 					<option *ngFor="let l of loans" [ngValue]="l.id">{{l.title}}</option>
 				</select>
+			</td>
+			<td>
+				<input type="checkbox" [(ngModel)]="r.taxexempt" (change)="r.updated = true"/>
+			</td>
+			<td>
+				<input type="checkbox" [(ngModel)]="r.profitability" (change)="r.updated = true"/>
 			</td>
 			<td>
 				<button (click)="removeRow(r)">-</button>

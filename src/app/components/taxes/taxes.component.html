@@ -1,0 +1,65 @@
+<h1>Impôts</h1>
+<div class="content">
+    <div class="tax-types">
+        <div>
+            <h2>Impôt sur le revenu</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Revenus</th>
+                        <th>Montant</th>
+                        <th>% de N</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tax of (rentTaxes | async)">
+                        <td>{{ tax.year }}</td>
+                        <td [amount]="[tax.salary, {color: true}]"></td>
+                        <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+                        <td>{{ tax.sum / tax.salary | percent:'.1' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2>Taxe foncière</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Montant</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tax of (buildTaxes | async)">
+                        <td>{{ tax.year }}</td>
+                        <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2>Taxe d'habitation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Montant</th>
+                        <th>% de N - 1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tax of (homeTaxes | async)">
+                        <td>{{ tax.year }}</td>
+                        <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+                        <td>{{ tax.salary ? (tax.sum / tax.salary | percent:'.1') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="total">
+        
+    </div>
+</div>

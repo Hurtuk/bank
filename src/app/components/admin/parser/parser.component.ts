@@ -20,7 +20,7 @@ export class ParserComponent implements OnInit {
 		loan: number,
 		updated: boolean
 	}[];
-	public accounts: {id: number, name: string}[] = [];
+	public accounts: {id: number, name: string, bank: string}[] = [];
 	public account: {id: number, name: string};
 	public lastItems: {date: Date, title: string}[];
 
