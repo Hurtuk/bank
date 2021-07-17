@@ -26,7 +26,20 @@
 }
 
 h2 {
-	margin-top: 112px;
+	margin-top: 50px;
+
+	+ table {
+		font-size: .85rem;
+
+		type {
+			white-space: nowrap;
+
+			::ng-deep i {
+				width: 20px;
+				height: 20px;
+			}
+		}
+	}
 }
 
 ul {
@@ -50,6 +63,23 @@ ul {
 			background-repeat: no-repeat;
 			background-position: center;
 			float: left;
+		}
+	}
+
+	&.actions {
+		white-space: normal;
+
+		li {
+			display: inline-block;
+			font-size: .9rem;
+			margin-right: 15px;
+			padding-right: 45px;
+
+			span {
+				width: 30px;
+				height: 30px;
+				margin-right: 5px;
+			}
 		}
 	}
 }

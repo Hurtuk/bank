@@ -50,14 +50,19 @@ export class TradeComponent implements OnInit {
 				data: x.data.map(dd => ({date: new Date(dd.date), value: dd.value}))
 			})));
 			this.bought = d[1];
-			this.bought.forEach((b, index) =>
-				b.total = b.count + (index ? this.bought[index - 1].total : 0)
-			);
-			this.benefit = this.currents.map(a => ({
-				action: a.action,
-				total: this.bought.reduce((prev, current) => prev += current.value, 0),
-				value: this.bought[this.bought.length - 1].total * this.currents[this.currents.length - 1].valueDate.value
-			}));
+			this.bought.forEach((b, index) => {
+				const actions = this.bought.filter(a => a.action === b.action);
+				b.total = b.count + (index && actions.length >= index ? actions[index - 1].total : 0)
+			});
+			this.benefit = this.currents.map(a => {
+				const actions = this.bought.filter(b => b.action === a.action);
+				return {
+					action: a.action,
+					total: actions.reduce((prev, current) => prev += current.value, 0),
+					value: actions[actions.length - 1].total * a.valueDate.value
+				}
+			});
+			//console.log(this.benefit);
 			this.benefitTotal = this.benefit.reduce((prev, current) => prev += (current.value - current.total), 0);
 		});
 	}

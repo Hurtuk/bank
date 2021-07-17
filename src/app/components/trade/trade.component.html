@@ -43,7 +43,7 @@
 						<div>Achat : <span [amount]="[b.total]"></span></div>
 						<div>Valeur : <span [amount]="[b.value]"></span></div>
 					</div>
-					<div>Bénéfice : <span [amount]="[b.value - b.total, {color: true, alwaysSign: true}]"></span></div>
+					<div>Bénéfice : <span [amount]="[b.value - b.total, {color: true, alwaysSign: true}]"></span> ({{ b.value < b.total ? '' : '+' }}{{ (b.value - b.total) / b.total | percent:'.1' }})</div>
 				</div>
 				<div>Total : <span [amount]="[benefitTotal, {color: true, alwaysSign: true}]"></span></div>
 			</div>
