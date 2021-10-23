@@ -25,6 +25,8 @@ export class BkChartComponent implements OnInit {
 	@Input() header = true;
 	@Input() minimum: number;
 
+	@Input() stackedPercent = false;
+
 	public receivedData: {data: {date: Date, value: number}[], label: string}[];
 	public data: {data: {date: Date, value: number}[], label: string}[];
 	public total: number;
@@ -34,7 +36,12 @@ export class BkChartComponent implements OnInit {
 	public displayLabels: Date[] = [];
 	public options: any = {
 		responsive: true,
-		maintainAspectRatio: false
+		maintainAspectRatio: false,
+		scales: {
+			y: {
+				stacked: this.stackedPercent
+			}
+		}
 	};
 	public groups = ['Jour', 'Mois', 'Année'];
 	public group: string;
@@ -47,6 +54,12 @@ export class BkChartComponent implements OnInit {
 	) { }
 
 	private fillHoles() {
+		/*let minDate = new Date();
+		this.receivedData.forEach(x => {
+			if (x.data[0].date < minDate) {
+				minDate = x.data[0].date;
+			}
+		});*/
 		const minDate = new Date(2016, 0, 1);
 		// Go through dates
 		const now = new Date();
@@ -252,8 +265,21 @@ export class BkChartComponent implements OnInit {
 			this.options.scales.yAxes = [{
 				ticks: {
 					min: this.minimum
-				}
+				},
+				stacked: this.stackedPercent
 			}];
+		}
+		if (this.stackedPercent) {
+			if (this.options.scales?.yAxes?.ticks) {
+				this.options.scales.yAxes[0].ticks.max = 1;	
+			} else {
+				this.options.scales.yAxes = [{
+					ticks: {
+						max: 1
+					},
+					stacked: this.stackedPercent
+				}];
+			}
 		}
 		this.group = this.offFilters.indexOf('Mois') === -1 ? 'Mois' : 'Jour';
 		this.chartsService[this.initialData].subscribe(x => {
@@ -274,8 +300,9 @@ export class BkChartComponent implements OnInit {
 				if (!this.minimum && !this.receivedData.some(rd => rd.data.some(d => d.value < 0))) {
 					this.options.scales.yAxes = [{
 						ticks: {
-							min: 0
-						}
+							min: 0, max: this.stackedPercent ? 1 : undefined
+						},
+						stacked: this.stackedPercent
 					}];
 				}
 			}

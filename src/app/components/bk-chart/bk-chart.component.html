@@ -1,4 +1,4 @@
-<div class="data" *ngIf="!add && header">
+<div class="data" *ngIf="!add && header && !stackedPercent">
 	<div>Total : <span [amount]="[total, {alwaysSign: true, color: true}]"></span></div>
 	<div>Moyenne : <span [amount]="[average, {alwaysSign: true, color: true}]"></span></div>
 	<div class="six-sigma">

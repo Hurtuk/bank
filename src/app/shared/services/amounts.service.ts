@@ -95,4 +95,8 @@ export class AmountsService {
 	public getForecast(): Observable<{tag: {id: string, title: string}, current: number, expected: number, forecast: number, previous: number}[]> {
 		return this.http.get<{tag: {id: string, title: string}, current: number, expected: number, forecast: number, previous: number}[]>(this.urlBuilder.buildUrl('getForecast'));
 	}
+
+	public getIncome(): Observable<{[name: string]: {date: Date, value: number}[]}> {
+		return this.http.get<{[name: string]: {date: Date, value: number}[]}>(this.urlBuilder.buildUrl('getIncome'));
+	}
 }

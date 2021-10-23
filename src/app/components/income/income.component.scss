@@ -1,0 +1,51 @@
+.chart {
+    display: flex;
+
+    + .chart {
+        margin-top: 50px;
+    }
+}
+
+bk-chart {
+    flex: 1;
+    display: block;
+    height: 300px;
+    margin: 0 20px;
+}
+
+table {
+    font-size: .9rem;
+    margin: 0 20px;
+
+    td {
+        text-align: right;
+        vertical-align: top;
+        padding: 5px 10px;
+    }
+
+    th {
+        padding: 5px 10px;
+        vertical-align: top;
+        color: darkgray;
+    }
+
+    tbody > tr > * {
+        border-top: 1px solid rgba(0, 0, 0, .1);
+    }
+
+    .evolution {
+        display: block;
+        font-size: .8rem;
+        
+        &.minus {
+            color: red;
+        }
+        &:not(.minus) {
+            color: green;
+
+            &:not(:empty)::before {
+                content: '+';
+            }
+        }
+    }
+}

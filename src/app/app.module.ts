@@ -31,6 +31,7 @@ import { ForecastComponent } from './components/forecast/forecast.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { RealEstateComponent } from './components/real-estate/real-estate.component';
 import { TaxesComponent } from './components/taxes/taxes.component';
+import { IncomeComponent } from './components/income/income.component';
 
 @NgModule({
 	declarations: [
@@ -48,6 +49,7 @@ import { TaxesComponent } from './components/taxes/taxes.component';
 		ProgressBarComponent,
 		RealEstateComponent,
 		TaxesComponent,
+		IncomeComponent,
 
 		AmountDirective
 	],

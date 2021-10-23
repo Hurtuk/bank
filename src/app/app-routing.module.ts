@@ -9,6 +9,7 @@ import { LoansComponent } from './components/loans/loans.component';
 import { ForecastComponent } from './components/forecast/forecast.component';
 import { RealEstateComponent } from './components/real-estate/real-estate.component';
 import { TaxesComponent } from './components/taxes/taxes.component';
+import { IncomeComponent } from './components/income/income.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
 	{ path: 'loans', component: LoansComponent },
 	{ path: 'trade', component: TradeComponent },
 	{ path: 'forecast', component: ForecastComponent },
+	{ path: 'income', component: IncomeComponent },
 	{ path: 'real-estate', component: RealEstateComponent },
 	{ path: 'taxes', component: TaxesComponent },
 	{ path: 'login', component: LoginComponent }

@@ -17,6 +17,10 @@
     }
 }
 
+h2 {
+    text-align: center;
+}
+
 caption {
     color: $color-tertiary;
     padding-bottom: 10px;
@@ -46,4 +50,82 @@ tbody + tbody > tr:first-child > * {
     text-align: center;
     margin-top: 10px;
     font-style: italic;
+}
+
+.current-year {
+    display: flex;
+
+    > div:first-child {
+        text-align: center;
+        margin: 0 40px;
+        font-size: 1rem;
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 0;
+            margin-top: 0;
+
+            + span {
+                font-size: 1.7rem;
+                margin: 40px 0;
+                font-weight: bold;
+            }
+        }
+
+        > span {
+            display: block;
+            text-align: center;
+        }
+    }
+}
+
+.months {
+    display: flex;
+    flex-direction: row-reverse;
+    flex: 1;
+}
+
+.month {
+    flex: 1;
+    max-width: 100px;
+    margin: 0 18px;
+    position: relative;
+}
+
+.month-percent {
+    font-size: .85rem;
+    font-weight: bold;
+    color: rgb(158, 158, 158);
+    position: absolute;
+    top: 102px;
+    left: 0;
+    right: 0;
+}
+
+.month span,
+h3 {
+    display: block;
+    text-align: center;
+}
+
+canvas {
+    width: 30px;
+    height: 30px;
+}
+
+.previous-years {
+    > div {
+        display: inline-block;
+        margin: 10px 30px;
+        text-align: center;
+
+        span {
+            display: block;
+        }
+    }
+}
+
+.down-data {
+    display: flex;
+    justify-content: space-evenly;
 }

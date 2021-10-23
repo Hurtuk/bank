@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
 				this.stocks = val.stocks;
 			}
 		});
+		const today = (new Date()).getTime();
 		this.amountsService.getTotalData().subscribe(val =>
 			this.chartsService.totalData.next(
 				[
@@ -47,7 +48,10 @@ export class HomeComponent implements OnInit {
 					{ label: 'A venir', data: val.income.map(i => ({date: i.date, value: -i.value})) },
 					{ label: 'Epargne', data: val.thrift },
 					{ label: 'Actions', data: val.variable }
-				]
+				]/*.map(elt => ({
+					label: elt.label,
+					data: elt.data.filter(d => d.date.getTime() > today - 10000 * 3600 * 365 * 1.5)
+				}))*/
 			)
 		);
 	}

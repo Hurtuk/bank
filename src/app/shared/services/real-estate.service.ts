@@ -14,6 +14,6 @@ export class RealEstateService {
 	) { }
 
   public getRealEstateProfit(): Observable<any> {
-		return this.http.get<any[]>(this.urlBuilder.buildUrl('getRealEstateProfit', 26, 10));
+		return this.http.get<any>(this.urlBuilder.buildUrl('getRealEstateProfit', 26));
 	}
 }
