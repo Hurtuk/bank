@@ -63,8 +63,8 @@ export class AmountsService {
 		return this.http.get<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[]}>(this.urlBuilder.buildUrl('getTotalData'));
 	}
 
-	public getCurrentsData(): Observable<{label: string, data: {date: Date, value: number}[]}[]> {
-		return this.http.get<{label: string, data: {date: Date, value: number}[]}[]>(this.urlBuilder.buildUrl('getCurrents'));
+	public getCurrentsData(): Observable<{ actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number }[]> {
+		return this.http.get<{ actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number }[]>(this.urlBuilder.buildUrl('getCurrents'));
 	}
 
 	public getBenefit(): Observable<{date: Date, value: number}[]> {

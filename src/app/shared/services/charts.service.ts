@@ -9,7 +9,7 @@ export class ChartsService {
 	public incomeData = new Subject<{label: string, data: {date: Date, value: number}[]}[]>();
 	public incomeDetailData = new Subject<{label: string, data: {date: Date, value: number}[]}[]>();
 	public totalData = new Subject<{label: string; data: {date: Date, value: number}[]}[]>();
-	public currentsData = new Subject<{label: string; data: {date: Date, value: number}[]}[]>();
+	public currentsData = new Subject<{ actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number }[]>();
 	public benefitData = new Subject<{label: string; data: {date: Date, value: number}[]}[]>();
 
 	constructor() { }

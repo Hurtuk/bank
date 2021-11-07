@@ -32,6 +32,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { RealEstateComponent } from './components/real-estate/real-estate.component';
 import { TaxesComponent } from './components/taxes/taxes.component';
 import { IncomeComponent } from './components/income/income.component';
+import { DecimalPipe } from '@angular/common';
 
 @NgModule({
 	declarations: [

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
-import { forkJoin } from 'rxjs';
 
 @Component({
 	selector: 'trade',
@@ -10,7 +9,7 @@ import { forkJoin } from 'rxjs';
 })
 
 export class TradeComponent implements OnInit {
-	public currents: { action: string, valueDate: { value: number, date: Date }, prevValueDate: { value: number, date: Date } }[];
+	public currents: { actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number }[];
 	public bought: {
 		action: string;
 		date: Date;
@@ -28,43 +27,15 @@ export class TradeComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.chartsService.currentsData.subscribe(x => this.currents = x.map(d =>
-			({
-				action: d.label,
-				valueDate: d.data[d.data.length - 1],
-				prevValueDate: d.data[d.data.length - 2] ? d.data[d.data.length - 2] : null
-			})
-		));
+		this.chartsService.currentsData.subscribe(x => this.currents = x);
 		this.amountsService.getBenefit().subscribe(d =>
 			this.chartsService.benefitData.next([{
 				label: 'Bénéfice',
 				data: d.map(dd => ({date: new Date(dd.date), value: dd.value}))
 			}])
 		);
-		forkJoin([
-			this.amountsService.getCurrentsData(),
-			this.amountsService.getBoughtActions()
-		]).subscribe(d => {
-			this.chartsService.currentsData.next(d[0].map(x => ({
-				label: x.label,
-				data: x.data.map(dd => ({date: new Date(dd.date), value: dd.value}))
-			})));
-			this.bought = d[1];
-			this.bought.forEach((b, index) => {
-				const actions = this.bought.filter(a => a.action === b.action);
-				b.total = b.count + (index && actions.length >= index ? actions[index - 1].total : 0)
-			});
-			this.benefit = this.currents.map(a => {
-				const actions = this.bought.filter(b => b.action === a.action);
-				return {
-					action: a.action,
-					total: actions.reduce((prev, current) => prev += current.value, 0),
-					value: actions[actions.length - 1].total * a.valueDate.value
-				}
-			});
-			//console.log(this.benefit);
-			this.benefitTotal = this.benefit.reduce((prev, current) => prev += (current.value - current.total), 0);
-		});
+		this.amountsService.getCurrentsData()
+			.subscribe(d => this.chartsService.currentsData.next(d));
 	}
 
 	public getPercent(prev: number, cur: number) {
