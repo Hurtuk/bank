@@ -15,4 +15,11 @@
 		</label>
 	</ng-container>
 </div>
-<update-list [items]="result" [account]="account" [allIncome]="true"></update-list>
+<div class="filters" *ngIf="year">
+	Filtrer : 
+	<select [(ngModel)]="filter">
+		<option></option>
+		<option *ngFor="let t of types" [ngValue]="t.id">{{t.tag}}</option>
+	</select>
+</div>
+<update-list *ngIf="year" [items]="result" [account]="account" [allIncome]="true" [filterTag]="filter"></update-list>

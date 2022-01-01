@@ -1,0 +1,21 @@
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.ongoing {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+td {
+    padding: .5rem 2rem;
+
+    &:last-child {
+        text-align: right;
+    }
+}
+
+tr.odd {
+    background-color: rgb(243, 243, 243);
+}

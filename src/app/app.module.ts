@@ -32,7 +32,9 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { RealEstateComponent } from './components/real-estate/real-estate.component';
 import { TaxesComponent } from './components/taxes/taxes.component';
 import { IncomeComponent } from './components/income/income.component';
-import { DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
+import { TravelsService } from './shared/services/travels.service';
+import { TravelsComponent } from './components/travels/travels.component';
 
 @NgModule({
 	declarations: [
@@ -51,7 +53,7 @@ import { DecimalPipe } from '@angular/common';
 		RealEstateComponent,
 		TaxesComponent,
 		IncomeComponent,
-
+		TravelsComponent,
 		AmountDirective
 	],
 	imports: [
@@ -71,6 +73,7 @@ import { DecimalPipe } from '@angular/common';
 		DateService,
 		AuthGuard,
 		AuthService,
+		TravelsService,
 		httpInterceptorProviders
 	],
 	bootstrap: [AppComponent]

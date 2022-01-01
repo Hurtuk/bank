@@ -1,0 +1,19 @@
+<h1>Voyages</h1>
+<table *ngIf="travels">
+    <thead>
+        <tr>
+            <th>Dates</th>
+            <th>Nom</th>
+            <th>Coût total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of travels" [class]="(t.ended == '0' ? 'ongoing' : '') + ' ' + (t.start.getFullYear() % 2 ? 'odd' : 'even')">
+            <td>{{ t.start | date:'dd/MM/yyyy' }} - {{ t.end | date:'dd/MM/yyyy' }}</td>
+            <td>{{ t.title }}</td>
+            <td>
+                <span [amount]="[-t.cost]"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

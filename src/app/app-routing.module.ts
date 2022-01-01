@@ -10,6 +10,7 @@ import { ForecastComponent } from './components/forecast/forecast.component';
 import { RealEstateComponent } from './components/real-estate/real-estate.component';
 import { TaxesComponent } from './components/taxes/taxes.component';
 import { IncomeComponent } from './components/income/income.component';
+import { TravelsComponent } from './components/travels/travels.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
 	{ path: 'forecast', component: ForecastComponent },
 	{ path: 'income', component: IncomeComponent },
 	{ path: 'real-estate', component: RealEstateComponent },
+	{ path: 'travels', component: TravelsComponent },
 	{ path: 'taxes', component: TaxesComponent },
 	{ path: 'login', component: LoginComponent }
 ];

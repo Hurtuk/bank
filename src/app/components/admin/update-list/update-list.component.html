@@ -5,11 +5,13 @@
 			<th>Date</th>
 			<th>Titre</th>
 			<th>Montant</th>
+			<th></th>
 			<th>Variable</th>
 			<th>Rembourse</th>
 			<th>Prêt</th>
-			<th>Défiscalisable</th>
-			<th>Calcul<br/>rendement</th>
+			<th>Défisc.</th>
+			<th>Rend.</th>
+			<th>Voyage</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -19,45 +21,56 @@
 				<button (click)="add()">Nouvelle ligne</button>
 			</td>
 		</tr>
-		<tr *ngFor="let r of items">
-			<td>
-				<type *ngFor="let t of r.types" [icon]="t.image"></type>
-				<type (click)="openPopup(r)"></type>
-			</td>
-			<td>
-				<input [ngModel]="r.date | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="r.date = $event" type="datetime-local" (change)="r.updated = true"/>
-			</td>
-			<td>
-				<input type="text" [(ngModel)]="r.title" (change)="autoSetTypes(r); r.updated = true"/>
-			</td>
-			<td>
-				<input type="number" [(ngModel)]="r.amount" (change)="r.updated = true"/>
-			</td>
-			<td>
-				<input type="number" [(ngModel)]="r.variable" (change)="r.updated = true"/>
-			</td>
-			<td>
-				<select [(ngModel)]="r.refunding" (change)="r.updated = true">
-					<option></option>
-					<option *ngFor="let f of refundable" [ngValue]="f.id">{{f.title + ' ' + f.amount + '€'}}</option>
-				</select>
-			</td>
-			<td>
-				<select [(ngModel)]="r.loan" (change)="r.updated = true">
-					<option></option>
-					<option *ngFor="let l of loans" [ngValue]="l.id">{{l.title}}</option>
-				</select>
-			</td>
-			<td>
-				<input type="checkbox" [(ngModel)]="r.taxexempt" (change)="r.updated = true"/>
-			</td>
-			<td>
-				<input type="checkbox" [(ngModel)]="r.profitability" (change)="r.updated = true"/>
-			</td>
-			<td>
-				<button (click)="removeRow(r)">-</button>
-			</td>
-		</tr>
+		<ng-container *ngFor="let r of items">
+			<tr *ngIf="show(r)">
+				<td>
+					<type *ngFor="let t of r.types" [icon]="t.image"></type>
+					<type (click)="openPopup(r)"></type>
+				</td>
+				<td>
+					<input [ngModel]="r.date | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="r.date = $event" type="datetime-local" (change)="r.updated = true"/>
+				</td>
+				<td>
+					<input type="text" [(ngModel)]="r.title" (change)="autoSetTypes(r); r.updated = true"/>
+				</td>
+				<td>
+					<input type="number" [(ngModel)]="r.amount" (change)="r.updated = true"/>
+				</td>
+				<td>
+					<i class="fa fa-arrows-h" style="cursor: pointer" (click)="invert(r)"></i>
+				</td>
+				<td>
+					<input type="number" [(ngModel)]="r.variable" (change)="r.updated = true"/>
+				</td>
+				<td>
+					<select [(ngModel)]="r.refunding" (change)="r.updated = true">
+						<option></option>
+						<option *ngFor="let f of refundable" [ngValue]="f.id">{{f.title + ' ' + f.amount + '€'}}</option>
+					</select>
+				</td>
+				<td>
+					<select [(ngModel)]="r.loan" (change)="r.updated = true">
+						<option></option>
+						<option *ngFor="let l of loans" [ngValue]="l.id">{{l.title}}</option>
+					</select>
+				</td>
+				<td>
+					<input type="checkbox" [(ngModel)]="r.taxexempt" (change)="r.updated = true"/>
+				</td>
+				<td>
+					<input type="checkbox" [(ngModel)]="r.profitability" (change)="r.updated = true"/>
+				</td>
+				<td>
+					<select [(ngModel)]="r.travel" (change)="r.updated = true">
+						<option></option>
+						<option *ngFor="let t of travels" [ngValue]="t.id">{{t.title}}</option>
+					</select>
+				</td>
+				<td>
+					<button (click)="removeRow(r)">-</button>
+				</td>
+			</tr>
+		</ng-container>
 	</tbody>
 	<tfoot *ngIf="items">
 		<tr>

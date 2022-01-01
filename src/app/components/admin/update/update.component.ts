@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TypesService } from 'src/app/shared/services/types.service';
 import { AccountsService } from '../../../shared/services/accounts.service';
 import { AmountsService } from '../../../shared/services/amounts.service';
 
@@ -21,16 +22,19 @@ export class UpdateComponent implements OnInit {
 	}[];
 	public accounts: {id: number, name: string}[] = [];
 	public account: {id: number, name: string};
-	public year = (new Date()).getFullYear();
+	public types: {id: number, tag: string}[];
+	public year: number;
 	public years: string[];
 
 	constructor(
 		private accountsService: AccountsService,
-		private amountsService: AmountsService
+		private amountsService: AmountsService,
+		private typesService: TypesService
 	) { }
 
 	ngOnInit() {
 		this.accountsService.getAllAccounts().subscribe(x => this.accounts = x);
+		this.typesService.getTypes().subscribe(x => this.types = x.sort((a, b) => a.tag.localeCompare(b.tag)));
 	}
 
 	public updateYears() {

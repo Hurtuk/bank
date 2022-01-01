@@ -4,6 +4,10 @@ table {
 	margin: 0 auto;
 }
 
+th {
+	font-size: .9rem;
+}
+
 td {
 	text-align: center;
 	white-space: nowrap;
@@ -20,12 +24,16 @@ input {
 	}
 
 	&[type=text] {
-		width: 210px;
+		width: 160px;
 	}
 
 	&[type=number] {
 		width: 80px;
 		text-align: right;
+	}
+
+	&[type=datetime-local] {
+		width: 126px;
 	}
 }
 

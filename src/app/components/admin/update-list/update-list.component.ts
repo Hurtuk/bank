@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TravelsService } from 'src/app/shared/services/travels.service';
 import { AmountsService } from '../../../shared/services/amounts.service';
 import { TypesService } from '../../../shared/services/types.service';
 
@@ -20,14 +21,17 @@ export class UpdateListComponent implements OnInit {
 		loan: number,
 		taxexempt: boolean,
 		profitability: boolean,
+		travel: number,
 		updated?: boolean
 	}[];
 	@Input() account: number;
 	@Input() canAdd: boolean;
 	@Input() allIncome: boolean;
 	@Input() addAllowed = true;
+	@Input() filterTag: number;
 	public refundable: any[];
 	public loans: any[];
+	public travels: any[];
 	public popupOpened: boolean;
 	public types: {id: number, image: string}[];
 	public popupOpenedFor: any;
@@ -35,11 +39,16 @@ export class UpdateListComponent implements OnInit {
 
 	constructor(
 		private amountsService: AmountsService,
-		private typesService: TypesService
+		private typesService: TypesService,
+		private travelsService: TravelsService
 	) { }
 
 	public removeRow(item) {
 		this.items.splice(this.items.indexOf(item), 1);
+	}
+
+	public show(item): boolean {
+		return !this.filterTag || item.types.some(t => t.id == this.filterTag);
 	}
 
 	public openPopup(item) {
@@ -71,6 +80,7 @@ export class UpdateListComponent implements OnInit {
 			loan: null,
 			taxexempt: false,
 			profitability: false,
+			travel: null,
 			updated: true
 		});
 	}
@@ -83,6 +93,13 @@ export class UpdateListComponent implements OnInit {
 				this.items = this.items.filter(d => d.updated);
 				this.items.forEach(d => d.updated = false);
 			});
+	}
+
+	public invert(row) {
+		const variable = row.variable;
+		row.variable = row.amount;
+		row.amount = variable;
+		row.updated = true;
 	}
 
 	public autoSetTypes(item) {
@@ -120,6 +137,9 @@ export class UpdateListComponent implements OnInit {
 		}
 		this.amountsService.getLoans().subscribe(x => {
 			this.loans = x;
+		});
+		this.travelsService.getTravels().subscribe(x => {
+			this.travels = x;
 		});
 		this.typesService.getTypes().subscribe(x => this.types = x);
 		this.typesService.getTypes().subscribe();

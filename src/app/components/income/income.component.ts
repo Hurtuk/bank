@@ -52,6 +52,8 @@ export class IncomeComponent implements OnInit {
   public percentPerYear: { year: number, data: { label: string, value: number }[] }[];
   public labels: string[];
 
+	public minYear = (new Date()).getFullYear() - 5;
+
   constructor(
 		private amountsService: AmountsService,
 		private chartsService: ChartsService,
@@ -158,7 +160,7 @@ export class IncomeComponent implements OnInit {
 
   public getLabels(): string[] {
     if (!this.labels) {
-      const order = ["Sopra Steria", "Coaxys", "Immobilier", "CESI", "Ecriture", "Divers"];
+      const order = ["Sopra Steria", "Coaxys / BlueSoft", "Immobilier", "CESI", "Ecriture", "Divers"];
       const labels = [];
       for (const py of this.perYear) {
         for (const data of py.data) {

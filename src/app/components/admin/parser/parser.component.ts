@@ -41,17 +41,17 @@ export class ParserComponent implements OnInit {
 			amount: string;
 		let data: string[], dateData: string[];
 		for (const r of rows) {
-			data = r.split('\t');
-			if (r.indexOf('/') !== -1) {
+			if (r) {
+				data = r.split('\t');
+				console.log(data);
 				// Date
 				dateData = data[0].split('/');
 				date = new Date(Number.parseInt(dateData[2]), Number.parseInt(dateData[1]) - 1, Number.parseInt(dateData[0]), 9, 30, 0);
 				// Title
 				title = data[1];
-			}
-			if (r.indexOf('€') !== -1) {
 				// Amount
-				amount = data[1].split('€')[0].trim().replace(/,/, '.').replace(/ /, '');
+				const indexAmount = data[2].trim() ? 2 : 3;
+				amount = data[indexAmount].split('€')[0].trim().replace(/,/, '.').replace(/\+? /g, '');
 				// Add line
 				this.result.push({
 					id: -1,

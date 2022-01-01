@@ -13,13 +13,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let y of perYear">
-					<th>{{ y.year }}</th>
-					<td *ngFor="let label of getLabels()">
-						<span [amount]="[getDataFromYear(y.data, label)?.value]"></span>
-						<span class="evolution" *ngIf="label != 'Divers'" [class.minus]="getDataFromYear(y.data, label)?.evolution < 0">{{ getDataFromYear(y.data, label)?.evolution | percent:'1.0-1' }}</span>
-					</td>
-				</tr>
+				<ng-container *ngFor="let y of perYear">
+					<tr *ngIf="y.year >= minYear">
+						<th>{{ y.year }}</th>
+						<td *ngFor="let label of getLabels()">
+							<span [amount]="[getDataFromYear(y.data, label)?.value]"></span>
+							<span class="evolution" *ngIf="label != 'Divers'" [class.minus]="getDataFromYear(y.data, label)?.evolution < 0">{{ getDataFromYear(y.data, label)?.evolution | percent:'1.0-1' }}</span>
+						</td>
+					</tr>
+				</ng-container>
 			</tbody>
 		</table>
 	</div>
@@ -34,12 +36,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let y of percentPerYear">
-					<th>{{ y.year }}</th>
-					<ng-container *ngFor="let label of getLabels()">
-						<td *ngIf="label != 'Divers'">{{ getDataFromYear(y.data, label)?.value | percent:'1.0-1' }}</td>
-					</ng-container>
-				</tr>
+				<ng-container *ngFor="let y of percentPerYear">
+					<tr *ngIf="y.year >= minYear - 2">
+						<th>{{ y.year }}</th>
+						<ng-container *ngFor="let label of getLabels()">
+							<td *ngIf="label != 'Divers'">{{ getDataFromYear(y.data, label)?.value | percent:'1.0-1' }}</td>
+						</ng-container>
+					</tr>
+				</ng-container>
 			</tbody>
 		</table>
 		<bk-chart

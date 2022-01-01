@@ -13,6 +13,8 @@ export class MonthEndsComponent implements OnInit {
 	public data: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
 	public operation = 'Total';
 
+	public minYear = (new Date()).getFullYear() - 5;
+
 	constructor(
 		private amountsService: AmountsService,
 		private chartsService: ChartsService,
