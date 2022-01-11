@@ -28,13 +28,19 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Montant</th>
+                        <th colspan="2">Montant</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Habitation</th>
+                        <th>Site Arpège</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let tax of (buildTaxes | async)">
+                    <tr *ngFor="let tax of buildTaxes.home; let i = index">
                         <td>{{ tax.year }}</td>
                         <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+                        <td *ngIf="buildTaxes.arpege[i]" [amount]="[buildTaxes.arpege[i].sum, {color: true}]">{{ buildTaxes.arpege[i].sum }}</td>
                     </tr>
                 </tbody>
             </table>

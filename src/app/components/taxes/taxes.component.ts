@@ -9,7 +9,7 @@ import { TaxesService } from 'src/app/shared/services/taxes.service';
 export class TaxesComponent implements OnInit {
 
   public rentTaxes = this.taxesService.getTaxes("Impôt sur le revenu");
-  public buildTaxes = this.taxesService.getTaxes("Taxe foncière");
+  public buildTaxes;
   public homeTaxes = this.taxesService.getTaxes("Taxe d'habitation");
 
   constructor(
@@ -17,6 +17,8 @@ export class TaxesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.taxesService.getTaxes("Taxe foncière")
+      .subscribe(t => this.buildTaxes = t);
   }
 
 }

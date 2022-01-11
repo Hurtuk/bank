@@ -24,6 +24,7 @@ export class BkChartComponent implements OnInit {
 	@Input() chartOptions: {option: string, value: string | number}[][];
 	@Input() header = true;
 	@Input() minimum: number;
+	@Input() minDate: Date;
 
 	@Input() stackedPercent = false;
 
@@ -54,12 +55,6 @@ export class BkChartComponent implements OnInit {
 	) { }
 
 	private fillHoles() {
-		/*let minDate = new Date();
-		this.receivedData.forEach(x => {
-			if (x.data[0].date < minDate) {
-				minDate = x.data[0].date;
-			}
-		});*/
 		const minDate = new Date(2016, 0, 1);
 		// Go through dates
 		const now = new Date();
@@ -120,7 +115,13 @@ export class BkChartComponent implements OnInit {
 				});
 				break;
 		}
-		this.displayData = this.data.map(x => ({ data: x.data.map(d => Math.round(d.value * 100) / 100), label: x.label }));
+		let temp = this.data;
+		if (this.minDate) {
+			temp.forEach(v => {
+				v.data = v.data.filter(vv => vv.date > this.minDate);
+			});
+		}
+		this.displayData = temp.map(x => ({ data: x.data.map(d => Math.round(d.value * 100) / 100), label: x.label }));
 	}
 
 	private calculateSigma(values) {
@@ -261,7 +262,7 @@ export class BkChartComponent implements OnInit {
 				}
 			}]
 		};
-		if (this.minimum) {
+		if (typeof this.minimum !== "undefined") {
 			this.options.scales.yAxes = [{
 				ticks: {
 					min: this.minimum

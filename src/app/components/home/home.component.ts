@@ -9,6 +9,9 @@ import { ChartsService } from '../../shared/services/charts.service';
 })
 
 export class HomeComponent implements OnInit {
+
+	private YEARS_BACK = 3;
+
 	public fixAccounts: {bank: string, name: string, amount: number}[];
 	public income: {date: Date, types: string[], title: string, amount: number}[];
 	public thriftAccounts: {bank: string, name: string, amount: number}[];
@@ -26,12 +29,16 @@ export class HomeComponent implements OnInit {
 			{option: 'borderWidth', value: 2}]
 	];
 
+	public minDate: Date;
+
 	constructor(
 		private amountsService: AmountsService,
 		private chartsService: ChartsService
 	) { }
 
 	ngOnInit() {
+		const today = new Date();
+		this.minDate = new Date(today.getFullYear() - this.YEARS_BACK, today.getMonth(), today.getDate());
 		this.amountsService.getHomeValues().subscribe(val => {
 			if (val) {
 				this.fixAccounts = val.fixed;
@@ -40,7 +47,6 @@ export class HomeComponent implements OnInit {
 				this.stocks = val.stocks;
 			}
 		});
-		const today = (new Date()).getTime();
 		this.amountsService.getTotalData().subscribe(val =>
 			this.chartsService.totalData.next(
 				[
@@ -48,10 +54,7 @@ export class HomeComponent implements OnInit {
 					{ label: 'A venir', data: val.income.map(i => ({date: i.date, value: -i.value})) },
 					{ label: 'Epargne', data: val.thrift },
 					{ label: 'Actions', data: val.variable }
-				]/*.map(elt => ({
-					label: elt.label,
-					data: elt.data.filter(d => d.date.getTime() > today - 10000 * 3600 * 365 * 1.5)
-				}))*/
+				]
 			)
 		);
 	}
