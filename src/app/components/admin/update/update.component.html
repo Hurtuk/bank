@@ -1,10 +1,23 @@
 <div class="tabs">
 	<ng-container *ngFor="let a of accounts">
-		<input type="radio" name="tab" [id]="'account-tab-' + a.id" [value]="a.id" [checked]="account == a" (change)="account = a; updateYears()"/>
-		<label [for]="'account-tab-' + a.id" [class.closed]="a.opened != 1">
-			<span [style.backgroundImage]="'url(./assets/images/structures/' + a.bank + '.png)'"></span>
-			{{ a.name }}
-		</label>
+		<ng-container *ngIf="a.opened == 1">
+			<input type="radio" name="tab" [id]="'account-tab-' + a.id" [value]="a.id" [checked]="account == a" (change)="account = a; updateYears()"/>
+			<label [for]="'account-tab-' + a.id">
+				<span [style.backgroundImage]="'url(./assets/images/structures/' + a.bank + '.png)'"></span>
+				{{ a.name }}
+			</label>
+		</ng-container>
+	</ng-container>
+</div>
+<div class="tabs">
+	<ng-container *ngFor="let a of accounts">
+		<ng-container *ngIf="a.opened != 1">
+			<input type="radio" name="tab" [id]="'account-tab-' + a.id" [value]="a.id" [checked]="account == a" (change)="account = a; updateYears()"/>
+			<label [for]="'account-tab-' + a.id" class="closed">
+				<span [style.backgroundImage]="'url(./assets/images/structures/' + a.bank + '.png)'"></span>
+				{{ a.name }}
+			</label>
+		</ng-container>
 	</ng-container>
 </div>
 <div class="tabs" *ngIf="years">

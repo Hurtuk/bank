@@ -99,4 +99,8 @@ export class AmountsService {
 	public getIncome(): Observable<{[name: string]: {date: Date, value: number}[]}> {
 		return this.http.get<{[name: string]: {date: Date, value: number}[]}>(this.urlBuilder.buildUrl('getIncome'));
 	}
+
+	public getAutodata(item: any): Observable<any> {
+		return this.http.get<any>(this.urlBuilder.buildUrl('getAutoData', item.title, item.types.map(t => t.id).sort((a, b) => a - b)));
+	}
 }

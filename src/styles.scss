@@ -42,6 +42,8 @@ h2 {
 	flex-direction: row;
 	justify-content: space-evenly;
 	margin: 5px 0 20px;
+	flex-wrap: wrap;
+	gap: 5px;
 
 	input {
 		display: none;
@@ -49,7 +51,7 @@ h2 {
 
 	label {
 		display: inline-block;
-		width: 15%;
+		width: 12%;
 		background-color: lightgray;
 		line-height: 40px;
 		cursor: pointer;

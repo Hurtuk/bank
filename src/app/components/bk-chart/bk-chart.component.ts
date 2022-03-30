@@ -248,7 +248,7 @@ export class BkChartComponent implements OnInit {
 		this.receivedData.forEach((d, index) => {
 			d.data = d.data.map((x, i) => ({
 				date: x.date,
-				value: x.value + (index ? this.receivedData[index - 1].data[i].value : 0)
+				value: x.value + (index && this.receivedData[index - 1].data[i]?.value ? this.receivedData[index - 1].data[i].value : 0)
 			}));
 		});
 	}

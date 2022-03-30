@@ -88,8 +88,8 @@ export class IncomeComponent implements OnInit {
 
       for (const entity in income) {
         data.push({ label: entity, data: income[entity].map(xx => {
-          const total = totals.find(t => Math.abs(xx.date.getTime() - t.date.getTime()) < 1000 * 3600 * 2).sum;
-          if (total !== 0) {
+          const total = totals.find(t => Math.abs(xx.date.getTime() - t.date.getTime()) < 1000 * 3600 * 2)?.sum;
+          if (total) {
             return {date: new Date(xx.date), value: xx.value / total};
           } else {
             return {date: new Date(xx.date), value: 1};

@@ -1,6 +1,7 @@
 <table>
 	<thead>
 		<tr>
+			<th></th>
 			<th>Types</th>
 			<th>Date</th>
 			<th>Titre</th>
@@ -17,12 +18,15 @@
 	</thead>
 	<tbody>
 		<tr *ngIf="canAdd">
-			<td colspan="7">
+			<td colspan="13">
 				<button (click)="add()">Nouvelle ligne</button>
 			</td>
 		</tr>
 		<ng-container *ngFor="let r of items">
 			<tr *ngIf="show(r)">
+				<td>
+					<i (click)="autofill(r)" class="fa fa-refresh" style="cursor: pointer"></i>
+				</td>
 				<td>
 					<type *ngFor="let t of r.types" [icon]="t.image"></type>
 					<type (click)="openPopup(r)"></type>
@@ -31,7 +35,7 @@
 					<input [ngModel]="r.date | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="r.date = $event" type="datetime-local" (change)="r.updated = true"/>
 				</td>
 				<td>
-					<input type="text" [(ngModel)]="r.title" (change)="autoSetTypes(r); r.updated = true"/>
+					<input type="text" [(ngModel)]="r.title" (change)="autoSetData(r); r.updated = true"/>
 				</td>
 				<td>
 					<input type="number" [(ngModel)]="r.amount" (change)="r.updated = true"/>
@@ -74,13 +78,19 @@
 	</tbody>
 	<tfoot *ngIf="items">
 		<tr>
-			<td colspan="8">
+			<td colspan="13">
 				<button (click)="save()" [disabled]="!addAllowed">Enregistrer</button>
 				<div *ngIf="success">Données enregistrées !</div>
 			</td>
 		</tr>
 	</tfoot>
 </table>
+<div>
+	<h2>Evénements réguliers :</h2>
+	<ul>
+		<li *ngFor="let m of lastMonthly">{{ m.title }} : {{m.amount}}</li>
+	</ul>
+</div>
 <div class="popup" *ngIf="popupOpened">
 	<h1 (click)="closePopup()">{{ popupOpenedFor.title }}</h1>
 	<div class="types">

@@ -37,6 +37,8 @@ export class UpdateListComponent implements OnInit {
 	public popupOpenedFor: any;
 	public success: boolean;
 
+	public lastMonthly: any[];
+
 	constructor(
 		private amountsService: AmountsService,
 		private typesService: TypesService,
@@ -102,12 +104,23 @@ export class UpdateListComponent implements OnInit {
 		row.updated = true;
 	}
 
-	public autoSetTypes(item) {
+	public autoSetData(item) {
 		this.typesService.getTypesFromTransacTitle(item.title).subscribe(types => {
 			if (types) {
+				item.types = [];
 				types.forEach(type => {
 					item.types.push(this.types.find(t => t.id == type))
 				});
+			}
+		});
+	}
+
+	public autofill(item) {
+		this.amountsService.getAutodata(item).subscribe(data => {
+			if (data) {
+				item.loan = data.loan;
+				item.taxexempt = data.taxexempt != "0";
+				item.profitability = data.profitability;
 			}
 		});
 	}
@@ -143,5 +156,12 @@ export class UpdateListComponent implements OnInit {
 		});
 		this.typesService.getTypes().subscribe(x => this.types = x);
 		this.typesService.getTypes().subscribe();
+		this.amountsService.getSpendingsByType(4).subscribe(s => {
+			this.lastMonthly = [];
+			const firstMonth = s[0].date.getMonth();
+			for (let i = 0; i < s.length && s[i].date.getMonth() === firstMonth; i++) {
+				this.lastMonthly.push(s[i]);
+			}
+		});
 	}
 }
