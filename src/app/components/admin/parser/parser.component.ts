@@ -43,7 +43,6 @@ export class ParserComponent implements OnInit {
 		for (const r of rows) {
 			if (r) {
 				data = r.split('\t');
-				console.log(data);
 				// Date
 				dateData = data[0].split('/');
 				date = new Date(Number.parseInt(dateData[2]), Number.parseInt(dateData[1]) - 1, Number.parseInt(dateData[0]), 9, 30, 0);

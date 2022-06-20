@@ -19,7 +19,6 @@ export class UpdateListComponent implements OnInit {
 		variable: number,
 		refunding: number,
 		loan: number,
-		taxexempt: boolean,
 		profitability: boolean,
 		travel: number,
 		updated?: boolean
@@ -80,7 +79,6 @@ export class UpdateListComponent implements OnInit {
 			variable: 0,
 			refunding: null,
 			loan: null,
-			taxexempt: false,
 			profitability: false,
 			travel: null,
 			updated: true
@@ -106,7 +104,7 @@ export class UpdateListComponent implements OnInit {
 
 	public autoSetData(item) {
 		this.typesService.getTypesFromTransacTitle(item.title).subscribe(types => {
-			if (types) {
+			if (types && types.length > 0) {
 				item.types = [];
 				types.forEach(type => {
 					item.types.push(this.types.find(t => t.id == type))
@@ -119,7 +117,6 @@ export class UpdateListComponent implements OnInit {
 		this.amountsService.getAutodata(item).subscribe(data => {
 			if (data) {
 				item.loan = data.loan;
-				item.taxexempt = data.taxexempt != "0";
 				item.profitability = data.profitability;
 			}
 		});

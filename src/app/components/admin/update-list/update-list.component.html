@@ -10,7 +10,6 @@
 			<th>Variable</th>
 			<th>Rembourse</th>
 			<th>Prêt</th>
-			<th>Défisc.</th>
 			<th>Rend.</th>
 			<th>Voyage</th>
 			<th>Actions</th>
@@ -57,9 +56,6 @@
 						<option></option>
 						<option *ngFor="let l of loans" [ngValue]="l.id">{{l.title}}</option>
 					</select>
-				</td>
-				<td>
-					<input type="checkbox" [(ngModel)]="r.taxexempt" (change)="r.updated = true"/>
 				</td>
 				<td>
 					<input type="checkbox" [(ngModel)]="r.profitability" (change)="r.updated = true"/>

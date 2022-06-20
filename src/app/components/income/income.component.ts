@@ -10,11 +10,8 @@ import { ChartsService } from 'src/app/shared/services/charts.service';
 export class IncomeComponent implements OnInit {
 
 	public chartOptions = [
-		[{option: 'backgroundColor', value: '#CF022B'}, // Sopra Steria
+		[{option: 'backgroundColor', value: '#CF022B'}, // Travail
 			{option: 'borderWidth', value: 0},
-      {option: 'pointRadius', value: 0}],
-    [{option: 'backgroundColor', value: '#FFA119'}, // Coaxys
-      {option: 'borderWidth', value: 0},
       {option: 'pointRadius', value: 0}],
     [{option: 'backgroundColor', value: '#008000'}, // Immobilier
       {option: 'borderWidth', value: 0},
@@ -31,11 +28,8 @@ export class IncomeComponent implements OnInit {
 	];
 
 	public chartOptions2 = [
-		[{option: 'backgroundColor', value: '#CF022B'}, // Sopra Steria
+		[{option: 'backgroundColor', value: '#CF022B'}, // Travail
 			{option: 'borderWidth', value: 0},
-      {option: 'pointRadius', value: 0}],
-    [{option: 'backgroundColor', value: '#FFA119'}, // Coaxys
-      {option: 'borderWidth', value: 0},
       {option: 'pointRadius', value: 0}],
     [{option: 'backgroundColor', value: '#008000'}, // Immobilier
       {option: 'borderWidth', value: 0},
@@ -130,7 +124,7 @@ export class IncomeComponent implements OnInit {
           }
         }
       }
-      this.perYear.reverse();
+      this.perYear.sort((a, b) => b.year - a.year);
 
       // Second chart
 
@@ -160,7 +154,7 @@ export class IncomeComponent implements OnInit {
 
   public getLabels(): string[] {
     if (!this.labels) {
-      const order = ["Sopra Steria", "Coaxys / BlueSoft", "Immobilier", "CESI", "Ecriture", "Divers"];
+      const order = ["Travail", "Immobilier", "CESI", "Ecriture", "Divers"];
       const labels = [];
       for (const py of this.perYear) {
         for (const data of py.data) {

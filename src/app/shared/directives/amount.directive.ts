@@ -31,7 +31,7 @@ export class AmountDirective implements OnChanges {
 
 	private formatAmount() {
 		if (this.amount) {
-			const value = parseFloat(this.amount[0]);
+			const value = parseFloat(this.amount[0] ?? '0');
 			const options = this.amount.length > 1 ? this.amount[1]: {};
 			if ((value && !isNaN(value)) || value === 0) {
 				const decimal = Math.abs(Math.round((value % 1 * 100)));

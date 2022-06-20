@@ -35,6 +35,7 @@ import { IncomeComponent } from './components/income/income.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { TravelsService } from './shared/services/travels.service';
 import { TravelsComponent } from './components/travels/travels.component';
+import { ReBarsComponent } from './components/real-estate/re-bars/re-bars.component';
 
 @NgModule({
 	declarations: [
@@ -51,6 +52,7 @@ import { TravelsComponent } from './components/travels/travels.component';
 		ForecastComponent,
 		ProgressBarComponent,
 		RealEstateComponent,
+		ReBarsComponent,
 		TaxesComponent,
 		IncomeComponent,
 		TravelsComponent,

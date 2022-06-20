@@ -11,6 +11,8 @@ import { RealEstateService } from 'src/app/shared/services/real-estate.service';
 export class RealEstateComponent implements OnInit {
 
   public data: any;
+
+  public occupied: any[];
   
   public options: any = {
 		responsive: true,
