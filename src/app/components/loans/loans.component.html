@@ -7,7 +7,7 @@
     </div>
     <div class="infos">
         <h1>{{loan.title}}</h1>
-        <div>Empruntés : <span [amount]="[loan.amount]"></span> à <strong>{{ loan.rate }}%</strong>, soit à rembourser : <span [amount]="[loan.to_refund]"></span></div>
+        <div>Empruntés : <span [amount]="[loan.amount]"></span> à <strong>{{ loan.rate }}%</strong>, soit à rembourser : <span [amount]="[loan.to_refund]"></span> (restent <span [amount]="[loan.to_refund - loan.refund]"></span>)</div>
         <app-progress-bar [full]="loan.to_refund" [current]="loan.refund"></app-progress-bar>
     </div>
 </div>

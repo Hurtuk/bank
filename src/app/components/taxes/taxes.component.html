@@ -28,12 +28,9 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th colspan="2">Montant</th>
-                    </tr>
-                    <tr>
-                        <th></th>
                         <th>Habitation</th>
-                        <th>Site Arpège</th>
+                        <th>Arpège</th>
+                        <th>Boléro</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +38,7 @@
                         <td>{{ tax.year }}</td>
                         <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
                         <td *ngIf="buildTaxes.arpege[i]" [amount]="[buildTaxes.arpege[i].sum, {color: true}]">{{ buildTaxes.arpege[i].sum }}</td>
+                        <td *ngIf="buildTaxes.bolero[i]" [amount]="[buildTaxes.bolero[i].sum, {color: true}]">{{ buildTaxes.bolero[i].sum }}</td>
                     </tr>
                 </tbody>
             </table>

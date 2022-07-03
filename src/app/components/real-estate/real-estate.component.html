@@ -1,4 +1,4 @@
-<h1>Site Arpège</h1>
+<h1>{{name}}</h1>
 <div class="content" *ngIf="data">
     <h2>Rentabilité</h2>
     <div class="current-year">
@@ -56,7 +56,7 @@
             <table>
                 <tbody>
                     <ng-container *ngFor="let row of data.start">
-                        <tr *ngIf="row.title != 'Coût du crédit'">
+                        <tr>
                             <td>{{row.title}}</td>
                             <td [amount]="[-row.value, {alwaysSign: true, color: true}]"></td>
                         </tr>
@@ -65,7 +65,7 @@
                 <tfoot>
                     <tr>
                         <th>Total</th>
-                        <th [amount]="[-data.cost+30470, {alwaysSign: true, color: true}]"></th>
+                        <th [amount]="[-data.cost, {alwaysSign: true, color: true}]"></th>
                     </tr>
                 </tfoot>
             </table>

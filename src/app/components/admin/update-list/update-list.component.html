@@ -82,9 +82,14 @@
 	</tfoot>
 </table>
 <div>
-	<h2>Evénements réguliers :</h2>
-	<ul>
-		<li *ngFor="let m of lastMonthly">{{ m.title }} : {{m.amount}}</li>
+	<h2>événements réguliers :</h2>
+	<ul class="frequent">
+		<li *ngFor="let m of lastMonthly">
+			<ng-container *ngFor="let t of m.types">
+				<type *ngIf="t != 'mensuel'" [icon]="t"></type>
+			</ng-container>
+			{{ m.title }} : {{m.amount}}€
+		</li>
 	</ul>
 </div>
 <div class="popup" *ngIf="popupOpened">

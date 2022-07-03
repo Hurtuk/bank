@@ -20,7 +20,7 @@ const routes: Routes = [
 	{ path: 'trade', component: TradeComponent },
 	{ path: 'forecast', component: ForecastComponent },
 	{ path: 'income', component: IncomeComponent },
-	{ path: 'real-estate', component: RealEstateComponent },
+	{ path: 'real-estate/:id', component: RealEstateComponent },
 	{ path: 'travels', component: TravelsComponent },
 	{ path: 'taxes', component: TaxesComponent },
 	{ path: 'login', component: LoginComponent }

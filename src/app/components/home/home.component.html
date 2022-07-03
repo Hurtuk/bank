@@ -10,7 +10,7 @@
 	<h2>Remboursements à venir</h2>
 	<table>
 		<tr *ngFor="let inc of income">
-			<td>
+			<td style="white-space: nowrap">
 				<type *ngFor="let t of inc.types" [icon]="t"></type>
 			</td>
 			<td>{{ inc.date | date: 'dd/MM' }}</td>

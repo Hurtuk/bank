@@ -55,3 +55,15 @@ input {
 		margin: 0 auto;
 	}
 }
+
+.frequent {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	::ng-deep .type {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+	}
+}

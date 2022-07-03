@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DateService } from 'src/app/shared/services/date.service';
 import { RealEstateService } from 'src/app/shared/services/real-estate.service';
 
@@ -10,6 +10,7 @@ import { RealEstateService } from 'src/app/shared/services/real-estate.service';
 })
 export class RealEstateComponent implements OnInit {
 
+  public name: string;
   public data: any;
 
   public occupied: any[];
@@ -22,11 +23,16 @@ export class RealEstateComponent implements OnInit {
 
   constructor(
     private realEstateService: RealEstateService,
-    private dateService: DateService
+    private dateService: DateService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.realEstateService.getRealEstateProfit().subscribe(r => {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.realEstateService.getName(id).subscribe(n => this.name = n);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.realEstateService.getRealEstateProfit(id).subscribe(r => {
       this.data = r;
       // Complete months
       const last_month = parseInt(this.data.per_month[0].month);

@@ -88,7 +88,8 @@ export class IncomeComponent implements OnInit {
           } else {
             return {date: new Date(xx.date), value: 1};
           }
-        }) });
+        })
+        .filter(d => d.value > 0) });
       }
       this.chartsService.incomeData.next(data);
 

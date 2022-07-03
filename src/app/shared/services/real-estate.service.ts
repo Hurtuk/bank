@@ -13,7 +13,11 @@ export class RealEstateService {
 		private urlBuilder: UrlBuilderService
 	) { }
 
-  public getRealEstateProfit(): Observable<any> {
-		return this.http.get<any>(this.urlBuilder.buildUrl('getRealEstateProfit', 29));
+	public getName(idTag: number | string): Observable<string> {
+		return this.http.get<string>(this.urlBuilder.buildUrl('getBuildingName', idTag));
+	}
+
+  public getRealEstateProfit(idTag: number | string): Observable<any> {
+		return this.http.get<any>(this.urlBuilder.buildUrl('getRealEstateProfit', idTag));
 	}
 }
