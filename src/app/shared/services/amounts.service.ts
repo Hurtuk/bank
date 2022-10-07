@@ -59,6 +59,10 @@ export class AmountsService {
 		return this.http.get<{year: string, months: {month: number, value: number}[]}[]>(this.urlBuilder.buildUrl('getMonthEnds'));
 	}
 
+	public getPlusMinus(): Observable<{year: string, month: number, plus: number, minus: number}[]> {
+		return this.http.get<{year: string, month: number, plus: number, minus: number}[]>(this.urlBuilder.buildUrl('getRanges'));
+	}
+
 	public getTotalData(): Observable<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[]}> {
 		return this.http.get<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[]}>(this.urlBuilder.buildUrl('getTotalData'));
 	}

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ChartsService } from '../../shared/services/charts.service';
-import { BaseChartDirective, Label } from 'ng2-charts';
-import { DateService } from '../../shared/services/date.service';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
 	selector: 'bk-chart',
@@ -22,9 +21,13 @@ export class BkChartComponent implements OnInit {
 	@Input() fillWith = 'zeros';
 	@Input() add = false;
 	@Input() chartOptions: {option: string, value: string | number}[][];
+	@Input() hideX = false;
 	@Input() header = true;
 	@Input() minimum: number;
+	@Input() maximum: number;
 	@Input() minDate: Date;
+	@Input() type = "line";
+	@Input() bgColor: string;
 
 	@Input() stackedPercent = false;
 
@@ -33,7 +36,7 @@ export class BkChartComponent implements OnInit {
 	public total: number;
 	public average: number;
 
-	public displayData = [{data: [], label: 'new'}];
+	public displayData: any[] = [{data: [], label: 'new'}];
 	public displayLabels: Date[] = [];
 	public options: any = {
 		responsive: true,
@@ -50,8 +53,7 @@ export class BkChartComponent implements OnInit {
 	public sigma: boolean;
 
 	constructor(
-		private chartsService: ChartsService,
-		private dateService: DateService
+		private chartsService: ChartsService
 	) { }
 
 	private fillHoles() {
@@ -226,6 +228,9 @@ export class BkChartComponent implements OnInit {
 							});
 						});
 					}
+					if (this.bgColor) {
+						this.displayData.forEach(d => d.backgroundColor = this.bgColor);
+					}
 					if (this.group === 'Jour') {
 						this.chart.datasets.forEach(d => d.pointRadius = 0);
 					}
@@ -259,6 +264,9 @@ export class BkChartComponent implements OnInit {
 				type: 'time',
 				time: {
 					unit: this.group === 'Année' ? 'year': 'month',
+				},
+				ticks: {
+					display: !this.hideX
 				}
 			}]
 		};
@@ -301,7 +309,8 @@ export class BkChartComponent implements OnInit {
 				if (!this.minimum && !this.receivedData.some(rd => rd.data.some(d => d.value < 0))) {
 					this.options.scales.yAxes = [{
 						ticks: {
-							min: 0, max: this.stackedPercent ? 1 : undefined
+							min: 0,
+							max: this.stackedPercent ? 1 : this.maximum
 						},
 						stacked: this.stackedPercent
 					}];

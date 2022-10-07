@@ -1,46 +1,65 @@
 <h1>Fins de mois</h1>
 <div class="content">
-	<div class="chart">
-		<div class="tabs">
-			<input type="radio" name="tab" id="total-chart" value="Total" [(ngModel)]="operation" (change)="refresh()"/>
-			<label for="total-chart">Total</label>
-			<input type="radio" name="tab" id="compare-chart" value="Superposés" [(ngModel)]="operation" (change)="refresh()"/>
-			<label for="compare-chart">Superposés</label>
+	<div class="wrapper">
+		<div class="chart">
+			<div class="tabs">
+				<input type="radio" name="tab" id="total-chart" value="Total" [(ngModel)]="operation" (change)="refresh()"/>
+				<label for="total-chart">Total</label>
+				<input type="radio" name="tab" id="compare-chart" value="Superposés" [(ngModel)]="operation" (change)="refresh()"/>
+				<label for="compare-chart">Superposés</label>
+			</div>
+			<bk-chart initialData="monthEndsData" [offFilters]="['Jour']" [comparison]="true"></bk-chart>
 		</div>
-		<bk-chart initialData="monthEndsData" [offFilters]="['Jour']" [comparison]="true"></bk-chart>
+		<div class="tables">
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<ng-container *ngFor="let d of data">
+							<th *ngIf="d.year >= minYear">{{d.year}}</th>
+						</ng-container>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Total</th>
+						<ng-container *ngFor="let d of data">
+							<td *ngIf="d.year >= minYear" [amount]="[d.total, {color: true, alwaysSign: true}]"></td>
+						</ng-container>
+					</tr>
+					<tr>
+						<th>Moyenne</th>
+						<ng-container *ngFor="let d of data">
+							<td *ngIf="d.year >= minYear" [amount]="[d.average, {color: true, alwaysSign: true}]"></td>
+						</ng-container>
+					</tr>
+				</tbody>
+				<tbody *ngIf="data">
+					<tr *ngFor="let m of data[0].months; let i = index">
+						<th>{{getMonth(m.month)}}</th>
+						<ng-container *ngFor="let d of data">
+							<td *ngIf="d.year >= minYear" [amount]="[d.months[i] ? d.months[i].value : '', {color: true, alwaysSign: true}]"></td>
+						</ng-container>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div class="tables">
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<ng-container *ngFor="let d of data">
-						<th *ngIf="d.year >= minYear">{{d.year}}</th>
-					</ng-container>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>Total</th>
-					<ng-container *ngFor="let d of data">
-						<td *ngIf="d.year >= minYear" [amount]="[d.total, {color: true, alwaysSign: true}]"></td>
-					</ng-container>
-				</tr>
-				<tr>
-					<th>Moyenne</th>
-					<ng-container *ngFor="let d of data">
-						<td *ngIf="d.year >= minYear" [amount]="[d.average, {color: true, alwaysSign: true}]"></td>
-					</ng-container>
-				</tr>
-			</tbody>
-			<tbody *ngIf="data">
-				<tr *ngFor="let m of data[0].months; let i = index">
-					<th>{{getMonth(m.month)}}</th>
-					<ng-container *ngFor="let d of data">
-						<td *ngIf="d.year >= minYear" [amount]="[d.months[i] ? d.months[i].value : '', {color: true, alwaysSign: true}]"></td>
-					</ng-container>
-				</tr>
-			</tbody>
-		</table>
+	<div class="ranges">
+		<bk-chart
+			initialData="rangesDataP"
+			[offFilters]="['Jour', 'Mois', 'Année']"
+			[header]="false"
+			type="bar"
+			[maximum]="RANGE"
+			[hideX]="true"
+			bgColor="#008000"></bk-chart>
+		<bk-chart
+			initialData="rangesDataM"
+			[offFilters]="['Jour', 'Mois', 'Année']"
+			[header]="false"
+			type="bar"
+			[minimum]="-RANGE"
+			bgColor="rgba(255, 0, 0, 0.8)"></bk-chart>
 	</div>
 </div>

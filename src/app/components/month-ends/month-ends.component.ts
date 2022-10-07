@@ -10,6 +10,8 @@ import { DateService } from '../../shared/services/date.service';
 })
 
 export class MonthEndsComponent implements OnInit {
+	public RANGE = 6000;
+
 	public data: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
 	public operation = 'Total';
 
@@ -52,6 +54,16 @@ export class MonthEndsComponent implements OnInit {
 				d.average = d.total / d.months.length;
 			});
 			this.refresh();
+		});
+		this.amountsService.getPlusMinus().subscribe(x => {
+			this.chartsService.rangesDataP.next([{
+				label: "Plus",
+				data: x.map(m => ({date: new Date(parseInt(m.year), m.month - 1, 1), value: m.plus }))
+			}]);
+			this.chartsService.rangesDataM.next([{
+				label: "Moins",
+				data: x.map(m => ({date: new Date(parseInt(m.year), m.month - 1, 1), value: m.minus }))
+			}]);
 		});
 	}
 }

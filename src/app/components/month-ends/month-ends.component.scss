@@ -1,6 +1,6 @@
 @import '../../shared/styles/colors';
 
-.content {
+.wrapper {
 	display: flex;
 }
 
@@ -10,7 +10,7 @@
 
 	bk-chart {
 		display: block;
-		height: 500px;
+		height: 300px;
 	}
 }
 
@@ -46,16 +46,37 @@
 		&:not(:first-of-type) {
 			td,
 			th {
-				font-size: .9em;
+				font-size: .85em;
 			}
 		}
 
 		tr {
 			&:first-child {
 				> * {
-					padding-top: 20px;
+					padding-top: 10px;
 				}
 			}
+		}
+
+		+ tbody {
+			td, th {
+				padding-top: 4px;
+				padding-bottom: 4px;
+			}
+		}
+	}
+}
+
+.ranges {
+	max-width: 1000px;
+	margin: 20px auto 0;
+
+	bk-chart {
+		height: 160px;
+		display: block;
+
+		&:first-child {
+			margin: 0 8px -18px 4px;
 		}
 	}
 }
