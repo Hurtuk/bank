@@ -1,3 +1,6 @@
+<div *ngIf="canAdd">
+	<button type="button" *ngFor="let lm of loanMonth" (click)="addLoan(lm)">+ {{ lm.title }}</button>
+</div>
 <table>
 	<thead>
 		<tr>

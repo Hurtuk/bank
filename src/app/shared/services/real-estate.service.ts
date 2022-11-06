@@ -20,4 +20,8 @@ export class RealEstateService {
   public getRealEstateProfit(idTag: number | string): Observable<any> {
 		return this.http.get<any>(this.urlBuilder.buildUrl('getRealEstateProfit', idTag));
 	}
+
+	public getLoanMonth(): Observable<any[]> {
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('getLoanMonth'));
+	}
 }

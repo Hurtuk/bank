@@ -72,11 +72,12 @@
 	margin: 20px auto 0;
 
 	bk-chart {
-		height: 160px;
+		height: 180px;
 		display: block;
 
 		&:first-child {
 			margin: 0 8px -18px 4px;
+			height: 132px;
 		}
 	}
 }

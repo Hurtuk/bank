@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { RealEstateService } from 'src/app/shared/services/real-estate.service';
 import { TravelsService } from 'src/app/shared/services/travels.service';
 import { AmountsService } from '../../../shared/services/amounts.service';
 import { TypesService } from '../../../shared/services/types.service';
@@ -37,11 +38,13 @@ export class UpdateListComponent implements OnInit {
 	public success: boolean;
 
 	public lastMonthly: any[];
+	public loanMonth: any[];
 
 	constructor(
 		private amountsService: AmountsService,
 		private typesService: TypesService,
-		private travelsService: TravelsService
+		private travelsService: TravelsService,
+		private realEstateService: RealEstateService
 	) { }
 
 	public removeRow(item) {
@@ -135,6 +138,49 @@ export class UpdateListComponent implements OnInit {
 		}
 	}
 
+	public addLoan(lm: any) {
+		if (!this.items) {
+			this.items = [];
+		}
+		this.items.push({
+			id: -1,
+			types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
+			date: new Date(lm.date),
+			title: 'Prêt',
+			amount: -lm.capital,
+			variable: 0,
+			refunding: null,
+			loan: lm.idLoan,
+			profitability: false,
+			travel: null,
+			updated: true
+		},{
+			id: -1,
+			types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
+			date: new Date(lm.date),
+			title: 'Intérêts prêt',
+			amount: -lm.interests,
+			variable: 0,
+			refunding: null,
+			loan: lm.idLoan,
+			profitability: true,
+			travel: null,
+			updated: true
+		},{
+			id: -1,
+			types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
+			date: new Date(lm.date),
+			title: 'Assurance prêt',
+			amount: -lm.tools,
+			variable: 0,
+			refunding: null,
+			loan: lm.idLoan,
+			profitability: true,
+			travel: null,
+			updated: true
+		});
+	}
+
 	ngOnInit() {
 		if (this.allIncome) {
 			this.amountsService.getAllVariables().subscribe(x => {
@@ -151,6 +197,9 @@ export class UpdateListComponent implements OnInit {
 		this.travelsService.getTravels().subscribe(x => {
 			this.travels = x;
 		});
+		if (this.canAdd) {
+			this.realEstateService.getLoanMonth().subscribe(d => this.loanMonth = d);
+		}
 		this.typesService.getTypes().subscribe(x => this.types = x);
 		this.typesService.getTypes().subscribe();
 		this.amountsService.getSpendingsByType(4).subscribe(s => {
