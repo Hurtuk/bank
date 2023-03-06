@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -32,10 +31,10 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { RealEstateComponent } from './components/real-estate/real-estate.component';
 import { TaxesComponent } from './components/taxes/taxes.component';
 import { IncomeComponent } from './components/income/income.component';
-import { CommonModule, DecimalPipe } from '@angular/common';
 import { TravelsService } from './shared/services/travels.service';
 import { TravelsComponent } from './components/travels/travels.component';
 import { ReBarsComponent } from './components/real-estate/re-bars/re-bars.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
 	declarations: [
