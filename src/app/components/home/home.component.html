@@ -21,10 +21,10 @@
 </div>
 <div class="top-panel">
 	<div>
-		<div class="panel">
+		<div class="panel thrift">
 			<h1>Epargne</h1>
 			<ul>
-				<li *ngFor="let thr of thriftAccounts">
+				<li *ngFor="let thr of thriftAccounts" [class.big]="thr.amount > 1000">
 					<span [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
 					<div class="account-name">{{ thr.name }}</div>
 					<div class="account-sum" [amount]="[thr.amount]"></div>

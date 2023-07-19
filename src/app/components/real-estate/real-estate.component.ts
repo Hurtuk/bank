@@ -12,8 +12,6 @@ export class RealEstateComponent implements OnInit {
 
   public name: string;
   public data: any;
-
-  public occupied: any[];
   
   public options: any = {
 		responsive: true,

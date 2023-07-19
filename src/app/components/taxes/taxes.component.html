@@ -9,7 +9,6 @@
                         <th></th>
                         <th>Revenus</th>
                         <th>Montant</th>
-                        <th>% de N</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,7 +16,6 @@
                         <td>{{ tax.year }}</td>
                         <td [amount]="[tax.salary, {color: true}]"></td>
                         <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
-                        <td>{{ tax.sum / tax.salary | percent:'.1' }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -50,14 +48,12 @@
                     <tr>
                         <th></th>
                         <th>Montant</th>
-                        <th>% de N - 1</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let tax of (homeTaxes | async)">
                         <td>{{ tax.year }}</td>
                         <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
-                        <td>{{ tax.salary ? (tax.sum / tax.salary | percent:'.1') : '' }}</td>
                     </tr>
                 </tbody>
             </table>

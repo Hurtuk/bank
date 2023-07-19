@@ -108,6 +108,12 @@ export class AmountsService {
 		return this.http.get<any>(this.urlBuilder.buildUrl('getAutoData', item.title, item.types.map(t => t.id).sort((a, b) => a - b)));
 	}
 
+	public transfer(date: Date, amount: number, fromAccount: number, toAccount: number): Observable<void> {
+		const headers = new HttpHeaders();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post<void>(this.urlBuilder.buildUrl('transfer'), {date, amount, fromAccount, toAccount}, { headers: headers });
+	}
+	
 	public getBills(): Observable<any> {
 		return this.http.get<any>(this.urlBuilder.buildUrl('getBills'));
 	}

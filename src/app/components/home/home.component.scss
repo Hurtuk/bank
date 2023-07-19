@@ -126,3 +126,29 @@ bk-chart {
 	margin: 30px auto 10px;
 	width: 90%;
 }
+
+.thrift {
+	ul {
+		font-size: .9em;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		max-width: 15vw;
+		margin: 0 auto;
+		gap: 0 20px;
+
+		.big {
+			flex: 1 0 100%;
+		}
+
+		li:not(.big) {
+			font-size: .75em;
+			flex: 1 0 auto;
+
+			> span {
+				width: 30px;
+				height: 30px;
+			}
+		}
+	}
+}

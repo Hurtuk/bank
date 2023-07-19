@@ -202,12 +202,5 @@ export class UpdateListComponent implements OnInit {
 		}
 		this.typesService.getTypes().subscribe(x => this.types = x);
 		this.typesService.getTypes().subscribe();
-		this.amountsService.getSpendingsByType(4).subscribe(s => {
-			this.lastMonthly = [];
-			const firstMonth = s[0].date.getMonth();
-			for (let i = 0; i < s.length && s[i].date.getMonth() === firstMonth; i++) {
-				this.lastMonthly.push(s[i]);
-			}
-		});
 	}
 }

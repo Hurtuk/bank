@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountsService } from '../../../shared/services/accounts.service';
+import { AmountsService } from 'src/app/shared/services/amounts.service';
 
 @Component({
 	selector: 'parser',
@@ -24,13 +25,28 @@ export class ParserComponent implements OnInit {
 	public account: {id: number, name: string};
 	public lastItems: {date: Date, title: string}[];
 
+	public transferDate: Date;
+	public transferAmount: number;
+	public transferFromAccount: {id: number, name: string};;
+	public transferToAccount: {id: number, name: string};
+	public transferSaved = false;
+
 	constructor(
-		private accountsService: AccountsService
+		private accountsService: AccountsService,
+		private amountsService: AmountsService
 	) { }
 
 	ngOnInit() {
 		this.accountsService.getAccounts().subscribe(x => this.accounts = x);
 		this.accountsService.getLastItems().subscribe(x => this.lastItems = x);
+	}
+
+	public saveTransfer() {
+		this.amountsService.transfer(this.transferDate, this.transferAmount, this.transferFromAccount.id, this.transferToAccount.id)
+			.subscribe(() => {
+				this.transferSaved = true;
+				setTimeout(() => this.transferSaved = false, 2000);
+			});
 	}
 
 	public parse() {

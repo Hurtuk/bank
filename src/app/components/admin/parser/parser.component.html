@@ -8,7 +8,24 @@
 			<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
 		</select>
 	</div>
-	<textarea [(ngModel)]="parsingText" cols="60" rows="30"></textarea>
-	<button (click)="parse()">Parser !</button>
+	<h3>Transfert</h3>
+	<div>
+		<label>Date : <input [ngModel]="transferDate | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="transferDate = $event" type="datetime-local" /></label>
+		<label>Montant : <input type="number" [(ngModel)]="transferAmount" /></label>
+		<label>Depuis :
+			<select [(ngModel)]="transferFromAccount">
+				<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+			</select>
+		</label>
+		<label>Vers : 
+			<select [(ngModel)]="transferToAccount">
+				<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+			</select>
+		</label>
+		<div><input type="submit" value="Enregistrer" (click)="saveTransfer()" /></div>
+		<div *ngIf="transferSaved">Enregistré !</div>
+	</div>
+	<!--<textarea [(ngModel)]="parsingText" cols="60" rows="30"></textarea>
+	<button (click)="parse()">Parser !</button>-->
 </div>
 <update-list [items]="result" [account]="account" [canAdd]="true" [addAllowed]="!!account" ></update-list>

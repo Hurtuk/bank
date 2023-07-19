@@ -38,6 +38,12 @@
             font-weight: bold;
             color: lightgray;
         }
+
+        &:first-child {
+            .percent {
+                border-left: 0;
+            }
+        }
     }
 }
 

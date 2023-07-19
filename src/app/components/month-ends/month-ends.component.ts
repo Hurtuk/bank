@@ -10,7 +10,7 @@ import { DateService } from '../../shared/services/date.service';
 })
 
 export class MonthEndsComponent implements OnInit {
-	public RANGE = 7000;
+	public RANGE = 8000;
 
 	public data: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
 	public operation = 'Total';
