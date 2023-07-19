@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UrlBuilderService {
 
-	private urlPrefix = 'http://www.louiecinephile.fr/bankServer/api/';
+	private urlPrefix = 'https://www.louiecinephile.fr/bankServer/api/';
 
 	private static replaceContent(source: string, args: any[]) {
 		return source.replace(/{(\d+)}/g,

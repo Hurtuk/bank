@@ -11,10 +11,12 @@ import { RealEstateComponent } from './components/real-estate/real-estate.compon
 import { TaxesComponent } from './components/taxes/taxes.component';
 import { IncomeComponent } from './components/income/income.component';
 import { TravelsComponent } from './components/travels/travels.component';
+import { BillsComponent } from './components/bills/bills.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'spending', component: SpendingComponent },
+	{ path: 'bills', component: BillsComponent },
 	{ path: 'month-ends', component: MonthEndsComponent },
 	{ path: 'loans', component: LoansComponent },
 	{ path: 'trade', component: TradeComponent },

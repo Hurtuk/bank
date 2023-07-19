@@ -1,0 +1,8 @@
+.columned {
+    display: flex;
+    text-align: center;
+
+    > div {
+        flex: 1;
+    }
+}

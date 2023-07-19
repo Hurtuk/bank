@@ -1,0 +1,36 @@
+<h1>Dépenses mensuelles</h1>
+<div class="columned" *ngIf="(data | async) as bills">
+    <div>
+        <h2>Appartement</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th *ngFor="let y of getYears()">{{ y }}</th>
+                </tr>
+                <tr *ngFor="let b of bills.home">
+                    <td>
+                        <type [icon]="b.icon" size="big" />
+                        <span>{{ b.legend }}</span>
+                    </td>
+                    <td *ngFor="let y of b.years; let last = last; let i = index">
+                        <div class="monthly">
+                            <span class="month" [amount]="[-y.valueMonth]"></span>
+                            <span class="evolution" *ngIf="!last"
+                                [class.better]="b.years[i + 1].valueMonth > y.valueMonth"
+                                >{{ (1 - y.valueMonth / b.years[i + 1].valueMonth) | percent:'1.0-1' }}</span>
+                        </div>
+                        <span class="yearly" [amount]="[-y.valueYear]"></span>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h2>Autres</h2>
+
+    </div>
+</div>

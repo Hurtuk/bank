@@ -107,4 +107,8 @@ export class AmountsService {
 	public getAutodata(item: any): Observable<any> {
 		return this.http.get<any>(this.urlBuilder.buildUrl('getAutoData', item.title, item.types.map(t => t.id).sort((a, b) => a - b)));
 	}
+
+	public getBills(): Observable<any> {
+		return this.http.get<any>(this.urlBuilder.buildUrl('getBills'));
+	}
 }
