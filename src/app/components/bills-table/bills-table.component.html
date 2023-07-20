@@ -1,0 +1,25 @@
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th *ngFor="let y of getYears()">{{ y }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let b of data">
+            <th>
+                <type [icon]="b.icon" size="medium" />
+                <span>{{ b.legend }}</span>
+            </th>
+            <td *ngFor="let y of b.years; let last = last; let i = index">
+                <div class="month">
+                    <span class="monthly" [amount]="[y.valueMonth]"></span>
+                    <span class="evolution" *ngIf="!last && b.years[i + 1].valueMonth > 0 && y.valueMonth != b.years[i + 1].valueMonth"
+                        [class.better]="y.valueMonth < b.years[i + 1].valueMonth"
+                        >{{ y.valueMonth > b.years[i + 1].valueMonth ? '+' : '' }}{{ (y.valueMonth / b.years[i + 1].valueMonth - 1) | percent:'1.0' }}</span>
+                    <span class="yearly" [amount]="[y.valueYear]"></span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

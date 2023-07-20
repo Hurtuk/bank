@@ -1,0 +1,65 @@
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+thead {
+    th {
+        font-family: 'Sofia Sans Extra Condensed';
+    }
+}
+
+tbody {
+    th {
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: .9em;
+        font-family: 'Sofia Sans Extra Condensed';
+        width: 70px;
+    }
+
+    td {
+        padding: 2em 1em;
+
+        div {
+            height: 100%;
+            position: relative;
+        }
+
+        span {
+            display: block;
+            text-align: center;
+        }
+
+        &:nth-child(n+3) {
+            font-size: .85em;
+        }
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, .025);
+    }
+}
+
+.evolution {
+    font-size: .75em;
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 1.6em;
+
+    &.better {
+        color: green;
+    }
+}
+
+.monthly {
+    margin-bottom: 1em;
+}
+
+.yearly {
+    font-weight: normal;
+    font-size: .75em;
+}

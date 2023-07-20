@@ -36,6 +36,7 @@ import { TravelsComponent } from './components/travels/travels.component';
 import { ReBarsComponent } from './components/real-estate/re-bars/re-bars.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BillsComponent } from './components/bills/bills.component';
+import { BillsTableComponent } from './components/bills-table/bills-table.component';
 
 @NgModule({
 	declarations: [
@@ -57,7 +58,8 @@ import { BillsComponent } from './components/bills/bills.component';
 		IncomeComponent,
 		TravelsComponent,
 		AmountDirective,
-        BillsComponent
+        BillsComponent,
+        BillsTableComponent
 	],
 	imports: [
 		BrowserModule,
