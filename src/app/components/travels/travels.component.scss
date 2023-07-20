@@ -11,8 +11,15 @@ table {
 td {
     padding: .5rem 2rem;
 
-    &:last-child {
+    &:nth-last-child(2) {
         text-align: right;
+    }
+
+    &:last-child {
+        text-align: left;
+        font-style: italic;
+        font-size: .8em;
+        padding-left: .5em;
     }
 }
 

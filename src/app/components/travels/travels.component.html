@@ -5,6 +5,7 @@
             <th>Dates</th>
             <th>Nom</th>
             <th>Coût total</th>
+            <th>Commentaire</th>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +15,7 @@
             <td>
                 <span [amount]="[-t.cost]"></span>
             </td>
+            <td class="comment">{{ t.comment }}</td>
         </tr>
     </tbody>
 </table>
