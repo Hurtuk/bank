@@ -12,6 +12,7 @@ import { TaxesComponent } from './components/taxes/taxes.component';
 import { IncomeComponent } from './components/income/income.component';
 import { TravelsComponent } from './components/travels/travels.component';
 import { BillsComponent } from './components/bills/bills.component';
+import { ElectricityComponent } from './components/electricity/electricity.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
 	{ path: 'real-estate/:id', component: RealEstateComponent },
 	{ path: 'travels', component: TravelsComponent },
 	{ path: 'taxes', component: TaxesComponent },
+	{ path: 'electricity', component: ElectricityComponent },
 	{ path: 'login', component: LoginComponent }
 ];
 

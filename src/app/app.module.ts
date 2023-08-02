@@ -37,6 +37,8 @@ import { ReBarsComponent } from './components/real-estate/re-bars/re-bars.compon
 import { BrowserModule } from '@angular/platform-browser';
 import { BillsComponent } from './components/bills/bills.component';
 import { BillsTableComponent } from './components/bills-table/bills-table.component';
+import { ElectricityComponent } from './components/electricity/electricity.component';
+import { ElectricityService } from './shared/services/electricity.service';
 
 @NgModule({
 	declarations: [
@@ -59,7 +61,8 @@ import { BillsTableComponent } from './components/bills-table/bills-table.compon
 		TravelsComponent,
 		AmountDirective,
         BillsComponent,
-        BillsTableComponent
+        BillsTableComponent,
+		ElectricityComponent
 	],
 	imports: [
 		BrowserModule,
@@ -79,6 +82,7 @@ import { BillsTableComponent } from './components/bills-table/bills-table.compon
 		AuthGuard,
 		AuthService,
 		TravelsService,
+		ElectricityService,
 		httpInterceptorProviders
 	],
 	bootstrap: [AppComponent]

@@ -13,6 +13,7 @@ export class ChartsService {
 	public totalData = new Subject<{label: string; data: {date: Date, value: number}[]}[]>();
 	public currentsData = new Subject<{ actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number }[]>();
 	public benefitData = new Subject<{label: string; data: {date: Date, value: number}[]}[]>();
+	public elecData = new Subject<{label: string; data: {date: Date, value: number}[]}[]>();
 
 	constructor() { }
 }

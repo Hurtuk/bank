@@ -8,7 +8,7 @@ import { AmountsService } from '../../shared/services/amounts.service';
 })
 
 export class InfoBarComponent implements OnInit {
-	public totals = this.amountsService.totals.value;
+	public totals: any;
 	public total = 0;
 
 	constructor(
@@ -16,6 +16,7 @@ export class InfoBarComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+		this.totals = this.amountsService.totals.value;
 		this.amountsService.totals.subscribe(data => {
 			if (data) {
 				this.totals = data;
