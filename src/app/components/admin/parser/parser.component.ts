@@ -21,7 +21,7 @@ export class ParserComponent implements OnInit {
 		loan: number,
 		updated: boolean
 	}[];
-	public accounts: {id: number, name: string, bank: string}[] = [];
+	public accounts: {id: number, name: string, bank: string, thrift: boolean}[] = [];
 	public account: {id: number, name: string};
 	public lastItems: {date: Date, title: string}[];
 
@@ -81,5 +81,9 @@ export class ParserComponent implements OnInit {
 				});
 			}
 		}
+	}
+
+	public getAccounts(thrift: boolean): {id: number, name: string, bank: string, thrift: boolean}[] {
+		return this.accounts.filter(a => a.thrift == thrift);
 	}
 }

@@ -12,27 +12,23 @@ h2 {
 	display: flex;
 	flex: 1 1 auto;
 	flex-direction: column;
+	align-items: center;
 	height: calc(100vh - 123px);
 }
 
+table {
+	border-collapse: collapse;
+}
+
 .action-icon {
-	height: 50px;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+	height: 30px;
 }
 
-bk-chart {
-	display: block;
-	height: 500px;	
-}
-
-tbody th {
+td {
 	text-align: right;
+	padding: .25rem 2rem;
 }
 
-.percent {
-	display: block;
-	font-style: italic;
-	font-size: .9rem;
+tr:nth-child(even) {
+	background-color: rgba(0, 0, 0, 0.025);
 }

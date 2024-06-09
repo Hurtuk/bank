@@ -11,8 +11,8 @@ export class AccountsService {
 		private urlBuilder: UrlBuilderService
 	) { }
 
-	public getAccounts(): Observable<{id: number, name: string, bank: string}[]> {
-		return this.http.get<{id: number, name: string, bank: string}[]>(this.urlBuilder.buildUrl('getAccounts'));
+	public getAccounts(): Observable<{id: number, name: string, bank: string, thrift: boolean}[]> {
+		return this.http.get<{id: number, name: string, bank: string, thrift: boolean}[]>(this.urlBuilder.buildUrl('getAccounts'));
 	}
 
 	public getAllAccounts(): Observable<{id: number, name: string, bank: string, openend: boolean}[]> {

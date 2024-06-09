@@ -68,7 +68,7 @@ export class ElectricityComponent implements OnInit {
 	}
 
 	private thisMonth(year: number, month: number): boolean {
-		return this.today.getFullYear() === year && this.today.getMonth() === month;
+		return this.today.getFullYear() === year && (this.today.getMonth() + 1) === month;
 	}
 
 }

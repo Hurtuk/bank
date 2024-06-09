@@ -2,7 +2,7 @@
 	<h1>Fixe</h1>
 	<ul>
 		<li *ngFor="let fix of fixAccounts">
-			<span [style.backgroundImage]="'url(./assets/images/structures/' + fix.bank + '.png)'"></span>
+			<span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + fix.bank + '.png)'"></span>
 			<div class="account-name">{{ fix.name }}</div>
 			<div class="account-sum" [amount]="[fix.amount]"></div>
 		</li>
@@ -25,7 +25,7 @@
 			<h1>Epargne</h1>
 			<ul>
 				<li *ngFor="let thr of thriftAccounts" [class.big]="thr.amount > 1000">
-					<span [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
+					<span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
 					<div class="account-name">{{ thr.name }}</div>
 					<div class="account-sum" [amount]="[thr.amount]"></div>
 				</li>
@@ -35,9 +35,12 @@
 			<h1>Actions</h1>
 			<ul class="actions">
 				<ng-container *ngFor="let sto of stocks">
-					<li *ngIf="sto.value * sto.count != 0">
-						<span [style.backgroundImage]="'url(./assets/images/structures/' + sto.code + '.png)'"></span>
-						<div class="account-sum" [amount]="[sto.value * sto.count]"></div>
+					<li>
+						<i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'"></i>
+						<div class="account-sum">
+							<span [amount]="[sto.value * sto.count]"></span>
+							<span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
+						</div>
 					</li>
 				</ng-container>
 			</ul>

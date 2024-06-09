@@ -31,6 +31,8 @@ export class BkChartComponent implements OnInit {
 
 	@Input() stackedPercent = false;
 
+	@Input() customId = "";
+
 	public receivedData: {data: {date: Date, value: number}[], label: string}[];
 	public data: {data: {date: Date, value: number}[], label: string}[];
 	public total: number;
@@ -279,7 +281,7 @@ export class BkChartComponent implements OnInit {
 			}];
 		}
 		if (this.stackedPercent) {
-			if (this.options.scales?.yAxes?.ticks) {
+			if (this.options.scales?.yAxes[0]?.ticks) {
 				this.options.scales.yAxes[0].ticks.max = 1;	
 			} else {
 				this.options.scales.yAxes = [{
@@ -305,8 +307,7 @@ export class BkChartComponent implements OnInit {
 				if (this.add) {
 					this.addValues();
 				}
-				// TODO Fix
-				if (!this.minimum && !this.receivedData.some(rd => rd.data.some(d => d.value < 0))) {
+				if (!this.minimum && this.allMonthsPositive()) {
 					this.options.scales.yAxes = [{
 						ticks: {
 							min: 0,
@@ -314,9 +315,21 @@ export class BkChartComponent implements OnInit {
 						},
 						stacked: this.stackedPercent
 					}];
+				} else {
+					this.options.scales.yAxes = [{
+						ticks: {
+							min: this.minimum,
+							max: this.maximum
+						},
+						stacked: this.stackedPercent
+					}];
 				}
 			}
 			this.refresh();
 		});
+	}
+
+	private allMonthsPositive(): boolean {
+		return !this.receivedData.some(rd => this.sumBy(rd.data, (d => d.getFullYear() + '-' + (d.getMonth() + 1) + '-1'), false).some(d => d.value < 0));
 	}
 }

@@ -56,10 +56,11 @@ ul {
 		text-align: right;
 		margin-bottom: 10px;
 
-		span {
+		.icon {
 			display: block;
 			width: 40px;
 			height: 40px;
+			margin-right: .5rem;
 			background-size: contain;
 			background-repeat: no-repeat;
 			background-position: center;
@@ -69,12 +70,23 @@ ul {
 
 	&.actions {
 		white-space: normal;
+		columns: 3;
 
 		li {
-			display: inline-block;
 			font-size: .9rem;
-			margin-right: 15px;
 			padding-right: 45px;
+			display: block;
+			margin-bottom: 1rem;
+			overflow: auto;
+
+			.icon {
+				width: 30px;
+				height: 30px;
+			}
+
+			div {
+				white-space: nowrap;
+			}
 
 			span {
 				width: 30px;
@@ -85,6 +97,11 @@ ul {
 
 		.account-sum {
 			font-size: 1.2em;
+
+			> span:nth-child(2) {
+				font-size: .8em;
+				margin-right: 0;
+			}
 		}
 	}
 }

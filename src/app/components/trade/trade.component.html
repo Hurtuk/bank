@@ -1,52 +1,28 @@
 <h1>Bourse</h1>
 <div class="content">
-
 	<table>
 		<thead>
 			<tr>
 				<th></th>
-				<th *ngFor="let cur of currents" [style.backgroundImage]="'url(./assets/images/structures/' + cur.actionCode + '.png)'" class="action-icon"></th>
+				<th style="text-align: left">Nom</th>
+				<th>Valeur</th>
+				<th colspan="2">Possédées</th>
+				<th>Achetées</th>
+				<th>Valeur totale</th>
+				<th>Bénéfice</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<th>Valeur unitaire</th>
-				<td *ngFor="let cur of currents">
-					<span [amount]="[cur.value]"></span>
-				</td>
-			</tr>
-			<tr>
-				<th>Quantité</th>
-				<td *ngFor="let cur of currents">{{ cur.quantity }}</td>
-			</tr>
-			<tr>
-				<th>Achat</th>
-				<td *ngFor="let cur of currents">
-					<span [amount]="[cur.sumpos]"></span>
-				</td>
-			</tr>
-			<tr>
-				<th>Valeur totale</th>
-				<td *ngFor="let cur of currents">
-					<span [amount]="[cur.total]"></span>
-				</td>
-			</tr>
-			<tr>
-				<th>Bénéfice</th>
-				<td *ngFor="let cur of currents">
-					<span [amount]="[cur.total - cur.sumpos, {alwaysSign: true, color: true}]"></span>
-					<span class="percent">{{ cur.total >= cur.sumpos ? '+' : '' }}{{ (cur.total - cur.sumpos) / cur.sumpos | percent:'1.0-1' }}</span>
-				</td>
+			<tr *ngFor="let cur of currents">
+				<td style="text-align: center"><img [src]="'./assets/images/structures/' + getActionIcon(cur.actionCode) + '.png'" class="action-icon" /></td>
+				<td style="text-align: left; padding-left: 0">{{ cur.actionCode }}</td>
+				<td><span [amount]="[cur.value]"></span></td>
+				<td style="padding-right: 0">{{ floor(cur.quantity) }}</td>
+				<td style="text-align: left; padding-left: 0">{{ decimal(cur.quantity) }}</td>
+				<td><span [amount]="[cur.initial]"></span></td>
+				<td><span [amount]="[cur.value * cur.quantity]"></span></td>
+				<td><span [amount]="[cur.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></td>
 			</tr>
 		</tbody>
 	</table>
-
-	<h2>Bénéfices</h2>
-
-	<div class="benefit">
-		<bk-chart
-			[header]="false"
-			[offFilters]="['Mois', 'Année']"
-			initialData="benefitData"></bk-chart>
-	</div>
 </div>

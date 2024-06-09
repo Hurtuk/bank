@@ -34,8 +34,12 @@ export class AmountDirective implements OnChanges {
 			const value = parseFloat(this.amount[0] ?? '0');
 			const options = this.amount.length > 1 ? this.amount[1]: {};
 			if ((value && !isNaN(value)) || value === 0) {
-				const decimal = Math.abs(Math.round((value % 1 * 100)));
-				const integer = value >= 0 ? Math.floor(value): Math.ceil(value);
+				let decimal = Math.abs(Math.round((value % 1 * 100)));
+				let integer = value >= 0 ? Math.floor(value): Math.ceil(value);
+				if (decimal >= 100) {
+					integer++;
+					decimal = 0;
+				}
 				let result;
 
 				// No space

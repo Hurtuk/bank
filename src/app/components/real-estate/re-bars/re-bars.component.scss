@@ -50,6 +50,7 @@
 .chart-part {
     position: relative;
     height: 20px;
+    white-space: nowrap;
 
     .percent {
         position: absolute;
@@ -81,7 +82,7 @@
         background-color: lightgray;
         text-shadow: 0px 0px 4px black;
         color: white;
-        padding: .5rem;
+        padding: .2rem;
         text-align: center;
         font-size: .7rem;
         position: relative;

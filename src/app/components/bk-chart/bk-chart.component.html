@@ -14,15 +14,15 @@
 	[chartType]="type"></canvas>
 <div class="tabs" [hidden]="offFilters.length === 2">
 	<ng-container *ngIf="offFilters.indexOf('Jour') === -1">
-		<input type="radio" name="tab" id="chart-day" value="Jour" [(ngModel)]="group" (change)="refresh()"/>
-		<label for="chart-day">Jour</label>
+		<input type="radio" name="tab" [id]="'chart-day' + customId" value="Jour" [(ngModel)]="group" (change)="refresh()"/>
+		<label [for]="'chart-day' + customId">Jour</label>
 	</ng-container>
 	<ng-container *ngIf="offFilters.indexOf('Mois') === -1">
-		<input type="radio" name="tab" id="chart-month" value="Mois" [(ngModel)]="group" (change)="refresh()"/>
-		<label for="chart-month">Mois</label>
+		<input type="radio" name="tab" [id]="'chart-month' + customId" value="Mois" [(ngModel)]="group" (change)="refresh()"/>
+		<label [for]="'chart-month' + customId">Mois</label>
 	</ng-container>
 	<ng-container *ngIf="offFilters.indexOf('Année') === -1">
-		<input type="radio" name="tab" id="chart-year" value="Année" [(ngModel)]="group" (change)="refresh()"/>
-		<label for="chart-year">Année</label>
+		<input type="radio" name="tab" [id]="'chart-year' + customId" value="Année" [(ngModel)]="group" (change)="refresh()"/>
+		<label [for]="'chart-year' + customId">Année</label>
 	</ng-container>
 </div>

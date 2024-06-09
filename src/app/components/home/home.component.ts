@@ -58,4 +58,11 @@ export class HomeComponent implements OnInit {
 			)
 		);
 	}
+	
+	public getActionIcon(actionCode: string): string {
+		if (actionCode.includes(' ')) {
+			return 'ETF';
+		}
+		return actionCode;
+	}
 }

@@ -5,7 +5,12 @@
 	</ul>
 	<div>Compte :
 		<select [(ngModel)]="account">
-			<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+			<optgroup label="Comptes courants">
+				<option *ngFor="let a of getAccounts(false)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+			</optgroup>
+			<optgroup label="Epargne">
+				<option *ngFor="let a of getAccounts(true)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+			</optgroup>
 		</select>
 	</div>
 	<h3>Transfert</h3>
@@ -14,12 +19,22 @@
 		<label>Montant : <input type="number" [(ngModel)]="transferAmount" /></label>
 		<label>Depuis :
 			<select [(ngModel)]="transferFromAccount">
-				<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+				<optgroup label="Comptes courants">
+					<option *ngFor="let a of getAccounts(false)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+				</optgroup>
+				<optgroup label="Epargne">
+					<option *ngFor="let a of getAccounts(true)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+				</optgroup>
 			</select>
 		</label>
 		<label>Vers : 
 			<select [(ngModel)]="transferToAccount">
-				<option *ngFor="let a of accounts" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+				<optgroup label="Comptes courants">
+					<option *ngFor="let a of getAccounts(false)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+				</optgroup>
+				<optgroup label="Epargne">
+					<option *ngFor="let a of getAccounts(true)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+				</optgroup>
 			</select>
 		</label>
 		<div><input type="submit" value="Enregistrer" (click)="saveTransfer()" /></div>
