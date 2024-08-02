@@ -24,5 +24,14 @@
 				<td><span [amount]="[cur.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td colspan="4">Total</td>
+				<td><span [amount]="[sumInitial()]"></span></td>
+				<td><span [amount]="[sumValue()]"></span></td>
+				<td><span [amount]="[((sumValue() / sumInitial()) - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></td>
+			</tr>
+		</tfoot>
 	</table>
 </div>

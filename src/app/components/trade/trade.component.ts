@@ -9,7 +9,7 @@ import { ChartsService } from '../../shared/services/charts.service';
 })
 
 export class TradeComponent implements OnInit {
-	public currents: { actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number }[];
+	public currents: { actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number, initial: number }[];
 	
 	constructor(
 		private amountsService: AmountsService,
@@ -37,5 +37,13 @@ export class TradeComponent implements OnInit {
 		const dec = Math.round((num - this.floor(num)) * 1000000) / 1000000;
 		if (!dec) return '';
 		return ',' + dec.toString().substring(2);
+	}
+
+	public sumInitial(): number {
+		return this.currents.reduce((prev, cur) => prev += cur.initial, 0);
+	}
+
+	public sumValue(): number {
+		return this.currents.reduce((prev, cur) => prev += cur.value * cur.quantity, 0);
 	}
 }
