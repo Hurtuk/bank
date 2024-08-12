@@ -174,7 +174,7 @@ export class UpdateListComponent implements OnInit {
 			amount: -lm.tools,
 			variable: 0,
 			refunding: null,
-			loan: lm.idLoan,
+			loan: null,
 			profitability: true,
 			travel: null,
 			updated: true

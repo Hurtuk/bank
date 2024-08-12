@@ -2,12 +2,13 @@
 <div *ngFor="let loan of loans | async" class="loan-row">
     <div class="image-container">
         <img [src]="'assets/images/loans/' + loan.image"/>
-        <div class="image" [style.backgroundImage]="'url(assets/images/loans/' + loan.image + ')'" [style.top.%]="100 * (loan.to_refund - loan.refund) / loan.to_refund"></div>
-        <span class="bar" [style.top.%]="100 * (loan.to_refund - loan.refund) / loan.to_refund">{{Math.floor(100 - 100 * (loan.to_refund - loan.refund) / loan.to_refund)}}%</span>
+        <div class="image" [style.backgroundImage]="'url(assets/images/loans/' + loan.image + ')'" [style.top.%]="100 * (loan.to_refund_capital - loan.refund_capital) / loan.to_refund_capital"></div>
+        <span class="bar" [style.top.%]="100 * (loan.to_refund_capital - loan.refund_capital) / loan.to_refund_capital">{{Math.floor(100 - 100 * (loan.to_refund_capital - loan.refund_capital) / loan.to_refund_capital)}}%</span>
     </div>
     <div class="infos">
         <h1>{{loan.title}}</h1>
-        <div>Empruntés : <span [amount]="[loan.amount]"></span> à <strong>{{ loan.rate }}%</strong>, soit à rembourser : <span [amount]="[loan.to_refund]"></span> (restent <span [amount]="[loan.to_refund - loan.refund]"></span>)</div>
-        <app-progress-bar [full]="loan.to_refund" [current]="loan.refund"></app-progress-bar>
+        <div>Empruntés : <span [amount]="[loan.amount]"></span> à <strong>{{ loan.rate }}%</strong>, soit à rembourser : <span [amount]="[loan.to_refund]"></span> (capital restant dû : <span [amount]="[loan.to_refund_capital - loan.refund_capital]"></span>)</div>
+        <app-progress-bar [full]="loan.to_refund" [current]="loan.refund" [small]="true" />
+        <app-progress-bar [full]="loan.to_refund_capital" [current]="loan.refund_capital" />
     </div>
 </div>

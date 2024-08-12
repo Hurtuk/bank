@@ -6,6 +6,18 @@ $bar-height: 20px;
     position: relative;
     height: $bar-height;
     background-color: lightgray;
+
+    &.small {
+        height: .7 * $bar-height;
+
+        .current-length {
+            height: .7 * $bar-height;
+
+            span {
+                font-size: .65em;
+            }
+        }
+    }
 }
 
 .current-length {
