@@ -18,6 +18,7 @@
 	> div {
 		display: flex;
 		flex-direction: row;
+		gap: 5rem;
 
 		+ div {
 			flex: 1;
@@ -77,21 +78,37 @@ ul {
 			padding-right: 45px;
 			display: block;
 			margin-bottom: 1rem;
-			overflow: auto;
+			position: relative;
+			min-height: 36px;
 
 			.icon {
 				width: 30px;
 				height: 30px;
+				position: relative;
+
+				span {
+					position: absolute;
+					bottom: -7px;
+					left: -7px;
+
+					&.up {
+						color: green;
+					}
+
+					&.down {
+						color: red;
+					}
+				}
 			}
 
-			div {
+			> div {
 				white-space: nowrap;
-			}
 
-			span {
-				width: 30px;
-				height: 30px;
-				margin-right: 5px;
+				> span {
+					width: 30px;
+					height: 30px;
+					margin-right: 5px;
+				}
 			}
 		}
 
@@ -167,5 +184,16 @@ bk-chart {
 				height: 30px;
 			}
 		}
+	}
+}
+
+.evolutions {
+	font-size: .55em;
+	position: absolute;
+	right: 0;
+	
+	> span {
+		display: inline-block;
+		margin-right: .25rem;
 	}
 }

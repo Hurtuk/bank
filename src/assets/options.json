@@ -1,0 +1,12 @@
+{
+    "spending": true,
+    "bills": true,
+    "month-ends": true,
+    "loans": true,
+    "income": true,
+    "trade": true,
+    "real-estate": true,
+    "taxes": true,
+    "electricity": true,
+    "travels": true
+}

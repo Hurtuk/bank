@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { OptionsService } from 'src/app/shared/services/options.service';
 
 @Component({
 	selector: 'menu-bar',
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['menu-bar.component.scss']
 })
 
-export class MenuBarComponent implements OnInit {
-	constructor() { }
+export class MenuBarComponent {
+	private optionsService = inject(OptionsService);
 
-	ngOnInit() { }
+	public options$ = this.optionsService.getOptions();
 }

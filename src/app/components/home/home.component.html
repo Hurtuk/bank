@@ -34,12 +34,20 @@
 		<div class="panel">
 			<h1>Actions</h1>
 			<ul class="actions">
-				<ng-container *ngFor="let sto of stocks">
+				<ng-container *ngFor="let sto of stocks; let i = $index">
 					<li>
-						<i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'"></i>
+						<i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
+							<span *ngIf="sto.indexBefore < i" class="up">▲</span>
+							<span *ngIf="sto.indexBefore > i" class="down">▼</span>
+						</i>
 						<div class="account-sum">
 							<span [amount]="[sto.value * sto.count]"></span>
 							<span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
+							<div class="evolutions">
+								<span *ngIf="sto.d1"><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+								<span *ngIf="sto.d7"> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+								<span *ngIf="sto.d30"> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+							</div>
 						</div>
 					</li>
 				</ng-container>
