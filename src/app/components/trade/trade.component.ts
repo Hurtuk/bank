@@ -40,10 +40,10 @@ export class TradeComponent implements OnInit {
 	}
 
 	public sumInitial(): number {
-		return this.currents.reduce((prev, cur) => prev += cur.initial, 0);
+		return this.currents ? this.currents.reduce((prev, cur) => prev += cur.initial, 0) : 0;
 	}
 
 	public sumValue(): number {
-		return this.currents.reduce((prev, cur) => prev += cur.value * cur.quantity, 0);
+		return this.currents ? this.currents.reduce((prev, cur) => prev += cur.value * cur.quantity, 0) : 0;
 	}
 }

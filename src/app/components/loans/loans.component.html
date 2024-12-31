@@ -9,6 +9,6 @@
         <h1>{{loan.title}}</h1>
         <div>Empruntés : <span [amount]="[loan.amount]"></span> à <strong>{{ loan.rate }}%</strong>, soit à rembourser : <span [amount]="[loan.to_refund]"></span> (capital restant dû : <span [amount]="[loan.to_refund_capital - loan.refund_capital]"></span>)</div>
         <app-progress-bar [full]="loan.to_refund" [current]="loan.refund" [small]="true" />
-        <app-progress-bar [full]="loan.to_refund_capital" [current]="loan.refund_capital" />
+        <app-progress-bar [full]="loan.to_refund_capital" [current]="loan.refund_capital" [title]="'Capital'" />
     </div>
 </div>

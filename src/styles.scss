@@ -8,6 +8,12 @@ html, body {
 	height: 100vh;
 	color: #333;
 	background-color: #fbfbfb;
+	overflow: hidden;
+}
+
+h1 + .content {
+	overflow: auto;
+	height: calc(100vh - 123px);
 }
 
 .amount {

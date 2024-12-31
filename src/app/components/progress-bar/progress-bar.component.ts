@@ -11,4 +11,5 @@ export class ProgressBarComponent {
     @Input() public current: number;
     @Input() public full: number;
     @Input() public small = false;
+    @Input() public title = '';
 }

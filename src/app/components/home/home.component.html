@@ -1,23 +1,23 @@
 <div class="panel">
 	<h1>Fixe</h1>
-	<ul>
-		<li *ngFor="let fix of fixAccounts">
+	<ul class="fix">
+		<li *ngFor="let fix of fixAccounts" [class.big]="fix.amount > 300">
 			<span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + fix.bank + '.png)'"></span>
 			<div class="account-name">{{ fix.name }}</div>
 			<div class="account-sum" [amount]="[fix.amount]"></div>
 		</li>
 	</ul>
 	<h2>Remboursements à venir</h2>
-	<table>
-		<tr *ngFor="let inc of income">
-			<td style="white-space: nowrap">
+	<ol class="waiting">
+		<li *ngFor="let inc of income">
+			<span>
 				<type *ngFor="let t of inc.types" [icon]="t"></type>
-			</td>
-			<td>{{ inc.date | date: 'dd/MM' }}</td>
-			<td>{{ inc.title }}</td>
-			<td [amount]="[-inc.amount, {alwaysSign: true, color: true}]"></td>
-		</tr>
-	</table>
+			</span>
+			<span>{{ inc.date | date: 'dd/MM' }}</span>
+			<span>{{ inc.title }}</span>
+			<span [amount]="[-inc.amount, {alwaysSign: true, color: true}]"></span>
+		</li>
+	</ol>
 </div>
 <div class="top-panel">
 	<div>
@@ -34,11 +34,13 @@
 		<div class="panel">
 			<h1>Actions</h1>
 			<ul class="actions">
-				<ng-container *ngFor="let sto of stocks; let i = $index">
+				<ng-container *ngFor="let sto of stocks; index as i">
 					<li>
 						<i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
-							<span *ngIf="sto.indexBefore < i" class="up">▲</span>
-							<span *ngIf="sto.indexBefore > i" class="down">▼</span>
+							<ng-container *ngIf="sto.indexBefore !== -1">
+								<span *ngIf="sto.indexBefore > i" class="up">▲</span>
+								<span *ngIf="sto.indexBefore < i" class="down">▼</span>
+							</ng-container>
 						</i>
 						<div class="account-sum">
 							<span [amount]="[sto.value * sto.count]"></span>
