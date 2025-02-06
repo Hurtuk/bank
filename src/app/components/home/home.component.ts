@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 
@@ -10,6 +10,9 @@ import { ChartsService } from '../../shared/services/charts.service';
 })
 
 export class HomeComponent implements OnInit {
+	private amountsService = inject(AmountsService);
+	private chartsService = inject(ChartsService);
+
 
 	private YEARS_BACK = 3;
 
@@ -31,11 +34,6 @@ export class HomeComponent implements OnInit {
 	];
 
 	public minDate: Date;
-
-	constructor(
-		private amountsService: AmountsService,
-		private chartsService: ChartsService
-	) { }
 
 	ngOnInit() {
 		const today = new Date();

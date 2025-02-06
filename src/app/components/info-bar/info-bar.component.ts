@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 
 @Component({
@@ -9,12 +9,10 @@ import { AmountsService } from '../../shared/services/amounts.service';
 })
 
 export class InfoBarComponent implements OnInit {
+	private amountsService = inject(AmountsService);
+
 	public totals: any;
 	public total = 0;
-
-	constructor(
-		private amountsService: AmountsService
-	) { }
 
 	ngOnInit() {
 		this.totals = this.amountsService.totals.value;

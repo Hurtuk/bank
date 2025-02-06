@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ChartsService } from 'src/app/shared/services/charts.service';
 import { DateService } from 'src/app/shared/services/date.service';
 import { ElectricityService } from 'src/app/shared/services/electricity.service';
@@ -10,6 +10,10 @@ import { ElectricityService } from 'src/app/shared/services/electricity.service'
     standalone: false
 })
 export class ElectricityComponent implements OnInit {
+	private chartsService = inject(ChartsService);
+	private electricityService = inject(ElectricityService);
+	private dateService = inject(DateService);
+
 
 	public data: any;
 	public years: any[];
@@ -23,12 +27,6 @@ export class ElectricityComponent implements OnInit {
 	];
 
 	private today = new Date();
-
-	constructor(
-		private chartsService: ChartsService,
-		private electricityService: ElectricityService,
-		private dateService: DateService
-	) { }
 
 	ngOnInit() {
 		this.electricityService.getElecData().subscribe(x => {

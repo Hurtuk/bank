@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
 
@@ -7,10 +7,13 @@ import { AuthService } from '../../../shared/services/auth.service';
     standalone: false
 })
 export class LoginComponent {
+	authService = inject(AuthService);
+	router = inject(Router);
+
 	message: string;
 	password: string;
 
-	constructor(public authService: AuthService, public router: Router) {
+	constructor() {
 		this.setMessage();
 	}
 

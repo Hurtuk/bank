@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TypesService } from '../../shared/services/types.service';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
@@ -11,6 +11,10 @@ import { ChartsService } from '../../shared/services/charts.service';
 })
 
 export class SpendingComponent implements OnInit {
+	private typesService = inject(TypesService);
+	private amountsService = inject(AmountsService);
+	private chartsService = inject(ChartsService);
+
 	public types: { id: number; tag: string; image: string; total: number; }[];
 	public selectedTypes: { id: number; tag?: string; image?: string; total?: number; }[] = [];
 	public data: { date: Date; amount: number; types: string[]; }[] = [];
@@ -21,12 +25,6 @@ export class SpendingComponent implements OnInit {
 
 	public groups = ['Comparaison', 'Addition'];
 	public group = 'Comparaison';
-
-	constructor(
-		private typesService: TypesService,
-		private amountsService: AmountsService,
-		private chartsService: ChartsService
-	) { }
 
 	public isSelectedType(type, types = this.selectedTypes) {
 		return types.some(x => x.id === type.id);

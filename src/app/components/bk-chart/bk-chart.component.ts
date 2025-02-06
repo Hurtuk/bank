@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, inject } from '@angular/core';
 import { ChartsService } from '../../shared/services/charts.service';
 import { BaseChartDirective } from 'ng2-charts';
 import 'chartjs-adapter-moment';
@@ -15,6 +15,8 @@ import 'chartjs-adapter-moment';
  * 	{data: {date: Date, value: number}[], label: string}[]
  */
 export class BkChartComponent implements OnInit {
+	private chartsService = inject(ChartsService);
+
 	@ViewChild('baseChart') chart: BaseChartDirective;
 
 	@Input() initialData: string;
@@ -55,10 +57,6 @@ export class BkChartComponent implements OnInit {
 	public group: string;
 
 	public sigma: boolean;
-
-	constructor(
-		private chartsService: ChartsService
-	) { }
 
 	private fillHoles() {
 		const minDate = new Date(2016, 0, 1);

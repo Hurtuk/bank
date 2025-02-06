@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UrlBuilderService } from './url-builder.service';
 
@@ -7,11 +7,9 @@ import { UrlBuilderService } from './url-builder.service';
   providedIn: 'root'
 })
 export class RealEstateService {
+  private http = inject(HttpClient);
+  private urlBuilder = inject(UrlBuilderService);
 
-  constructor(
-		private http: HttpClient,
-		private urlBuilder: UrlBuilderService
-	) { }
 
 	public getName(idTag: number | string): Observable<string> {
 		return this.http.get<string>(this.urlBuilder.buildUrl('getBuildingName', idTag));

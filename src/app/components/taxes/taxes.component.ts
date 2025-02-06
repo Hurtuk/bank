@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TaxesService } from 'src/app/shared/services/taxes.service';
 
 @Component({
@@ -8,14 +8,12 @@ import { TaxesService } from 'src/app/shared/services/taxes.service';
     standalone: false
 })
 export class TaxesComponent implements OnInit {
+  private taxesService = inject(TaxesService);
+
 
   public rentTaxes;
   public buildTaxes;
   public homeTaxes;
-
-  constructor(
-    private taxesService: TaxesService
-  ) { }
 
   ngOnInit() {
     this.taxesService.getTaxes("Taxe foncière")

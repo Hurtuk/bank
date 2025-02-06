@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, inject } from '@angular/core';
 import { RealEstateService } from 'src/app/shared/services/real-estate.service';
 import { TravelsService } from 'src/app/shared/services/travels.service';
 import { AmountsService } from '../../../shared/services/amounts.service';
@@ -15,6 +15,11 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class UpdateListComponent implements OnInit {
+	private amountsService = inject(AmountsService);
+	private typesService = inject(TypesService);
+	private travelsService = inject(TravelsService);
+	private realEstateService = inject(RealEstateService);
+
 	@Input() items: {
 		id: number,
 		types: any[],
@@ -45,13 +50,6 @@ export class UpdateListComponent implements OnInit {
 
 	public lastMonthly: any[];
 	public loanMonth: any[];
-
-	constructor(
-		private amountsService: AmountsService,
-		private typesService: TypesService,
-		private travelsService: TravelsService,
-		private realEstateService: RealEstateService
-	) { }
 
 	public removeRow(item) {
 		this.items.splice(this.items.indexOf(item), 1);

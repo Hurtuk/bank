@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 
 @Component({
@@ -8,12 +8,10 @@ import { AmountsService } from 'src/app/shared/services/amounts.service';
     standalone: false
 })
 export class BillsComponent implements OnInit {
+    private amountService = inject(AmountsService);
+
 
     public data: any;
-
-    constructor(
-        private amountService: AmountsService
-    ) { }
 
     ngOnInit(): void {
         this.data = this.amountService.getBills();

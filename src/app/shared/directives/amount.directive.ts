@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, inject } from '@angular/core';
 
 /**
  * Arguments :
@@ -15,7 +15,9 @@ export class AmountDirective implements OnChanges {
 	@Input() amount: any[] = [];
 	private elementRef: ElementRef;
 
-	constructor(el: ElementRef) {
+	constructor() {
+		const el = inject(ElementRef);
+
 		this.elementRef = el;
 	}
 

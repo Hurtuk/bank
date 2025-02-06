@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TypesService } from 'src/app/shared/services/types.service';
 import { AccountsService } from '../../../shared/services/accounts.service';
 import { AmountsService } from '../../../shared/services/amounts.service';
@@ -14,6 +14,10 @@ import { UpdateListComponent } from '../update-list/update-list.component';
 })
 
 export class UpdateComponent implements OnInit {
+	private accountsService = inject(AccountsService);
+	private amountsService = inject(AmountsService);
+	private typesService = inject(TypesService);
+
 	public result: {
 		id: number,
 		types: {image: string, id: number, name: string}[],
@@ -29,12 +33,6 @@ export class UpdateComponent implements OnInit {
 	public types: {id: number, tag: string}[];
 	public year: number;
 	public years: string[];
-
-	constructor(
-		private accountsService: AccountsService,
-		private amountsService: AmountsService,
-		private typesService: TypesService
-	) { }
 
 	ngOnInit() {
 		this.accountsService.getAllAccounts().subscribe(x => this.accounts = x);

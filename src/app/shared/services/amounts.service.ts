@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UrlBuilderService } from './url-builder.service';
 
@@ -7,12 +7,10 @@ import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AmountsService {
-	public totals = new BehaviorSubject({fixed: 0, thrift: 0, income: 0, stocks: 0});
+	private http = inject(HttpClient);
+	private urlBuilder = inject(UrlBuilderService);
 
-	constructor(
-		private http: HttpClient,
-		private urlBuilder: UrlBuilderService
-	) { }
+	public totals = new BehaviorSubject({fixed: 0, thrift: 0, income: 0, stocks: 0});
 
 	public updateTotals(): Observable<{fixed: number, thrift: number, income: number, stocks: number}> {
 		return this.http.get<{fixed: number, thrift: number, income: number, stocks: number}>(this.urlBuilder.buildUrl('getTotals'))

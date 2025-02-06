@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DateService } from 'src/app/shared/services/date.service';
 import { RealEstateService } from 'src/app/shared/services/real-estate.service';
@@ -10,6 +10,11 @@ import { RealEstateService } from 'src/app/shared/services/real-estate.service';
     standalone: false
 })
 export class RealEstateComponent implements OnInit {
+  private realEstateService = inject(RealEstateService);
+  private dateService = inject(DateService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
 
   public name: string;
   public data: any;
@@ -20,13 +25,6 @@ export class RealEstateComponent implements OnInit {
     aspectRatio: 1,
     plugins: { legend: false }
 	};
-
-  constructor(
-    private realEstateService: RealEstateService,
-    private dateService: DateService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 
@@ -10,12 +10,10 @@ import { ChartsService } from '../../shared/services/charts.service';
 })
 
 export class TradeComponent implements OnInit {
+	private amountsService = inject(AmountsService);
+	private chartsService = inject(ChartsService);
+
 	public currents: { actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number, initial: number }[];
-	
-	constructor(
-		private amountsService: AmountsService,
-		private chartsService: ChartsService
-	) { }
 
 	ngOnInit() {
 		this.chartsService.currentsData.subscribe(x => this.currents = x.sort((a1, a2) => a2.value * a2.quantity - a1.value * a1.quantity));

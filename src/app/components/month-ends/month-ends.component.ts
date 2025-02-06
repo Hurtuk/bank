@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 import { DateService } from '../../shared/services/date.service';
@@ -11,18 +11,16 @@ import { DateService } from '../../shared/services/date.service';
 })
 
 export class MonthEndsComponent implements OnInit {
+	private amountsService = inject(AmountsService);
+	private chartsService = inject(ChartsService);
+	private dateService = inject(DateService);
+
 	public RANGE = 12000;
 
 	public data: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
 	public operation = 'Total';
 
 	public minYear = (new Date()).getFullYear() - 5;
-
-	constructor(
-		private amountsService: AmountsService,
-		private chartsService: ChartsService,
-		private dateService: DateService
-	) { }
 
 	public refresh() {
 		switch (this.operation) {

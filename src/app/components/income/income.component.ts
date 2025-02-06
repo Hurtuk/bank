@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 import { ChartsService } from 'src/app/shared/services/charts.service';
 
@@ -9,6 +9,9 @@ import { ChartsService } from 'src/app/shared/services/charts.service';
     standalone: false
 })
 export class IncomeComponent implements OnInit {
+	private amountsService = inject(AmountsService);
+	private chartsService = inject(ChartsService);
+
 
 	public chartOptions = [
 		[{option: 'backgroundColor', value: '#CF022B'}, // Travail
@@ -48,11 +51,6 @@ export class IncomeComponent implements OnInit {
   public labels: string[];
 
 	public minYear = (new Date()).getFullYear() - 5;
-
-  constructor(
-		private amountsService: AmountsService,
-		private chartsService: ChartsService,
-  ) { }
 
   ngOnInit(): void {
     this.amountsService.getIncome().subscribe(income => {

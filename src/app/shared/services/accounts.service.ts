@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UrlBuilderService } from './url-builder.service';
 
@@ -6,10 +6,9 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AccountsService {
-	constructor(
-		private http: HttpClient,
-		private urlBuilder: UrlBuilderService
-	) { }
+	private http = inject(HttpClient);
+	private urlBuilder = inject(UrlBuilderService);
+
 
 	public getAccounts(): Observable<{id: number, name: string, bank: string, thrift: boolean}[]> {
 		return this.http.get<{id: number, name: string, bank: string, thrift: boolean}[]>(this.urlBuilder.buildUrl('getAccounts'));

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AccountsService } from '../../../shared/services/accounts.service';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 import { DatePipe } from '@angular/common';
@@ -13,6 +13,9 @@ import { UpdateListComponent } from '../update-list/update-list.component';
 })
 
 export class ParserComponent implements OnInit {
+	private accountsService = inject(AccountsService);
+	private amountsService = inject(AmountsService);
+
 	public parsingText: string;
 	public result: {
 		id: number,
@@ -34,11 +37,6 @@ export class ParserComponent implements OnInit {
 	public transferFromAccount: {id: number, name: string};;
 	public transferToAccount: {id: number, name: string};
 	public transferSaved = false;
-
-	constructor(
-		private accountsService: AccountsService,
-		private amountsService: AmountsService
-	) { }
 
 	ngOnInit() {
 		this.accountsService.getAccounts().subscribe(x => this.accounts = x);

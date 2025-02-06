@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 
 @Component({
@@ -8,12 +8,12 @@ import { AmountsService } from 'src/app/shared/services/amounts.service';
     standalone: false
 })
 export class ForecastComponent implements OnInit {
+  private amountService = inject(AmountsService);
+
 
   public year = (new Date()).getFullYear();
   public items: {tag: {id: string, title: string}, current: number, expected: number, forecast: number, previous: number}[];
   public total: number;
-
-  constructor(private amountService: AmountsService) { }
 
   ngOnInit() {
     this.amountService.getForecast().subscribe(f => {
