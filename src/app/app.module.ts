@@ -22,7 +22,7 @@ import { AuthGuard } from './shared/services/auth-guard.service';
 import { AuthService } from './shared/services/auth.service';
 import { LoginComponent } from './components/admin/login/login.component';
 import { AdminModule } from './admin.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { httpInterceptorProviders } from 'src/interceptors';
 import { LoansComponent } from './components/loans/loans.component';
 import { ForecastComponent } from './components/forecast/forecast.component';
@@ -40,51 +40,45 @@ import { ElectricityComponent } from './components/electricity/electricity.compo
 import { ElectricityService } from './shared/services/electricity.service';
 import { NgChartsModule } from 'ng2-charts';
 
-@NgModule({
-	declarations: [
-		AppComponent,
-		InfoBarComponent,
-		MenuBarComponent,
-		HomeComponent,
-		SpendingComponent,
-		BkChartComponent,
-		MonthEndsComponent,
-		TradeComponent,
-		LoginComponent,
-		LoansComponent,
-		ForecastComponent,
-		ProgressBarComponent,
-		RealEstateComponent,
-		ReBarsComponent,
-		TaxesComponent,
-		IncomeComponent,
-		TravelsComponent,
-		AmountDirective,
-		BillsComponent,
-		BillsTableComponent,
-		ElectricityComponent
-	],
-	imports: [
-		BrowserModule,
-		HttpClientModule,
-		AppRoutingModule,
-		FormsModule,
-		NgChartsModule,
-		AdminModule
-	],
-	providers: [
-		UrlBuilderService,
-		AmountsService,
-		TypesService,
-		AccountsService,
-		ChartsService,
-		DateService,
-		AuthGuard,
-		AuthService,
-		TravelsService,
-		ElectricityService,
-		httpInterceptorProviders
-	],
-	bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        InfoBarComponent,
+        MenuBarComponent,
+        HomeComponent,
+        SpendingComponent,
+        BkChartComponent,
+        MonthEndsComponent,
+        TradeComponent,
+        LoginComponent,
+        LoansComponent,
+        ForecastComponent,
+        ProgressBarComponent,
+        RealEstateComponent,
+        ReBarsComponent,
+        TaxesComponent,
+        IncomeComponent,
+        TravelsComponent,
+        AmountDirective,
+        BillsComponent,
+        BillsTableComponent,
+        ElectricityComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        NgChartsModule,
+        AdminModule], providers: [
+        UrlBuilderService,
+        AmountsService,
+        TypesService,
+        AccountsService,
+        ChartsService,
+        DateService,
+        AuthGuard,
+        AuthService,
+        TravelsService,
+        ElectricityService,
+        httpInterceptorProviders,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
