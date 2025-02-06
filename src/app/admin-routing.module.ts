@@ -1,12 +1,12 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AdminComponent } from './components/admin/admin.component';
+
 import { AuthGuard } from './shared/services/auth-guard.service';
 
 const adminRoutes: Routes = [
 	{
 		path: 'admin',
-		component: AdminComponent,
+		loadComponent: () => import('./components/admin/admin.component').then(m => m.AdminComponent),
 		canActivate: [AuthGuard]
 	}
 ];
