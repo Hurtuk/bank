@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ChartsService } from '../../shared/services/charts.service';
-import { BaseChartDirective } from 'ng2-charts';
+import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
 
 @Component({
 	selector: 'bk-chart',
@@ -13,7 +13,7 @@ import { BaseChartDirective } from 'ng2-charts';
  * 	{data: {date: Date, value: number}[], label: string}[]
  */
 export class BkChartComponent implements OnInit {
-	@ViewChild('baseChart', { static: true }) chart: BaseChartDirective;
+	@ViewChild('baseChart') chart: BaseChartDirective;
 
 	@Input() initialData: string;
 	@Input() offFilters = [];
@@ -222,7 +222,12 @@ export class BkChartComponent implements OnInit {
 			this.calculateTotal();
 			setTimeout(() => {
 				if (this.chart !== undefined) {
-					this.options.scales.xAxes[0].time.unit = this.group === 'Année' ? 'year': 'month';
+					if (this.group === 'Jour') {
+						this.options.elements.point.radius = 0;
+					} else {
+						this.options.elements.point.radius = 2;
+					}
+					this.options.scales.x[0].time.unit = this.group === 'Année' ? 'year': 'month';
 					if (this.chartOptions) {
 						this.chartOptions.forEach((opt, index) => {
 							opt.forEach(option => {
@@ -231,23 +236,19 @@ export class BkChartComponent implements OnInit {
 						});
 					}
 					if (this.bgColor) {
-						this.displayData.forEach(d => d.backgroundColor = this.bgColor);
+						this.displayData.forEach(d => {
+							d.backgroundColor = this.bgColor;
+							d.borderColor = this.bgColor;
+						});
 					}
-					if (this.group === 'Jour') {
-						this.chart.datasets.forEach(d => d.pointRadius = 0);
-					}
-					this.chart.ngOnDestroy();
-					this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
-					this.chart.chart.update();
+					this.chart.update();
 				}
 			}, 0);
 		} else {
 			this.total = 0;
 			this.average = 0;
 			this.displayData = [];
-			this.chart.ngOnDestroy();
-			this.chart.chart = this.chart.getChartBuilder(this.chart.ctx);
-			this.chart.chart.update();
+			this.chart.update();
 		}
 	}
 
@@ -262,7 +263,7 @@ export class BkChartComponent implements OnInit {
 
 	ngOnInit() {
 		this.options.scales = {
-			xAxes: [{
+			x: [{
 				type: 'time',
 				time: {
 					unit: this.group === 'Année' ? 'year': 'month',
@@ -273,7 +274,7 @@ export class BkChartComponent implements OnInit {
 			}]
 		};
 		if (typeof this.minimum !== "undefined") {
-			this.options.scales.yAxes = [{
+			this.options.scales.y = [{
 				ticks: {
 					min: this.minimum
 				},
@@ -281,13 +282,11 @@ export class BkChartComponent implements OnInit {
 			}];
 		}
 		if (this.stackedPercent) {
-			if (this.options.scales?.yAxes[0]?.ticks) {
-				this.options.scales.yAxes[0].ticks.max = 1;	
+			if (this.options.scales?.y[0]?.ticks) {
+				this.options.scales.y[0].ticks.max = 1;	
 			} else {
-				this.options.scales.yAxes = [{
-					ticks: {
-						max: 1
-					},
+				this.options.scales.y = [{
+					max: 1,
 					stacked: this.stackedPercent
 				}];
 			}
@@ -308,19 +307,15 @@ export class BkChartComponent implements OnInit {
 					this.addValues();
 				}
 				if (!this.minimum && this.allMonthsPositive()) {
-					this.options.scales.yAxes = [{
-						ticks: {
-							min: 0,
-							max: this.stackedPercent ? 1 : this.maximum
-						},
+					this.options.scales.y = [{
+						min: 0,
+						max: this.stackedPercent ? 1 : this.maximum,
 						stacked: this.stackedPercent
 					}];
 				} else {
-					this.options.scales.yAxes = [{
-						ticks: {
-							min: this.minimum,
-							max: this.maximum
-						},
+					this.options.scales.y = [{
+						min: this.minimum,
+						max: this.maximum,
 						stacked: this.stackedPercent
 					}];
 				}

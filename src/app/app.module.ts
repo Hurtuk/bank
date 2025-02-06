@@ -13,7 +13,6 @@ import { HomeComponent } from './components/home/home.component';
 import { TypesService } from './shared/services/types.service';
 import { AccountsService } from './shared/services/accounts.service';
 import { SpendingComponent } from './components/spending/spending.component';
-import { ChartsModule } from 'ng2-charts';
 import { BkChartComponent } from './components/bk-chart/bk-chart.component';
 import { ChartsService } from './shared/services/charts.service';
 import { MonthEndsComponent } from './components/month-ends/month-ends.component';
@@ -39,6 +38,7 @@ import { BillsComponent } from './components/bills/bills.component';
 import { BillsTableComponent } from './components/bills-table/bills-table.component';
 import { ElectricityComponent } from './components/electricity/electricity.component';
 import { ElectricityService } from './shared/services/electricity.service';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
 	declarations: [
@@ -60,8 +60,8 @@ import { ElectricityService } from './shared/services/electricity.service';
 		IncomeComponent,
 		TravelsComponent,
 		AmountDirective,
-        BillsComponent,
-        BillsTableComponent,
+		BillsComponent,
+		BillsTableComponent,
 		ElectricityComponent
 	],
 	imports: [
@@ -69,7 +69,7 @@ import { ElectricityService } from './shared/services/electricity.service';
 		HttpClientModule,
 		AppRoutingModule,
 		FormsModule,
-		ChartsModule,
+		NgChartsModule,
 		AdminModule
 	],
 	providers: [

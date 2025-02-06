@@ -11,7 +11,7 @@
 	[labels]="displayLabels"
 	[options]="options"
 	[legend]="displayData.length > 1"
-	[chartType]="type"></canvas>
+	[type]="type"></canvas>
 <div class="tabs" [hidden]="offFilters.length === 2">
 	<ng-container *ngIf="offFilters.indexOf('Jour') === -1">
 		<input type="radio" name="tab" [id]="'chart-day' + customId" value="Jour" [(ngModel)]="group" (change)="refresh()"/>
