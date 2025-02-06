@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 
 @Component({
-	selector: 'info-bar',
-	templateUrl: 'info-bar.component.html',
-	styleUrls: ['info-bar.component.scss']
+    selector: 'info-bar',
+    templateUrl: 'info-bar.component.html',
+    styleUrls: ['info-bar.component.scss'],
+    standalone: false
 })
 
 export class InfoBarComponent implements OnInit {

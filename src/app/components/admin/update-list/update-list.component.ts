@@ -5,9 +5,10 @@ import { AmountsService } from '../../../shared/services/amounts.service';
 import { TypesService } from '../../../shared/services/types.service';
 
 @Component({
-	selector: 'update-list',
-	templateUrl: 'update-list.component.html',
-	styleUrls: ['update-list.component.scss']
+    selector: 'update-list',
+    templateUrl: 'update-list.component.html',
+    styleUrls: ['update-list.component.scss'],
+    standalone: false
 })
 
 export class UpdateListComponent implements OnInit {

@@ -3,9 +3,10 @@ import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 
 @Component({
-	selector: 'trade',
-	templateUrl: 'trade.component.html',
-	styleUrls: ['trade.component.scss']
+    selector: 'trade',
+    templateUrl: 'trade.component.html',
+    styleUrls: ['trade.component.scss'],
+    standalone: false
 })
 
 export class TradeComponent implements OnInit {

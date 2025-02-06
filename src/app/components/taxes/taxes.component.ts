@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TaxesService } from 'src/app/shared/services/taxes.service';
 
 @Component({
-  selector: 'app-taxes',
-  templateUrl: './taxes.component.html',
-  styleUrls: ['./taxes.component.scss']
+    selector: 'app-taxes',
+    templateUrl: './taxes.component.html',
+    styleUrls: ['./taxes.component.scss'],
+    standalone: false
 })
 export class TaxesComponent implements OnInit {
 

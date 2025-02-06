@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-	selector: 'type',
-	templateUrl: 'type.component.html',
-	styleUrls: ['type.component.scss']
+    selector: 'type',
+    templateUrl: 'type.component.html',
+    styleUrls: ['type.component.scss'],
+    standalone: false
 })
 
 export class TypeComponent implements OnInit {

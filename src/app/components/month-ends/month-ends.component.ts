@@ -4,9 +4,10 @@ import { ChartsService } from '../../shared/services/charts.service';
 import { DateService } from '../../shared/services/date.service';
 
 @Component({
-	selector: 'month-ends',
-	templateUrl: 'month-ends.component.html',
-	styleUrls: ['month-ends.component.scss']
+    selector: 'month-ends',
+    templateUrl: 'month-ends.component.html',
+    styleUrls: ['month-ends.component.scss'],
+    standalone: false
 })
 
 export class MonthEndsComponent implements OnInit {

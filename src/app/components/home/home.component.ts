@@ -3,9 +3,10 @@ import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 
 @Component({
-	selector: 'home',
-	templateUrl: 'home.component.html',
-	styleUrls: ['home.component.scss']
+    selector: 'home',
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.component.scss'],
+    standalone: false
 })
 
 export class HomeComponent implements OnInit {

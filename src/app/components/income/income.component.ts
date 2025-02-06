@@ -3,9 +3,10 @@ import { AmountsService } from 'src/app/shared/services/amounts.service';
 import { ChartsService } from 'src/app/shared/services/charts.service';
 
 @Component({
-  selector: 'app-income',
-  templateUrl: './income.component.html',
-  styleUrls: ['./income.component.scss']
+    selector: 'app-income',
+    templateUrl: './income.component.html',
+    styleUrls: ['./income.component.scss'],
+    standalone: false
 })
 export class IncomeComponent implements OnInit {
 

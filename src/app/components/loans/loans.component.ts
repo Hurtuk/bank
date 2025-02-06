@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 
 @Component({
-	selector: 'loans',
-	templateUrl: 'loans.component.html',
-	styleUrls: ['loans.component.scss']
+    selector: 'loans',
+    templateUrl: 'loans.component.html',
+    styleUrls: ['loans.component.scss'],
+    standalone: false
 })
 
 export class LoansComponent implements OnInit {

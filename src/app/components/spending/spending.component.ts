@@ -4,9 +4,10 @@ import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 
 @Component({
-	selector: 'spending',
-	templateUrl: 'spending.component.html',
-	styleUrls: ['spending.component.scss']
+    selector: 'spending',
+    templateUrl: 'spending.component.html',
+    styleUrls: ['spending.component.scss'],
+    standalone: false
 })
 
 export class SpendingComponent implements OnInit {

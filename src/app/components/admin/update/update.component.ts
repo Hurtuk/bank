@@ -4,9 +4,10 @@ import { AccountsService } from '../../../shared/services/accounts.service';
 import { AmountsService } from '../../../shared/services/amounts.service';
 
 @Component({
-	selector: 'update',
-	templateUrl: 'update.component.html',
-	styleUrls: ['update.component.scss']
+    selector: 'update',
+    templateUrl: 'update.component.html',
+    styleUrls: ['update.component.scss'],
+    standalone: false
 })
 
 export class UpdateComponent implements OnInit {

@@ -4,9 +4,10 @@ import { DateService } from 'src/app/shared/services/date.service';
 import { ElectricityService } from 'src/app/shared/services/electricity.service';
 
 @Component({
-	selector: 'app-electricity',
-	templateUrl: './electricity.component.html',
-	styleUrls: ['./electricity.component.scss']
+    selector: 'app-electricity',
+    templateUrl: './electricity.component.html',
+    styleUrls: ['./electricity.component.scss'],
+    standalone: false
 })
 export class ElectricityComponent implements OnInit {
 

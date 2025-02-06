@@ -4,9 +4,10 @@ import { BaseChartDirective } from 'ng2-charts';
 import 'chartjs-adapter-moment';
 
 @Component({
-	selector: 'bk-chart',
-	templateUrl: 'bk-chart.component.html',
-	styleUrls: ['bk-chart.component.scss']
+    selector: 'bk-chart',
+    templateUrl: 'bk-chart.component.html',
+    styleUrls: ['bk-chart.component.scss'],
+    standalone: false
 })
 
 /**

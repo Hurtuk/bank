@@ -3,9 +3,10 @@ import { AccountsService } from '../../../shared/services/accounts.service';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 
 @Component({
-	selector: 'parser',
-	templateUrl: 'parser.component.html',
-	styleUrls: ['parser.component.scss']
+    selector: 'parser',
+    templateUrl: 'parser.component.html',
+    styleUrls: ['parser.component.scss'],
+    standalone: false
 })
 
 export class ParserComponent implements OnInit {

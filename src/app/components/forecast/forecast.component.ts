@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 
 @Component({
-  selector: 'app-forecast',
-  templateUrl: './forecast.component.html',
-  styleUrls: ['./forecast.component.scss']
+    selector: 'app-forecast',
+    templateUrl: './forecast.component.html',
+    styleUrls: ['./forecast.component.scss'],
+    standalone: false
 })
 export class ForecastComponent implements OnInit {
 

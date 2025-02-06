@@ -4,9 +4,10 @@ import { DateService } from 'src/app/shared/services/date.service';
 import { RealEstateService } from 'src/app/shared/services/real-estate.service';
 
 @Component({
-  selector: 'app-real-estate',
-  templateUrl: './real-estate.component.html',
-  styleUrls: ['./real-estate.component.scss']
+    selector: 'app-real-estate',
+    templateUrl: './real-estate.component.html',
+    styleUrls: ['./real-estate.component.scss'],
+    standalone: false
 })
 export class RealEstateComponent implements OnInit {
 

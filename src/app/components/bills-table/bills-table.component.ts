@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-bills-table',
-  templateUrl: './bills-table.component.html',
-  styleUrls: ['./bills-table.component.scss']
+    selector: 'app-bills-table',
+    templateUrl: './bills-table.component.html',
+    styleUrls: ['./bills-table.component.scss'],
+    standalone: false
 })
 export class BillsTableComponent {
 
