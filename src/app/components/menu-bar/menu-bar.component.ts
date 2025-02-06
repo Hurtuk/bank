@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { OptionsService } from 'src/app/shared/services/options.service';
 
@@ -5,7 +6,7 @@ import { OptionsService } from 'src/app/shared/services/options.service';
     selector: 'menu-bar',
     templateUrl: 'menu-bar.component.html',
     styleUrls: ['menu-bar.component.scss'],
-    standalone: false
+    imports: [AsyncPipe]
 })
 
 export class MenuBarComponent {

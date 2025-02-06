@@ -16,6 +16,9 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "chart.js/dist/types/utils": ["node_modules/chart.js/types/utils"]
+    }
   }
 }

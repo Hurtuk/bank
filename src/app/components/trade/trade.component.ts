@@ -1,12 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
+import { PercentPipe } from '@angular/common';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 
 @Component({
     selector: 'trade',
     templateUrl: 'trade.component.html',
     styleUrls: ['trade.component.scss'],
-    standalone: false
+	imports: [PercentPipe, AmountDirective]
 })
 
 export class TradeComponent implements OnInit {

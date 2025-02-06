@@ -1,12 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
+import { BkChartComponent } from '../bk-chart/bk-chart.component';
+import { DatePipe, PercentPipe } from '@angular/common';
 
 @Component({
     selector: 'home',
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.scss'],
-    standalone: false
+	imports: [BkChartComponent, DatePipe, PercentPipe]
 })
 
 export class HomeComponent implements OnInit {

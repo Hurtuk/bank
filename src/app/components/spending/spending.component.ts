@@ -2,12 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { TypesService } from '../../shared/services/types.service';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
+import { BkChartComponent } from '../bk-chart/bk-chart.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'spending',
     templateUrl: 'spending.component.html',
     styleUrls: ['spending.component.scss'],
-    standalone: false
+	imports: [BkChartComponent, DatePipe],
 })
 
 export class SpendingComponent implements OnInit {

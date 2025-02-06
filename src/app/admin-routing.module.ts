@@ -1,22 +1,10 @@
-import { Routes, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-
+import { Routes } from '@angular/router';
 import { AuthGuard } from './shared/services/auth-guard.service';
 
-const adminRoutes: Routes = [
+export const ADMIN_ROUTES: Routes = [
 	{
-		path: 'admin',
+		path: '',
 		loadComponent: () => import('./components/admin/admin.component').then(m => m.AdminComponent),
 		canActivate: [AuthGuard]
 	}
 ];
-
-@NgModule({
-	imports: [
-		RouterModule.forChild(adminRoutes)
-	],
-	exports: [
-		RouterModule
-	]
-})
-export class AdminRoutingModule {}

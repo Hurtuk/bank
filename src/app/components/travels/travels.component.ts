@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { TravelsService } from 'src/app/shared/services/travels.service';
 
@@ -5,7 +6,7 @@ import { TravelsService } from 'src/app/shared/services/travels.service';
     selector: 'app-travels',
     templateUrl: './travels.component.html',
     styleUrls: ['./travels.component.scss'],
-    standalone: false
+    imports: [DatePipe]
 })
 export class TravelsComponent implements OnInit {
   private travelService = inject(TravelsService);

@@ -1,12 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 import { ChartsService } from 'src/app/shared/services/charts.service';
+import { BkChartComponent } from '../bk-chart/bk-chart.component';
+import { PercentPipe } from '@angular/common';
 
 @Component({
     selector: 'app-income',
     templateUrl: './income.component.html',
-    styleUrls: ['./income.component.scss'],
-    standalone: false
+    imports: [BkChartComponent, PercentPipe],
+    styleUrls: ['./income.component.scss']
 })
 export class IncomeComponent implements OnInit {
 	private amountsService = inject(AmountsService);

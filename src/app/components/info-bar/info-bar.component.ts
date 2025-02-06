@@ -1,11 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 
 @Component({
     selector: 'info-bar',
     templateUrl: 'info-bar.component.html',
     styleUrls: ['info-bar.component.scss'],
-    standalone: false
+	imports: [AmountDirective]
 })
 
 export class InfoBarComponent implements OnInit {

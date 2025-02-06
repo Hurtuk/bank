@@ -2,12 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 import { DateService } from '../../shared/services/date.service';
+import { BkChartComponent } from '../bk-chart/bk-chart.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'month-ends',
     templateUrl: 'month-ends.component.html',
     styleUrls: ['month-ends.component.scss'],
-    standalone: false
+	imports: [BkChartComponent, FormsModule],
 })
 
 export class MonthEndsComponent implements OnInit {

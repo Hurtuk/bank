@@ -1,3 +1,4 @@
+import { DatePipe, PercentPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DateService } from 'src/app/shared/services/date.service';
@@ -7,7 +8,7 @@ import { RealEstateService } from 'src/app/shared/services/real-estate.service';
     selector: 'app-real-estate',
     templateUrl: './real-estate.component.html',
     styleUrls: ['./real-estate.component.scss'],
-    standalone: false
+    imports: [DatePipe, PercentPipe]
 })
 export class RealEstateComponent implements OnInit {
   private realEstateService = inject(RealEstateService);

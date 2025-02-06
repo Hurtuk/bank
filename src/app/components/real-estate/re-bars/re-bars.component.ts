@@ -1,10 +1,11 @@
+import { PercentPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-re-bars',
     templateUrl: './re-bars.component.html',
     styleUrls: ['./re-bars.component.scss'],
-    standalone: false
+    imports: [PercentPipe]
 })
 export class ReBarsComponent implements OnInit {
 

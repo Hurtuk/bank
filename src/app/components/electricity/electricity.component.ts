@@ -2,12 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ChartsService } from 'src/app/shared/services/charts.service';
 import { DateService } from 'src/app/shared/services/date.service';
 import { ElectricityService } from 'src/app/shared/services/electricity.service';
+import { BkChartComponent } from '../bk-chart/bk-chart.component';
+import { PercentPipe } from '@angular/common';
 
 @Component({
     selector: 'app-electricity',
     templateUrl: './electricity.component.html',
     styleUrls: ['./electricity.component.scss'],
-    standalone: false
+	imports: [BkChartComponent, PercentPipe]
 })
 export class ElectricityComponent implements OnInit {
 	private chartsService = inject(ChartsService);

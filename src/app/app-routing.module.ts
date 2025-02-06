@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { SpendingComponent } from './components/spending/spending.component';
 import { MonthEndsComponent } from './components/month-ends/month-ends.component';
@@ -14,7 +13,7 @@ import { TravelsComponent } from './components/travels/travels.component';
 import { BillsComponent } from './components/bills/bills.component';
 import { ElectricityComponent } from './components/electricity/electricity.component';
 
-const routes: Routes = [
+export const PUBLIC_ROUTES: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'spending', component: SpendingComponent },
 	{ path: 'bills', component: BillsComponent },
@@ -27,11 +26,6 @@ const routes: Routes = [
 	{ path: 'travels', component: TravelsComponent },
 	{ path: 'taxes', component: TaxesComponent },
 	{ path: 'electricity', component: ElectricityComponent },
-	{ path: 'login', component: LoginComponent }
+	{ path: 'login', component: LoginComponent },
+	{ path: 'admin', loadChildren: () => import('./admin-routing.module').then(r => r.ADMIN_ROUTES) }
 ];
-
-@NgModule({
-	imports: [ RouterModule.forRoot(routes) ],
-	exports: [ RouterModule ]
-})
-export class AppRoutingModule {}

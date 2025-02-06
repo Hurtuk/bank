@@ -7,7 +7,7 @@ import 'chartjs-adapter-moment';
     selector: 'bk-chart',
     templateUrl: 'bk-chart.component.html',
     styleUrls: ['bk-chart.component.scss'],
-    standalone: false
+	imports: [BaseChartDirective]
 })
 
 /**
@@ -228,7 +228,7 @@ export class BkChartComponent implements OnInit {
 						this.options.elements = {point: {radius: 2}};
 					}
 					this.options.plugins = {legend: this.displayData.length > 1};
-					this.options.scales.x.time.unit = this.group === 'Année' ? 'year': 'month';
+					this.options.scales.x = {...this.options.scales.x, time: {unit: this.group === 'Année' ? 'year': 'month'}};
 					if (this.chartOptions) {
 						this.chartOptions.forEach((opt, index) => {
 							opt.forEach(option => {

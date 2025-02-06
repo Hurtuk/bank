@@ -4,8 +4,7 @@ import { AmountsService } from 'src/app/shared/services/amounts.service';
 @Component({
     selector: 'app-forecast',
     templateUrl: './forecast.component.html',
-    styleUrls: ['./forecast.component.scss'],
-    standalone: false
+    styleUrls: ['./forecast.component.scss']
 })
 export class ForecastComponent implements OnInit {
   private amountService = inject(AmountsService);

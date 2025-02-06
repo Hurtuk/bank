@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     templateUrl: './login.component.html',
-    standalone: false
+	imports: [FormsModule]
 })
 export class LoginComponent {
 	authService = inject(AuthService);

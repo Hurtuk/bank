@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
 
@@ -5,7 +6,7 @@ import { AmountsService } from 'src/app/shared/services/amounts.service';
     selector: 'loans',
     templateUrl: 'loans.component.html',
     styleUrls: ['loans.component.scss'],
-    standalone: false
+    imports: [AsyncPipe]
 })
 
 export class LoansComponent implements OnInit {

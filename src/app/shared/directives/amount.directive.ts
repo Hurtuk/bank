@@ -8,8 +8,7 @@ import { Directive, ElementRef, Input, OnChanges, inject } from '@angular/core';
  * 	- color: boolean
  */
 @Directive({
-    selector: '[amount]',
-    standalone: false
+    selector: '[amount]'
 })
 export class AmountDirective implements OnChanges {
 	@Input() amount: any[] = [];
