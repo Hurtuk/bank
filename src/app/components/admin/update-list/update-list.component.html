@@ -49,7 +49,8 @@
 					<input type="number" [(ngModel)]="r.variable" (change)="r.updated = true"/>
 				</td>
 				<td>
-					<select [(ngModel)]="r.refunding" (change)="r.updated = true">
+					<button *ngIf="refundDisplayIds.indexOf(r.id) === -1" (click)="refundDisplayIds.push(r.id)">Afficher</button>
+					<select *ngIf="refundDisplayIds.indexOf(r.id) !== -1" [(ngModel)]="r.refunding" (change)="r.updated = true">
 						<option></option>
 						<option *ngFor="let f of refundable" [ngValue]="f.id">{{f.title + ' ' + f.amount + '€'}}</option>
 					</select>

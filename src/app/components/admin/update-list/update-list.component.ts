@@ -37,6 +37,8 @@ export class UpdateListComponent implements OnInit {
 	public popupOpenedFor: any;
 	public success: boolean;
 
+	public refundDisplayIds: number[] = [];
+
 	public lastMonthly: any[];
 	public loanMonth: any[];
 
