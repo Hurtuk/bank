@@ -3,12 +3,15 @@ import { RealEstateService } from 'src/app/shared/services/real-estate.service';
 import { TravelsService } from 'src/app/shared/services/travels.service';
 import { AmountsService } from '../../../shared/services/amounts.service';
 import { TypesService } from '../../../shared/services/types.service';
+import { NgIf, NgFor, DatePipe } from '@angular/common';
+import { TypeComponent } from '../../type/type.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'update-list',
     templateUrl: 'update-list.component.html',
     styleUrls: ['update-list.component.scss'],
-    standalone: false
+    imports: [NgIf, NgFor, TypeComponent, FormsModule, DatePipe]
 })
 
 export class UpdateListComponent implements OnInit {

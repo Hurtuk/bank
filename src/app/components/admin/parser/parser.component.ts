@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountsService } from '../../../shared/services/accounts.service';
 import { AmountsService } from 'src/app/shared/services/amounts.service';
+import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { UpdateListComponent } from '../update-list/update-list.component';
 
 @Component({
     selector: 'parser',
     templateUrl: 'parser.component.html',
     styleUrls: ['parser.component.scss'],
-    standalone: false
+    imports: [NgFor, FormsModule, NgIf, UpdateListComponent, DatePipe]
 })
 
 export class ParserComponent implements OnInit {

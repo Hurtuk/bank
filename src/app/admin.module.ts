@@ -10,20 +10,18 @@ import { UpdateComponent } from './components/admin/update/update.component';
 import { UpdateListComponent } from './components/admin/update-list/update-list.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		AdminRoutingModule
-	],
-	declarations: [
-		AdminComponent,
-		ParserComponent,
-		UpdateListComponent,
-		UpdateComponent,
-		TypeComponent
-	],
-	exports: [
-		TypeComponent
-	]
+    imports: [
+        CommonModule,
+        FormsModule,
+        AdminRoutingModule,
+        AdminComponent,
+        ParserComponent,
+        UpdateListComponent,
+        UpdateComponent,
+        TypeComponent
+    ],
+    exports: [
+        TypeComponent
+    ]
 })
 export class AdminModule {}
