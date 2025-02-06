@@ -1,2 +1,6 @@
-<i *ngIf="icon" [class]="'type ' + size" [title]="isString(icon) ? icon : icon.tag" [style.backgroundImage]="'url(./assets/images/' + (isString(icon) ? icon : icon.image) + (size ? '-big' : '') + '.png)'"></i>
-<i *ngIf="!icon" [class]="'type add ' + size">+</i>
+@if (icon) {
+  <i [class]="'type ' + size" [title]="isString(icon) ? icon : icon.tag" [style.backgroundImage]="'url(./assets/images/' + (isString(icon) ? icon : icon.image) + (size ? '-big' : '') + '.png)'"></i>
+}
+@if (!icon) {
+  <i [class]="'type add ' + size">+</i>
+}

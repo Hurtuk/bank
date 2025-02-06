@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TypesService } from 'src/app/shared/services/types.service';
 import { AccountsService } from '../../../shared/services/accounts.service';
 import { AmountsService } from '../../../shared/services/amounts.service';
-import { NgFor, NgIf } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { UpdateListComponent } from '../update-list/update-list.component';
 
@@ -10,7 +10,7 @@ import { UpdateListComponent } from '../update-list/update-list.component';
     selector: 'update',
     templateUrl: 'update.component.html',
     styleUrls: ['update.component.scss'],
-    imports: [NgFor, NgIf, FormsModule, UpdateListComponent]
+    imports: [FormsModule, UpdateListComponent]
 })
 
 export class UpdateComponent implements OnInit {

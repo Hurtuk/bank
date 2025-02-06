@@ -1,71 +1,89 @@
 <div class="content home">
-	<div class="panel">
-		<h1>Fixe</h1>
-		<ul class="fix">
-			<li *ngFor="let fix of fixAccounts" [class.big]="fix.amount > 300">
-				<span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + fix.bank + '.png)'"></span>
-				<div class="account-name">{{ fix.name }}</div>
-				<div class="account-sum" [amount]="[fix.amount]"></div>
-			</li>
-		</ul>
-		<h2>Remboursements à venir</h2>
-		<ol class="waiting">
-			<li *ngFor="let inc of income">
-				<span>
-					<type *ngFor="let t of inc.types" [icon]="t"></type>
-				</span>
-				<span>{{ inc.date | date: 'dd/MM' }}</span>
-				<span>{{ inc.title }}</span>
-				<span [amount]="[-inc.amount, {alwaysSign: true, color: true}]"></span>
-			</li>
-		</ol>
-	</div>
-	<div class="top-panel">
-		<div>
-			<div class="panel thrift">
-				<h1>Epargne</h1>
-				<ul>
-					<li *ngFor="let thr of thriftAccounts" [class.big]="thr.amount > 1000">
-						<span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
-						<div class="account-name">{{ thr.name }}</div>
-						<div class="account-sum" [amount]="[thr.amount]"></div>
-					</li>
-				</ul>
-			</div>
-			<div class="panel">
-				<h1>Actions</h1>
-				<ul class="actions">
-					<ng-container *ngFor="let sto of stocks; index as i">
-						<li>
-							<i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
-								<ng-container *ngIf="sto.indexBefore !== -1">
-									<span *ngIf="sto.indexBefore > i" class="up">▲</span>
-									<span *ngIf="sto.indexBefore < i" class="down">▼</span>
-								</ng-container>
-							</i>
-							<div class="account-sum">
-								<span [amount]="[sto.value * sto.count]"></span>
-								<span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
-								<div class="evolutions">
-									<span *ngIf="sto.d1"><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-									<span *ngIf="sto.d7"> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-									<span *ngIf="sto.d30"> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-								</div>
-							</div>
-						</li>
-					</ng-container>
-				</ul>
-			</div>
-		</div>
-		<div>
-			<bk-chart
-				initialData="totalData"
-				fillWith="prev"
-				[offFilters]="['Mois', 'Année']"
-				[add]="true"
-				[minDate]="minDate"
-				[minimum]="0"
-				[chartOptions]="chartOptions"></bk-chart>
-		</div>
-	</div>
+  <div class="panel">
+    <h1>Fixe</h1>
+    <ul class="fix">
+      @for (fix of fixAccounts; track fix) {
+        <li [class.big]="fix.amount > 300">
+          <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + fix.bank + '.png)'"></span>
+          <div class="account-name">{{ fix.name }}</div>
+          <div class="account-sum" [amount]="[fix.amount]"></div>
+        </li>
+      }
+    </ul>
+    <h2>Remboursements à venir</h2>
+    <ol class="waiting">
+      @for (inc of income; track inc) {
+        <li>
+          <span>
+            @for (t of inc.types; track t) {
+              <type [icon]="t"></type>
+            }
+          </span>
+          <span>{{ inc.date | date: 'dd/MM' }}</span>
+          <span>{{ inc.title }}</span>
+          <span [amount]="[-inc.amount, {alwaysSign: true, color: true}]"></span>
+        </li>
+      }
+    </ol>
+  </div>
+  <div class="top-panel">
+    <div>
+      <div class="panel thrift">
+        <h1>Epargne</h1>
+        <ul>
+          @for (thr of thriftAccounts; track thr) {
+            <li [class.big]="thr.amount > 1000">
+              <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
+              <div class="account-name">{{ thr.name }}</div>
+              <div class="account-sum" [amount]="[thr.amount]"></div>
+            </li>
+          }
+        </ul>
+      </div>
+      <div class="panel">
+        <h1>Actions</h1>
+        <ul class="actions">
+          @for (sto of stocks; track sto; let i = $index) {
+            <li>
+              <i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
+                @if (sto.indexBefore !== -1) {
+                  @if (sto.indexBefore > i) {
+                    <span class="up">▲</span>
+                  }
+                  @if (sto.indexBefore < i) {
+                    <span class="down">▼</span>
+                  }
+                }
+              </i>
+              <div class="account-sum">
+                <span [amount]="[sto.value * sto.count]"></span>
+                <span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
+                <div class="evolutions">
+                  @if (sto.d1) {
+                    <span><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                  }
+                  @if (sto.d7) {
+                    <span> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                  }
+                  @if (sto.d30) {
+                    <span> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                  }
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div>
+      <bk-chart
+        initialData="totalData"
+        fillWith="prev"
+        [offFilters]="['Mois', 'Année']"
+        [add]="true"
+        [minDate]="minDate"
+        [minimum]="0"
+      [chartOptions]="chartOptions"></bk-chart>
+    </div>
+  </div>
 </div>

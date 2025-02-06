@@ -1,23 +1,33 @@
-<div *ngFor="let room of data" class="room">
+@for (room of data; track room) {
+  <div class="room">
     <span class="name">{{ room.name }}</span>
     <div class="data">
-        <div class="months">
-            <div *ngFor="let m of room.data[0].months">
-                <span>{{ m.letter }}</span>
-                <div class="chart-part">
-                    <span class="percent">
-                        <ng-container *ngIf="m.occupied !== 1 && m.occupied !== 0">{{ m.occupied | percent }}</ng-container>
-                    </span>
-                    <span *ngFor="let d of m.days" class="day" [class.occupied]="d"></span>
-                </div>
+      <div class="months">
+        @for (m of room.data[0].months; track m) {
+          <div>
+            <span>{{ m.letter }}</span>
+            <div class="chart-part">
+              <span class="percent">
+                @if (m.occupied !== 1 && m.occupied !== 0) {
+                  {{ m.occupied | percent }}
+                }
+              </span>
+              @for (d of m.days; track d) {
+                <span class="day" [class.occupied]="d"></span>
+              }
             </div>
-        </div>
-        <div class="years">
-            <div *ngFor="let y of room.data; let i = index">
-                <div [style.width.%]="y.occupied * 100"></div>
-                <span>{{ y.year }}</span>
-                <span>{{ y.occupied | percent }}</span>
-            </div>
-        </div>
+          </div>
+        }
+      </div>
+      <div class="years">
+        @for (y of room.data; track y; let i = $index) {
+          <div>
+            <div [style.width.%]="y.occupied * 100"></div>
+            <span>{{ y.year }}</span>
+            <span>{{ y.occupied | percent }}</span>
+          </div>
+        }
+      </div>
     </div>
-</div>
+  </div>
+}

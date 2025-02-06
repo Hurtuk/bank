@@ -1,11 +1,13 @@
 <h1>Dépenses mensuelles</h1>
-<div class="columned" *ngIf="(data | async) as bills">
+@if ((data | async); as bills) {
+  <div class="columned">
     <div>
-        <h2>Appartement</h2>
-        <app-bills-table [data]="bills.home" />
+      <h2>Appartement</h2>
+      <app-bills-table [data]="bills.home" />
     </div>
     <div>
-        <h2>Autres</h2>
-        <app-bills-table [data]="bills.others" />
+      <h2>Autres</h2>
+      <app-bills-table [data]="bills.others" />
     </div>
-</div>
+  </div>
+}

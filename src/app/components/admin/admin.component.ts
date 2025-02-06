@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+
 import { ParserComponent } from './parser/parser.component';
 import { UpdateComponent } from './update/update.component';
 
@@ -8,7 +8,7 @@ import { UpdateComponent } from './update/update.component';
     selector: 'admin',
     templateUrl: 'admin.component.html',
     styleUrls: ['admin.component.scss'],
-    imports: [FormsModule, NgIf, ParserComponent, UpdateComponent]
+    imports: [FormsModule, ParserComponent, UpdateComponent]
 })
 
 export class AdminComponent implements OnInit {

@@ -1,98 +1,124 @@
-<div *ngIf="canAdd">
-	<button type="button" *ngFor="let lm of loanMonth" (click)="addLoan(lm)">+ {{ lm.title }}</button>
-</div>
+@if (canAdd) {
+  <div>
+    @for (lm of loanMonth; track lm) {
+      <button type="button" (click)="addLoan(lm)">+ {{ lm.title }}</button>
+    }
+  </div>
+}
 <table>
-	<thead>
-		<tr>
-			<th></th>
-			<th>Types</th>
-			<th>Date</th>
-			<th>Titre</th>
-			<th>Montant</th>
-			<th></th>
-			<th>Variable</th>
-			<th>Rembourse</th>
-			<th>Prêt</th>
-			<th>Rend.</th>
-			<th>Voyage</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngIf="canAdd">
-			<td colspan="13">
-				<button (click)="add()">Nouvelle ligne</button>
-			</td>
-		</tr>
-		<ng-container *ngFor="let r of items">
-			<tr *ngIf="show(r)">
-				<td>
-					<i (click)="autofill(r)" class="fa fa-refresh" style="cursor: pointer"></i>
-				</td>
-				<td>
-					<type *ngFor="let t of r.types" [icon]="t.image"></type>
-					<type (click)="openPopup(r)"></type>
-				</td>
-				<td>
-					<input [ngModel]="r.date | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="r.date = $event" type="datetime-local" (change)="r.updated = true"/>
-				</td>
-				<td>
-					<input type="text" [(ngModel)]="r.title" (change)="autoSetData(r); r.updated = true"/>
-				</td>
-				<td>
-					<input type="number" [(ngModel)]="r.amount" (change)="r.updated = true"/>
-				</td>
-				<td>
-					<i class="fa fa-arrows-h" style="cursor: pointer" (click)="invert(r)"></i>
-				</td>
-				<td>
-					<input type="number" [(ngModel)]="r.variable" (change)="r.updated = true"/>
-				</td>
-				<td>
-					<button *ngIf="refundDisplayIds.indexOf(r.id) === -1" (click)="refundDisplayIds.push(r.id)">Afficher</button>
-					<select *ngIf="refundDisplayIds.indexOf(r.id) !== -1" [(ngModel)]="r.refunding" (change)="r.updated = true">
-						<option></option>
-						<option *ngFor="let f of refundable" [ngValue]="f.id">{{f.title + ' ' + f.amount + '€'}}</option>
-					</select>
-				</td>
-				<td>
-					<select [(ngModel)]="r.loan" (change)="r.updated = true">
-						<option></option>
-						<option *ngFor="let l of loans" [ngValue]="l.id">{{l.title}}</option>
-					</select>
-				</td>
-				<td>
-					<input type="checkbox" [(ngModel)]="r.profitability" (change)="r.updated = true"/>
-				</td>
-				<td>
-					<select [(ngModel)]="r.travel" (change)="r.updated = true">
-						<option></option>
-						<option *ngFor="let t of travels" [ngValue]="t.id">{{t.title}}</option>
-					</select>
-				</td>
-				<td>
-					<button (click)="removeRow(r)">-</button>
-				</td>
-			</tr>
-		</ng-container>
-	</tbody>
-	<tfoot *ngIf="items">
-		<tr>
-			<td colspan="13">
-				<button (click)="save()" [disabled]="!addAllowed">Enregistrer</button>
-				<div *ngIf="success">Données enregistrées !</div>
-			</td>
-		</tr>
-	</tfoot>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Types</th>
+      <th>Date</th>
+      <th>Titre</th>
+      <th>Montant</th>
+      <th></th>
+      <th>Variable</th>
+      <th>Rembourse</th>
+      <th>Prêt</th>
+      <th>Rend.</th>
+      <th>Voyage</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (canAdd) {
+      <tr>
+        <td colspan="13">
+          <button (click)="add()">Nouvelle ligne</button>
+        </td>
+      </tr>
+    }
+    @for (r of items; track r) {
+      @if (show(r)) {
+        <tr>
+          <td>
+            <i (click)="autofill(r)" class="fa fa-refresh" style="cursor: pointer"></i>
+          </td>
+          <td>
+            @for (t of r.types; track t) {
+              <type [icon]="t.image"></type>
+            }
+            <type (click)="openPopup(r)"></type>
+          </td>
+          <td>
+            <input [ngModel]="r.date | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="r.date = $event" type="datetime-local" (change)="r.updated = true"/>
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="r.title" (change)="autoSetData(r); r.updated = true"/>
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="r.amount" (change)="r.updated = true"/>
+          </td>
+          <td>
+            <i class="fa fa-arrows-h" style="cursor: pointer" (click)="invert(r)"></i>
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="r.variable" (change)="r.updated = true"/>
+          </td>
+          <td>
+            @if (refundDisplayIds.indexOf(r.id) === -1) {
+              <button (click)="refundDisplayIds.push(r.id)">Afficher</button>
+            }
+            @if (refundDisplayIds.indexOf(r.id) !== -1) {
+              <select [(ngModel)]="r.refunding" (change)="r.updated = true">
+                <option></option>
+                @for (f of refundable; track f) {
+                  <option [ngValue]="f.id">{{f.title + ' ' + f.amount + '€'}}</option>
+                }
+              </select>
+            }
+          </td>
+          <td>
+            <select [(ngModel)]="r.loan" (change)="r.updated = true">
+              <option></option>
+              @for (l of loans; track l) {
+                <option [ngValue]="l.id">{{l.title}}</option>
+              }
+            </select>
+          </td>
+          <td>
+            <input type="checkbox" [(ngModel)]="r.profitability" (change)="r.updated = true"/>
+          </td>
+          <td>
+            <select [(ngModel)]="r.travel" (change)="r.updated = true">
+              <option></option>
+              @for (t of travels; track t) {
+                <option [ngValue]="t.id">{{t.title}}</option>
+              }
+            </select>
+          </td>
+          <td>
+            <button (click)="removeRow(r)">-</button>
+          </td>
+        </tr>
+      }
+    }
+  </tbody>
+  @if (items) {
+    <tfoot>
+      <tr>
+        <td colspan="13">
+          <button (click)="save()" [disabled]="!addAllowed">Enregistrer</button>
+          @if (success) {
+            <div>Données enregistrées !</div>
+          }
+        </td>
+      </tr>
+    </tfoot>
+  }
 </table>
-<div class="popup" *ngIf="popupOpened">
-	<h1 (click)="closePopup()">{{ popupOpenedFor.title }}</h1>
-	<div class="types">
-		<ng-container *ngFor="let t of types">
-			<input type="checkbox" [id]="'type-' + t.id" name="types" [checked]="currentHasType(t)" (change)="toggleType(t)" />
-			<label [for]="'type-' + t.id">
-				<type [icon]="t" size="big"></type>
-			</label>
-		</ng-container>
-	</div>
-</div>
+@if (popupOpened) {
+  <div class="popup">
+    <h1 (click)="closePopup()">{{ popupOpenedFor.title }}</h1>
+    <div class="types">
+      @for (t of types; track t) {
+        <input type="checkbox" [id]="'type-' + t.id" name="types" [checked]="currentHasType(t)" (change)="toggleType(t)" />
+        <label [for]="'type-' + t.id">
+          <type [icon]="t" size="big"></type>
+        </label>
+      }
+    </div>
+  </div>
+}

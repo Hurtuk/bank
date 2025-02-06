@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'type',
     templateUrl: 'type.component.html',
     styleUrls: ['type.component.scss'],
-    imports: [NgIf]
+    imports: []
 })
 
 export class TypeComponent implements OnInit {

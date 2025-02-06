@@ -1,27 +1,29 @@
-<div class="data" *ngIf="!add && header && !stackedPercent">
-	<div>Total : <span [amount]="[total, {alwaysSign: true, color: true}]"></span></div>
-	<div>Moyenne : <span [amount]="[average, {alwaysSign: true, color: true}]"></span></div>
-	<div class="six-sigma">
-		<input type="checkbox" id="six-sigma" name="six-sigma" [(ngModel)]="sigma" (change)="refresh()" />
-		<label for="six-sigma">6-σ</label>
-	</div>
-</div>
+@if (!add && header && !stackedPercent) {
+  <div class="data">
+    <div>Total : <span [amount]="[total, {alwaysSign: true, color: true}]"></span></div>
+    <div>Moyenne : <span [amount]="[average, {alwaysSign: true, color: true}]"></span></div>
+    <div class="six-sigma">
+      <input type="checkbox" id="six-sigma" name="six-sigma" [(ngModel)]="sigma" (change)="refresh()" />
+      <label for="six-sigma">6-σ</label>
+    </div>
+  </div>
+}
 <canvas baseChart #baseChart="base-chart"
-	[datasets]="displayData"
-	[labels]="displayLabels"
-	[options]="options"
-	[type]="type"></canvas>
+  [datasets]="displayData"
+  [labels]="displayLabels"
+  [options]="options"
+[type]="type"></canvas>
 <div class="tabs" [hidden]="offFilters.length === 2">
-	<ng-container *ngIf="offFilters.indexOf('Jour') === -1">
-		<input type="radio" name="tab" [id]="'chart-day' + customId" value="Jour" [(ngModel)]="group" (change)="refresh()"/>
-		<label [for]="'chart-day' + customId">Jour</label>
-	</ng-container>
-	<ng-container *ngIf="offFilters.indexOf('Mois') === -1">
-		<input type="radio" name="tab" [id]="'chart-month' + customId" value="Mois" [(ngModel)]="group" (change)="refresh()"/>
-		<label [for]="'chart-month' + customId">Mois</label>
-	</ng-container>
-	<ng-container *ngIf="offFilters.indexOf('Année') === -1">
-		<input type="radio" name="tab" [id]="'chart-year' + customId" value="Année" [(ngModel)]="group" (change)="refresh()"/>
-		<label [for]="'chart-year' + customId">Année</label>
-	</ng-container>
+  @if (offFilters.indexOf('Jour') === -1) {
+    <input type="radio" name="tab" [id]="'chart-day' + customId" value="Jour" [(ngModel)]="group" (change)="refresh()"/>
+    <label [for]="'chart-day' + customId">Jour</label>
+  }
+  @if (offFilters.indexOf('Mois') === -1) {
+    <input type="radio" name="tab" [id]="'chart-month' + customId" value="Mois" [(ngModel)]="group" (change)="refresh()"/>
+    <label [for]="'chart-month' + customId">Mois</label>
+  }
+  @if (offFilters.indexOf('Année') === -1) {
+    <input type="radio" name="tab" [id]="'chart-year' + customId" value="Année" [(ngModel)]="group" (change)="refresh()"/>
+    <label [for]="'chart-year' + customId">Année</label>
+  }
 </div>

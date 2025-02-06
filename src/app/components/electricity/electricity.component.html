@@ -1,51 +1,69 @@
 <h1>Consommation électrique</h1>
 
 <div class="chart">
-    <bk-chart
-        initialData="elecData"
-        [header]="false"
-        [offFilters]="['Jour']"
-        [minimum]="0"
-        [chartOptions]="chartOptions"></bk-chart>
+  <bk-chart
+    initialData="elecData"
+    [header]="false"
+    [offFilters]="['Jour']"
+    [minimum]="0"
+  [chartOptions]="chartOptions"></bk-chart>
 </div>
 
 <div>
-    <table *ngIf="years">
-        <thead>
-            <tr class="years">
-                <th></th>
-                <th *ngFor="let y of years">{{ y.year }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th class="total">Total (kWh)</th>
-                <td *ngFor="let y of years; let first = first; let last = last; let i = index" class="total">{{ Math.ceil(y.total) }}
-                    <span class="evolution" *ngIf="!last && !first" [class.better]="y.total < years[i - 1].total">
-                        {{ y.total > years[i - 1].total ? '+' : '' }}{{ (y.total / years[i - 1].total - 1) | percent:'1.0' }}
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <th>∅ par mois</th>
-                <td *ngFor="let y of years">{{ Math.round(y.avgPerMonth) }}</td>
-            </tr>
-            <tr>
-                <th>Min.</th>
-                <td *ngFor="let y of years" class="minmax" [innerHtml]="getMinimum(y.year)"></td>
-            </tr>
-            <tr>
-                <th>Max.</th>
-                <td *ngFor="let y of years" class="minmax" [innerHtml]="getMaximum(y.year)"></td>
-            </tr>
-            <tr>
-                <th>Facture</th>
-                <td *ngFor="let y of years" [amount]="[y.bill]"></td>
-            </tr>
-            <tr>
-                <th>∅ par kWh</th>
-                <td *ngFor="let y of years" [amount]="[y.avgPerKwh]"></td>
-            </tr>
-        </tbody>
+  @if (years) {
+    <table>
+      <thead>
+        <tr class="years">
+          <th></th>
+          @for (y of years; track y) {
+            <th>{{ y.year }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="total">Total (kWh)</th>
+          @for (y of years; track y; let first = $first; let last = $last; let i = $index) {
+            <td class="total">{{ Math.ceil(y.total) }}
+              @if (!last && !first) {
+                <span class="evolution" [class.better]="y.total < years[i - 1].total">
+                  {{ y.total > years[i - 1].total ? '+' : '' }}{{ (y.total / years[i - 1].total - 1) | percent:'1.0' }}
+                </span>
+              }
+            </td>
+          }
+        </tr>
+        <tr>
+          <th>∅ par mois</th>
+          @for (y of years; track y) {
+            <td>{{ Math.round(y.avgPerMonth) }}</td>
+          }
+        </tr>
+        <tr>
+          <th>Min.</th>
+          @for (y of years; track y) {
+            <td class="minmax" [innerHtml]="getMinimum(y.year)"></td>
+          }
+        </tr>
+        <tr>
+          <th>Max.</th>
+          @for (y of years; track y) {
+            <td class="minmax" [innerHtml]="getMaximum(y.year)"></td>
+          }
+        </tr>
+        <tr>
+          <th>Facture</th>
+          @for (y of years; track y) {
+            <td [amount]="[y.bill]"></td>
+          }
+        </tr>
+        <tr>
+          <th>∅ par kWh</th>
+          @for (y of years; track y) {
+            <td [amount]="[y.avgPerKwh]"></td>
+          }
+        </tr>
+      </tbody>
     </table>
+  }
 </div>

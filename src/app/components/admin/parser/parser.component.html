@@ -1,48 +1,64 @@
 <div>
-	<div>Derniers :</div>
-	<ul>
-		<li *ngFor="let item of lastItems">{{ item.date | date:'dd/MM' }} : {{ item.title }} : {{ item.value }}€</li>
-	</ul>
-	<h3>Transfert</h3>
-	<div>
-		<label>Date : <input [ngModel]="transferDate | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="transferDate = $event" type="datetime-local" /></label>
-		<label>Montant : <input type="number" [(ngModel)]="transferAmount" /></label>
-		<label>Depuis :
-			<select [(ngModel)]="transferFromAccount">
-				<optgroup label="Comptes courants">
-					<option *ngFor="let a of getAccounts(false)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
-				</optgroup>
-				<optgroup label="Epargne">
-					<option *ngFor="let a of getAccounts(true)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
-				</optgroup>
-			</select>
-		</label>
-		<label>Vers : 
-			<select [(ngModel)]="transferToAccount">
-				<optgroup label="Comptes courants">
-					<option *ngFor="let a of getAccounts(false)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
-				</optgroup>
-				<optgroup label="Epargne">
-					<option *ngFor="let a of getAccounts(true)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
-				</optgroup>
-			</select>
-		</label>
-		<div><input type="submit" value="Enregistrer" (click)="saveTransfer()" /></div>
-		<div *ngIf="transferSaved">Enregistré !</div>
-	</div>
-	<!--<textarea [(ngModel)]="parsingText" cols="60" rows="30"></textarea>
-	<button (click)="parse()">Parser !</button>-->
+  <div>Derniers :</div>
+  <ul>
+    @for (item of lastItems; track item) {
+      <li>{{ item.date | date:'dd/MM' }} : {{ item.title }} : {{ item.value }}€</li>
+    }
+  </ul>
+  <h3>Transfert</h3>
+  <div>
+    <label>Date : <input [ngModel]="transferDate | date:'yyyy-MM-ddThh:mm:ss'" (ngModelChange)="transferDate = $event" type="datetime-local" /></label>
+    <label>Montant : <input type="number" [(ngModel)]="transferAmount" /></label>
+    <label>Depuis :
+      <select [(ngModel)]="transferFromAccount">
+        <optgroup label="Comptes courants">
+          @for (a of getAccounts(false); track a) {
+            <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+          }
+        </optgroup>
+        <optgroup label="Epargne">
+          @for (a of getAccounts(true); track a) {
+            <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+          }
+        </optgroup>
+      </select>
+    </label>
+    <label>Vers :
+      <select [(ngModel)]="transferToAccount">
+        <optgroup label="Comptes courants">
+          @for (a of getAccounts(false); track a) {
+            <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+          }
+        </optgroup>
+        <optgroup label="Epargne">
+          @for (a of getAccounts(true); track a) {
+            <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+          }
+        </optgroup>
+      </select>
+    </label>
+    <div><input type="submit" value="Enregistrer" (click)="saveTransfer()" /></div>
+    @if (transferSaved) {
+      <div>Enregistré !</div>
+    }
+  </div>
+  <!--<textarea [(ngModel)]="parsingText" cols="60" rows="30"></textarea>
+  <button (click)="parse()">Parser !</button>-->
 </div>
 <div>
-	<div>Compte :
-		<select [(ngModel)]="account">
-			<optgroup label="Comptes courants">
-				<option *ngFor="let a of getAccounts(false)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
-			</optgroup>
-			<optgroup label="Epargne">
-				<option *ngFor="let a of getAccounts(true)" [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
-			</optgroup>
-		</select>
-	</div>
-	<update-list [items]="result" [account]="account" [canAdd]="true" [addAllowed]="!!account" ></update-list>
+  <div>Compte :
+    <select [(ngModel)]="account">
+      <optgroup label="Comptes courants">
+        @for (a of getAccounts(false); track a) {
+          <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+        }
+      </optgroup>
+      <optgroup label="Epargne">
+        @for (a of getAccounts(true); track a) {
+          <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
+        }
+      </optgroup>
+    </select>
+  </div>
+  <update-list [items]="result" [account]="account" [canAdd]="true" [addAllowed]="!!account" ></update-list>
 </div>

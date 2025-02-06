@@ -1,65 +1,75 @@
 <h1>Impôts</h1>
 <div class="content">
-    <div class="tax-types">
-        <div>
-            <h2>Impôt sur le revenu</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Revenus</th>
-                        <th>Montant</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let tax of (rentTaxes | async)">
-                        <td>{{ tax.year }}</td>
-                        <td [amount]="[tax.salary, {color: true}]"></td>
-                        <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <h2>Taxe foncière</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Habitation</th>
-                        <th>Arpège</th>
-                        <th>Boléro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let tax of buildTaxes?.home; let i = index">
-                        <td>{{ tax.year }}</td>
-                        <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
-                        <td *ngIf="buildTaxes.arpege[i]" [amount]="[buildTaxes.arpege[i].sum, {color: true}]">{{ buildTaxes.arpege[i].sum }}</td>
-                        <td *ngIf="buildTaxes.bolero[i]" [amount]="[buildTaxes.bolero[i].sum, {color: true}]">{{ buildTaxes.bolero[i].sum }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <h2>Taxe d'habitation</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Montant</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let tax of (homeTaxes | async)">
-                        <td>{{ tax.year }}</td>
-                        <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="tax-types">
+    <div>
+      <h2>Impôt sur le revenu</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Revenus</th>
+            <th>Montant</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tax of (rentTaxes | async); track tax) {
+            <tr>
+              <td>{{ tax.year }}</td>
+              <td [amount]="[tax.salary, {color: true}]"></td>
+              <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
-    <div class="total">
-        
+    <div>
+      <h2>Taxe foncière</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Habitation</th>
+            <th>Arpège</th>
+            <th>Boléro</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tax of buildTaxes?.home; track tax; let i = $index) {
+            <tr>
+              <td>{{ tax.year }}</td>
+              <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+              @if (buildTaxes.arpege[i]) {
+                <td [amount]="[buildTaxes.arpege[i].sum, {color: true}]">{{ buildTaxes.arpege[i].sum }}</td>
+              }
+              @if (buildTaxes.bolero[i]) {
+                <td [amount]="[buildTaxes.bolero[i].sum, {color: true}]">{{ buildTaxes.bolero[i].sum }}</td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
+    <div>
+      <h2>Taxe d'habitation</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Montant</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tax of (homeTaxes | async); track tax) {
+            <tr>
+              <td>{{ tax.year }}</td>
+              <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="total">
+
+  </div>
 </div>

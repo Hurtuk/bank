@@ -1,56 +1,74 @@
 <h1>Revenus</h1>
 <div class="content">
-	<div class="chart">
-		<bk-chart
-			[add]="true"
-			[chartOptions]="chartOptions2"
-			initialData="incomeDetailData"
-			[minimum]="0"></bk-chart>
-		<table *ngIf="perYear">
-			<thead>
-				<tr>
-					<th></th>
-					<th *ngFor="let label of getLabels()">{{ label }}</th>
-				</tr>
-			</thead>
-			<tbody>
-				<ng-container *ngFor="let y of perYear">
-					<tr *ngIf="y.year >= minYear">
-						<th>{{ y.year }}</th>
-						<td *ngFor="let label of getLabels()">
-							<span [amount]="[getDataFromYear(y.data, label)?.value]"></span>
-							<span class="evolution" *ngIf="label != 'Divers'" [class.minus]="getDataFromYear(y.data, label)?.evolution < 0">{{ getDataFromYear(y.data, label)?.evolution | percent:'1.0-1' }}</span>
-						</td>
-					</tr>
-				</ng-container>
-			</tbody>
-		</table>
-	</div>
-	<div class="chart">
-		<table *ngIf="percentPerYear">
-			<thead>
-				<tr>
-					<th></th>
-					<ng-container *ngFor="let label of getLabels()">
-						<th *ngIf="label != 'Divers'">{{ label }}</th>
-					</ng-container>
-				</tr>
-			</thead>
-			<tbody>
-				<ng-container *ngFor="let y of percentPerYear">
-					<tr *ngIf="y.year >= minYear - 2">
-						<th>{{ y.year }}</th>
-						<ng-container *ngFor="let label of getLabels()">
-							<td *ngIf="label != 'Divers'">{{ getDataFromYear(y.data, label)?.value | percent:'1.0-1' }}</td>
-						</ng-container>
-					</tr>
-				</ng-container>
-			</tbody>
-		</table>
-		<!-- <bk-chart
-			[stackedPercent]="true"
-			[chartOptions]="chartOptions"
-			initialData="incomeData"
-			customId="percent"></bk-chart> -->
-	</div>
+  <div class="chart">
+    <bk-chart
+      [add]="true"
+      [chartOptions]="chartOptions2"
+      initialData="incomeDetailData"
+    [minimum]="0"></bk-chart>
+    @if (perYear) {
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            @for (label of getLabels(); track label) {
+              <th>{{ label }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (y of perYear; track y) {
+            @if (y.year >= minYear) {
+              <tr>
+                <th>{{ y.year }}</th>
+                @for (label of getLabels(); track label) {
+                  <td>
+                    <span [amount]="[getDataFromYear(y.data, label)?.value]"></span>
+                    @if (label != 'Divers') {
+                      <span class="evolution" [class.minus]="getDataFromYear(y.data, label)?.evolution < 0">{{ getDataFromYear(y.data, label)?.evolution | percent:'1.0-1' }}</span>
+                    }
+                  </td>
+                }
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+  <div class="chart">
+    @if (percentPerYear) {
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            @for (label of getLabels(); track label) {
+              @if (label != 'Divers') {
+                <th>{{ label }}</th>
+              }
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (y of percentPerYear; track y) {
+            @if (y.year >= minYear - 2) {
+              <tr>
+                <th>{{ y.year }}</th>
+                @for (label of getLabels(); track label) {
+                  @if (label != 'Divers') {
+                    <td>{{ getDataFromYear(y.data, label)?.value | percent:'1.0-1' }}</td>
+                  }
+                }
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    }
+    <!-- <bk-chart
+    [stackedPercent]="true"
+    [chartOptions]="chartOptions"
+    initialData="incomeData"
+  customId="percent"></bk-chart> -->
+</div>
 </div>

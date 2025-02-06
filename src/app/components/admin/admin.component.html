@@ -1,9 +1,13 @@
 <h1>Administration</h1>
 <div class="tabs">
-	<input type="radio" name="tab" id="parser-tab" value="parser" [(ngModel)]="currentTab"/>
-	<label for="parser-tab">Parseur</label>
-	<input type="radio" name="tab" id="update-tab" value="update" [(ngModel)]="currentTab"/>
-	<label for="update-tab">Mise à jour</label>
+  <input type="radio" name="tab" id="parser-tab" value="parser" [(ngModel)]="currentTab"/>
+  <label for="parser-tab">Parseur</label>
+  <input type="radio" name="tab" id="update-tab" value="update" [(ngModel)]="currentTab"/>
+  <label for="update-tab">Mise à jour</label>
 </div>
-<parser *ngIf="currentTab === 'parser'"></parser>
-<update *ngIf="currentTab === 'update'"></update>
+@if (currentTab === 'parser') {
+  <parser></parser>
+}
+@if (currentTab === 'update') {
+  <update></update>
+}
