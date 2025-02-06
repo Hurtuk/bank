@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ChartsService } from '../../shared/services/charts.service';
-import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
+import 'chartjs-adapter-moment';
 
 @Component({
 	selector: 'bk-chart',
@@ -223,11 +224,12 @@ export class BkChartComponent implements OnInit {
 			setTimeout(() => {
 				if (this.chart !== undefined) {
 					if (this.group === 'Jour') {
-						this.options.elements.point.radius = 0;
+						this.options.elements = {point: {radius: 0}};
 					} else {
-						this.options.elements.point.radius = 2;
+						this.options.elements = {point: {radius: 2}};
 					}
-					this.options.scales.x[0].time.unit = this.group === 'Année' ? 'year': 'month';
+					this.options.plugins = {legend: this.displayData.length > 1};
+					this.options.scales.x.time.unit = this.group === 'Année' ? 'year': 'month';
 					if (this.chartOptions) {
 						this.chartOptions.forEach((opt, index) => {
 							opt.forEach(option => {
@@ -263,7 +265,7 @@ export class BkChartComponent implements OnInit {
 
 	ngOnInit() {
 		this.options.scales = {
-			x: [{
+			x: {
 				type: 'time',
 				time: {
 					unit: this.group === 'Année' ? 'year': 'month',
@@ -271,24 +273,24 @@ export class BkChartComponent implements OnInit {
 				ticks: {
 					display: !this.hideX
 				}
-			}]
+			}
 		};
 		if (typeof this.minimum !== "undefined") {
-			this.options.scales.y = [{
+			this.options.scales.y = {
 				ticks: {
 					min: this.minimum
 				},
 				stacked: this.stackedPercent
-			}];
+			};
 		}
 		if (this.stackedPercent) {
-			if (this.options.scales?.y[0]?.ticks) {
-				this.options.scales.y[0].ticks.max = 1;	
+			if (this.options.scales?.y?.ticks) {
+				this.options.scales.y.ticks.max = 1;	
 			} else {
-				this.options.scales.y = [{
+				this.options.scales.y = {
 					max: 1,
 					stacked: this.stackedPercent
-				}];
+				};
 			}
 		}
 		this.group = this.offFilters.indexOf('Mois') === -1 ? 'Mois' : 'Jour';
@@ -307,17 +309,17 @@ export class BkChartComponent implements OnInit {
 					this.addValues();
 				}
 				if (!this.minimum && this.allMonthsPositive()) {
-					this.options.scales.y = [{
+					this.options.scales.y = {
 						min: 0,
 						max: this.stackedPercent ? 1 : this.maximum,
 						stacked: this.stackedPercent
-					}];
+					};
 				} else {
-					this.options.scales.y = [{
+					this.options.scales.y = {
 						min: this.minimum,
 						max: this.maximum,
 						stacked: this.stackedPercent
-					}];
+					};
 				}
 			}
 			this.refresh();

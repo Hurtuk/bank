@@ -16,7 +16,8 @@ export class RealEstateComponent implements OnInit {
   public options: any = {
 		responsive: true,
 		maintainAspectRatio: true,
-    aspectRatio: 1
+    aspectRatio: 1,
+    plugins: { legend: false }
 	};
 
   constructor(
