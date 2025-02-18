@@ -4,18 +4,18 @@ import { DateService } from 'src/app/shared/services/date.service';
 import { ElectricityService } from 'src/app/shared/services/electricity.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { PercentPipe } from '@angular/common';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 
 @Component({
     selector: 'app-electricity',
     templateUrl: './electricity.component.html',
     styleUrls: ['./electricity.component.scss'],
-	imports: [BkChartComponent, PercentPipe]
+	imports: [BkChartComponent, PercentPipe, AmountDirective]
 })
 export class ElectricityComponent implements OnInit {
 	private chartsService = inject(ChartsService);
 	private electricityService = inject(ElectricityService);
 	private dateService = inject(DateService);
-
 
 	public data: any;
 	public years: any[];
@@ -25,7 +25,8 @@ export class ElectricityComponent implements OnInit {
 	public chartOptions = [
 		[{ option: 'borderColor', value: '#ffd21c' },
 		{ option: 'backgroundColor', value: '#ffe787' },
-		{ option: 'borderWidth', value: 1 }]
+		{ option: 'borderWidth', value: 1 },
+		{ option: 'fill', value: 'origin' }]
 	];
 
 	private today = new Date();

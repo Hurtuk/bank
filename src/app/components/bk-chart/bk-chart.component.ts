@@ -2,12 +2,14 @@ import { Component, OnInit, ViewChild, Input, inject } from '@angular/core';
 import { ChartsService } from '../../shared/services/charts.service';
 import { BaseChartDirective } from 'ng2-charts';
 import 'chartjs-adapter-moment';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'bk-chart',
     templateUrl: 'bk-chart.component.html',
     styleUrls: ['bk-chart.component.scss'],
-	imports: [BaseChartDirective]
+	imports: [BaseChartDirective, AmountDirective, FormsModule]
 })
 
 /**
@@ -220,31 +222,36 @@ export class BkChartComponent implements OnInit {
 			this.calculateDisplayData();
 			this.calculateDisplayLabels();
 			this.calculateTotal();
-			setTimeout(() => {
-				if (this.chart !== undefined) {
-					if (this.group === 'Jour') {
-						this.options.elements = {point: {radius: 0}};
-					} else {
-						this.options.elements = {point: {radius: 2}};
-					}
-					this.options.plugins = {legend: this.displayData.length > 1};
-					this.options.scales.x = {...this.options.scales.x, time: {unit: this.group === 'Année' ? 'year': 'month'}};
-					if (this.chartOptions) {
-						this.chartOptions.forEach((opt, index) => {
-							opt.forEach(option => {
-								this.displayData[index][option.option] = option.value;
-							});
-						});
-					}
-					if (this.bgColor) {
-						this.displayData.forEach(d => {
-							d.backgroundColor = this.bgColor;
-							d.borderColor = this.bgColor;
-						});
-					}
-					this.chart.update();
+			if (this.chart !== undefined) {
+				if (this.group === 'Jour') {
+					this.options.elements = {line: { tension: 0.4 }, point: {radius: 0}};
+				} else {
+					this.options.elements = {line: { tension: 0.4 }, point: {radius: 2}};
 				}
-			}, 0);
+				this.options.plugins = {legend: this.displayData.length > 1};
+				this.options.scales.x = {...this.options.scales.x, time: {unit: this.group === 'Année' ? 'year': 'month'}};
+				if (this.chartOptions) {
+					this.chartOptions.forEach((opt, index) => {
+						opt.forEach(option => {
+							this.displayData[index][option.option] = option.value;
+						});
+					});
+				}
+				this.displayData.forEach(dd => {
+					if (typeof dd.fill === 'undefined') {
+						dd.fill = 'origin';
+					}
+					dd.pointBackgroundColor = 'rgba(0, 0, 0, 0)';
+					dd.pointBorderColor = 'rgba(0, 0, 0, 0)';
+				});
+				if (this.bgColor) {
+					this.displayData.forEach(d => {
+						d.backgroundColor = this.bgColor;
+						d.borderColor = this.bgColor;
+					});
+				}
+				this.chart.update();
+			}
 		} else {
 			this.total = 0;
 			this.average = 0;

@@ -4,12 +4,13 @@ import { ChartsService } from '../../shared/services/charts.service';
 import { DateService } from '../../shared/services/date.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { FormsModule } from '@angular/forms';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 
 @Component({
     selector: 'month-ends',
     templateUrl: 'month-ends.component.html',
     styleUrls: ['month-ends.component.scss'],
-	imports: [BkChartComponent, FormsModule],
+	imports: [BkChartComponent, FormsModule, AmountDirective],
 })
 
 export class MonthEndsComponent implements OnInit {

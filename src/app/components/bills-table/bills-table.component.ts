@@ -1,11 +1,13 @@
 import { PercentPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { TypeComponent } from '../type/type.component';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 
 @Component({
     selector: 'app-bills-table',
     templateUrl: './bills-table.component.html',
     styleUrls: ['./bills-table.component.scss'],
-    imports: [PercentPipe]
+    imports: [PercentPipe, TypeComponent, AmountDirective]
 })
 export class BillsTableComponent {
 

@@ -1,12 +1,13 @@
-@import '../../shared/styles/colors';
+@use '../../shared/styles/colors' as colors;
 
 .wrapper {
 	display: flex;
+	gap: 50px;
+	padding: 0 30px;
 }
 
 .chart {
-	flex: 3;
-	padding: 0 50px;
+	flex: 1;
 
 	bk-chart {
 		display: block;
@@ -15,8 +16,7 @@
 }
 
 .tables {
-	flex: 2;
-	padding: 0 50px;
+	flex: 1;
 
 	td,
 	th {
@@ -30,7 +30,7 @@
 
 	thead {
 		th {
-			color: $color-tertiary;
+			color: colors.$color-tertiary;
 			text-transform: uppercase;
 			font-weight: 100;
 			font-size: 1.2em;
@@ -76,7 +76,7 @@
 		display: block;
 
 		&:first-child {
-			margin: 0 8px -18px 4px;
+			margin: 0 1px -21px 4px;
 			height: 132px;
 		}
 	}

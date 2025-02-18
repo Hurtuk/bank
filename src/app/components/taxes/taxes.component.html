@@ -12,11 +12,11 @@
           </tr>
         </thead>
         <tbody>
-          @for (tax of (rentTaxes | async); track tax) {
+          @for (tax of (rentTaxes | async); track $index) {
             <tr>
               <td>{{ tax.year }}</td>
               <td [amount]="[tax.salary, {color: true}]"></td>
-              <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+              <td [amount]="[tax.sum, {color: true}]"></td>
             </tr>
           }
         </tbody>
@@ -34,15 +34,15 @@
           </tr>
         </thead>
         <tbody>
-          @for (tax of buildTaxes?.home; track tax; let i = $index) {
+          @for (tax of buildTaxes?.home; track $index; let i = $index) {
             <tr>
               <td>{{ tax.year }}</td>
-              <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+              <td [amount]="[tax.sum, {color: true}]"></td>
               @if (buildTaxes.arpege[i]) {
-                <td [amount]="[buildTaxes.arpege[i].sum, {color: true}]">{{ buildTaxes.arpege[i].sum }}</td>
+                <td [amount]="[buildTaxes.arpege[i].sum, {color: true}]"></td>
               }
               @if (buildTaxes.bolero[i]) {
-                <td [amount]="[buildTaxes.bolero[i].sum, {color: true}]">{{ buildTaxes.bolero[i].sum }}</td>
+                <td [amount]="[buildTaxes.bolero[i].sum, {color: true}]"></td>
               }
             </tr>
           }
@@ -59,10 +59,10 @@
           </tr>
         </thead>
         <tbody>
-          @for (tax of (homeTaxes | async); track tax) {
+          @for (tax of (homeTaxes | async); track $index) {
             <tr>
               <td>{{ tax.year }}</td>
-              <td [amount]="[tax.sum, {color: true}]">{{ tax.sum }}</td>
+              <td [amount]="[tax.sum, {color: true}]"></td>
             </tr>
           }
         </tbody>

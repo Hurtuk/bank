@@ -15,7 +15,7 @@
       <thead>
         <tr class="years">
           <th></th>
-          @for (y of years; track y) {
+          @for (y of years; track $index) {
             <th>{{ y.year }}</th>
           }
         </tr>
@@ -23,7 +23,7 @@
       <tbody>
         <tr>
           <th class="total">Total (kWh)</th>
-          @for (y of years; track y; let first = $first; let last = $last; let i = $index) {
+          @for (y of years; track $index; let first = $first; let last = $last; let i = $index) {
             <td class="total">{{ Math.ceil(y.total) }}
               @if (!last && !first) {
                 <span class="evolution" [class.better]="y.total < years[i - 1].total">
@@ -35,31 +35,31 @@
         </tr>
         <tr>
           <th>∅ par mois</th>
-          @for (y of years; track y) {
+          @for (y of years; track $index) {
             <td>{{ Math.round(y.avgPerMonth) }}</td>
           }
         </tr>
         <tr>
           <th>Min.</th>
-          @for (y of years; track y) {
+          @for (y of years; track $index) {
             <td class="minmax" [innerHtml]="getMinimum(y.year)"></td>
           }
         </tr>
         <tr>
           <th>Max.</th>
-          @for (y of years; track y) {
+          @for (y of years; track $index) {
             <td class="minmax" [innerHtml]="getMaximum(y.year)"></td>
           }
         </tr>
         <tr>
           <th>Facture</th>
-          @for (y of years; track y) {
+          @for (y of years; track $index) {
             <td [amount]="[y.bill]"></td>
           }
         </tr>
         <tr>
           <th>∅ par kWh</th>
-          @for (y of years; track y) {
+          @for (y of years; track $index) {
             <td [amount]="[y.avgPerKwh]"></td>
           }
         </tr>

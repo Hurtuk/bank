@@ -1,11 +1,12 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 import { TaxesService } from 'src/app/shared/services/taxes.service';
 
 @Component({
     selector: 'app-taxes',
     templateUrl: './taxes.component.html',
-        imports: [AsyncPipe],
+    imports: [AsyncPipe, AmountDirective],
     styleUrls: ['./taxes.component.scss']
 })
 export class TaxesComponent implements OnInit {

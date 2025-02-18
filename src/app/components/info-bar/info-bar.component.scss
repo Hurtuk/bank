@@ -1,7 +1,7 @@
-@import '../../shared/styles/colors';
+@use '../../shared/styles/colors' as colors;
 
 :host {
-	background-color: $color-primary;
+	background-color: colors.$color-primary;
 	color: white;
 	display: block;
 	overflow: auto;

@@ -1,7 +1,7 @@
-@import '../../shared/styles/colors';
+@use '../../shared/styles/colors' as colors;
 
 :host {
-	background-color: $color-secondary;
+	background-color: colors.$color-secondary;
 	overflow: hidden;
 }
 

@@ -1,4 +1,4 @@
-@import '../../shared/styles/colors.scss';
+@use '../../shared/styles/colors.scss' as colors;
 
 .content {
     text-align: left;
@@ -22,7 +22,7 @@ h2 {
 }
 
 caption {
-    color: $color-tertiary;
+    color: colors.$color-tertiary;
     padding-bottom: 10px;
 }
 

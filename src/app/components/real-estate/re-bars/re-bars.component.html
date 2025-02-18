@@ -1,9 +1,9 @@
-@for (room of data; track room) {
+@for (room of data; track $index) {
   <div class="room">
     <span class="name">{{ room.name }}</span>
     <div class="data">
       <div class="months">
-        @for (m of room.data[0].months; track m) {
+        @for (m of room.data[0].months; track $index) {
           <div>
             <span>{{ m.letter }}</span>
             <div class="chart-part">
@@ -12,7 +12,7 @@
                   {{ m.occupied | percent }}
                 }
               </span>
-              @for (d of m.days; track d) {
+              @for (d of m.days; track $index) {
                 <span class="day" [class.occupied]="d"></span>
               }
             </div>
@@ -20,7 +20,7 @@
         }
       </div>
       <div class="years">
-        @for (y of room.data; track y; let i = $index) {
+        @for (y of room.data; track $index; let i = $index) {
           <div>
             <div [style.width.%]="y.occupied * 100"></div>
             <span>{{ y.year }}</span>

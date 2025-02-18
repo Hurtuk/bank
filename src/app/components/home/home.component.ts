@@ -3,18 +3,19 @@ import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { DatePipe, PercentPipe } from '@angular/common';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
+import { TypeComponent } from '../type/type.component';
 
 @Component({
     selector: 'home',
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.scss'],
-	imports: [BkChartComponent, DatePipe, PercentPipe]
+	imports: [BkChartComponent, DatePipe, PercentPipe, AmountDirective, TypeComponent]
 })
 
 export class HomeComponent implements OnInit {
 	private amountsService = inject(AmountsService);
 	private chartsService = inject(ChartsService);
-
 
 	private YEARS_BACK = 3;
 
@@ -27,9 +28,13 @@ export class HomeComponent implements OnInit {
 		[{option: 'borderColor', value: '#437EFF'},
 			{option: 'backgroundColor', value: '#437EFF'},
 			{option: 'borderWidth', value: 1}],
-		[{option: 'fill', value: false},
+		[{option: 'borderColor', value: '#5FB5EF'},
+			{option: 'backgroundColor', value: '#5FB5EF'},
+			{option: 'fill', value: false},
 			{option: 'borderWidth', value: 1}],
-		[{option: 'fill', value: false},
+		[{option: 'borderColor', value: '#FFCE56'},
+			{option: 'backgroundColor', value: '#FFCE56'},
+			{option: 'fill', value: false},
 			{option: 'borderWidth', value: 2}],
 		[{option: 'fill', value: false},
 			{option: 'borderWidth', value: 2}]

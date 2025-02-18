@@ -9,29 +9,22 @@
         <span [amount]="[data.per_year[0].minus, {alwaysSign: true, color: true}]"></span>
       </div>
       <div class="months" height="300">
-        @for (m of data.per_month; track m) {
+        @for (m of data.per_month; track $index) {
           @if (m.year === data.per_year[0].year) {
             <div class="month">
               <h3>{{ getMonth(m.month) }}</h3>
               @if (m.value_plus != 0 || m.value_minus != 0) {
                 <canvas baseChart
-                  [data]="[m.value_plus, m.value_minus]"
+                  [datasets]="[{ data: [m.value_plus, m.value_minus] }]"
                   [labels]="['Entrées', 'Sorties']"
-                  [colors]="[{backgroundColor: ['green', 'red']}]"
                   [options]="options"
-                type="doughnut"></canvas>
+                  [legend]="false"
+                  type="doughnut"></canvas>
                 <span class="month-percent">
                   {{ m.value_plus >= -m.value_minus ? '+' : '' }}{{ (m.value_plus / -m.value_minus) - 1 | percent:'1.0-1' }}
                 </span>
                 <span [amount]="[m.value_plus, {alwaysSign: true, color: true}]"></span>
                 <span [amount]="[m.value_minus, {alwaysSign: true, color: true}]"></span>
-              } @else {
-                <canvas baseChart
-                  [data]="[1]"
-                  [labels]="['Aucune transaction']"
-                  [colors]="[{backgroundColor: ['lightgray']}]"
-                  [options]="options"
-                type="doughnut"></canvas>
               }
             </div>
           }
@@ -39,7 +32,7 @@
       </div>
     </div>
     <div class="previous-years">
-      @for (py of data.per_year; track py; let i = $index) {
+      @for (py of data.per_year; track $index; let i = $index) {
         @if (i > 0) {
           <div>
             <h3>{{ py.year }}</h3>
@@ -55,7 +48,7 @@
         <h2>Dépenses de base</h2>
         <table>
           <tbody>
-            @for (row of data.start; track row) {
+            @for (row of data.start; track $index) {
               <tr>
                 <td>{{row.title}}</td>
                 <td [amount]="[-row.value, {alwaysSign: true, color: true}]"></td>
@@ -74,7 +67,7 @@
         <h2>Dernières transactions</h2>
         <table>
           <tbody>
-            @for (row of data.last; track row) {
+            @for (row of data.last; track $index) {
               <tr>
                 <td>{{row.date | date:'dd/MM/yy'}}</td>
                 <td>{{row.title}}</td>

@@ -1,5 +1,5 @@
+@use './app/shared/styles/colors' as colors;
 @import url('../node_modules/font-awesome/css/font-awesome.min.css');
-@import './app/shared/styles/colors';
 
 html, body {
 	padding: 0;
@@ -28,14 +28,14 @@ a {
 }
 
 h1 {
-	color: $color-secondary;
+	color: colors.$color-secondary;
     text-transform: uppercase;
     font-weight: 100;
     font-size: 2em;
 }
 
 h2 {
-	color: $color-tertiary;
+	color: colors.$color-tertiary;
     text-transform: uppercase;
     font-weight: 100;
 	font-size: 1.2em;

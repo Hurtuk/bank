@@ -2,7 +2,7 @@
   <div class="panel">
     <h1>Fixe</h1>
     <ul class="fix">
-      @for (fix of fixAccounts; track fix) {
+      @for (fix of fixAccounts; track $index) {
         <li [class.big]="fix.amount > 300">
           <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + fix.bank + '.png)'"></span>
           <div class="account-name">{{ fix.name }}</div>
@@ -12,10 +12,10 @@
     </ul>
     <h2>Remboursements à venir</h2>
     <ol class="waiting">
-      @for (inc of income; track inc) {
+      @for (inc of income; track $index) {
         <li>
           <span>
-            @for (t of inc.types; track t) {
+            @for (t of inc.types; track $index) {
               <type [icon]="t"></type>
             }
           </span>
@@ -31,7 +31,7 @@
       <div class="panel thrift">
         <h1>Epargne</h1>
         <ul>
-          @for (thr of thriftAccounts; track thr) {
+          @for (thr of thriftAccounts; track $index) {
             <li [class.big]="thr.amount > 1000">
               <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
               <div class="account-name">{{ thr.name }}</div>
@@ -41,38 +41,40 @@
         </ul>
       </div>
       <div class="panel">
-        <h1>Actions</h1>
-        <ul class="actions">
-          @for (sto of stocks; track sto; let i = $index) {
-            <li>
-              <i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
-                @if (sto.indexBefore !== -1) {
-                  @if (sto.indexBefore > i) {
-                    <span class="up">▲</span>
+        @if (stocks?.length) {
+          <h1>Actions</h1>
+          <ul class="actions">
+            @for (sto of stocks; track $index; let i = $index) {
+              <li>
+                <i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
+                  @if (sto.indexBefore !== -1) {
+                    @if (sto.indexBefore > i) {
+                      <span class="up">▲</span>
+                    }
+                    @if (sto.indexBefore < i) {
+                      <span class="down">▼</span>
+                    }
                   }
-                  @if (sto.indexBefore < i) {
-                    <span class="down">▼</span>
-                  }
-                }
-              </i>
-              <div class="account-sum">
-                <span [amount]="[sto.value * sto.count]"></span>
-                <span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
-                <div class="evolutions">
-                  @if (sto.d1) {
-                    <span><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                  }
-                  @if (sto.d7) {
-                    <span> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                  }
-                  @if (sto.d30) {
-                    <span> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                  }
+                </i>
+                <div class="account-sum">
+                  <span [amount]="[sto.value * sto.count]"></span>
+                  <span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
+                  <div class="evolutions">
+                    @if (sto.d1) {
+                      <span><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                    }
+                    @if (sto.d7) {
+                      <span> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                    }
+                    @if (sto.d30) {
+                      <span> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                    }
+                  </div>
                 </div>
-              </div>
-            </li>
-          }
-        </ul>
+              </li>
+            }
+          </ul>
+        }
       </div>
     </div>
     <div>

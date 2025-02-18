@@ -2,19 +2,19 @@
   <thead>
     <tr>
       <th></th>
-      @for (y of getYears(); track y) {
+      @for (y of getYears(); track $index) {
         <th>{{ y }}</th>
       }
     </tr>
   </thead>
   <tbody>
-    @for (b of data; track b) {
+    @for (b of data; track $index) {
       <tr>
         <th>
           <type [icon]="b.icon" size="medium" />
           <span>{{ b.legend }}</span>
         </th>
-        @for (y of b.years; track y; let last = $last; let i = $index) {
+        @for (y of b.years; track $index; let last = $last; let i = $index) {
           <td>
             <div class="month">
               <span class="monthly" [amount]="[y.valueMonth]"></span>

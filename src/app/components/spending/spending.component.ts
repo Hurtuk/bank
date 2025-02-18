@@ -4,12 +4,15 @@ import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { DatePipe } from '@angular/common';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
+import { TypeComponent } from '../type/type.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'spending',
     templateUrl: 'spending.component.html',
     styleUrls: ['spending.component.scss'],
-	imports: [BkChartComponent, DatePipe],
+	imports: [BkChartComponent, DatePipe, AmountDirective, TypeComponent, FormsModule],
 })
 
 export class SpendingComponent implements OnInit {

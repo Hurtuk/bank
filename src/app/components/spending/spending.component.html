@@ -2,7 +2,7 @@
 <div class="content">
   <div class="types">
     <ul>
-      @for (t of types; track t; let i = $index) {
+      @for (t of types; track $index; let i = $index) {
         @if (i < 3) {
           <li>
             <input type="checkbox" [id]="'type-' + t.id" name="types" (change)="toggleType(t)" />
@@ -15,7 +15,7 @@
       }
     </ul>
     <ul>
-      @for (t of types; track t; let i = $index) {
+      @for (t of types; track $index; let i = $index) {
         @if (i >= 3) {
           <li>
             <input type="checkbox" [id]="'type-' + t.id" name="types" (change)="toggleType(t)" />
@@ -37,7 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (spending of displaySpendings; track spending; let i = $index) {
+          @for (spending of displaySpendings; track $index; let i = $index) {
             <tr class="{{'month-' + (i >= 1 && (displaySpendings[i].date.getMonth() != displaySpendings[i-1].date.getMonth() || displaySpendings[i].date.getFullYear() != displaySpendings[i-1].date.getFullYear()) ? '1' : '0')}}">
               <td>{{spending.date | date:'dd/MM/yy'}}</td>
               <td>{{spending.title}}</td>

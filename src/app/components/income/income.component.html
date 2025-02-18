@@ -11,17 +11,17 @@
         <thead>
           <tr>
             <th></th>
-            @for (label of getLabels(); track label) {
+            @for (label of getLabels(); track $index) {
               <th>{{ label }}</th>
             }
           </tr>
         </thead>
         <tbody>
-          @for (y of perYear; track y) {
+          @for (y of perYear; track $index) {
             @if (y.year >= minYear) {
               <tr>
                 <th>{{ y.year }}</th>
-                @for (label of getLabels(); track label) {
+                @for (label of getLabels(); track $index) {
                   <td>
                     <span [amount]="[getDataFromYear(y.data, label)?.value]"></span>
                     @if (label != 'Divers') {
@@ -42,7 +42,7 @@
         <thead>
           <tr>
             <th></th>
-            @for (label of getLabels(); track label) {
+            @for (label of getLabels(); track $index) {
               @if (label != 'Divers') {
                 <th>{{ label }}</th>
               }
@@ -50,11 +50,11 @@
           </tr>
         </thead>
         <tbody>
-          @for (y of percentPerYear; track y) {
+          @for (y of percentPerYear; track $index) {
             @if (y.year >= minYear - 2) {
               <tr>
                 <th>{{ y.year }}</th>
-                @for (label of getLabels(); track label) {
+                @for (label of getLabels(); track $index) {
                   @if (label != 'Divers') {
                     <td>{{ getDataFromYear(y.data, label)?.value | percent:'1.0-1' }}</td>
                   }

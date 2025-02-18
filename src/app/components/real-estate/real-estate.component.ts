@@ -1,14 +1,17 @@
 import { DatePipe, PercentPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BaseChartDirective } from 'ng2-charts';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 import { DateService } from 'src/app/shared/services/date.service';
 import { RealEstateService } from 'src/app/shared/services/real-estate.service';
+import { ReBarsComponent } from './re-bars/re-bars.component';
 
 @Component({
     selector: 'app-real-estate',
     templateUrl: './real-estate.component.html',
     styleUrls: ['./real-estate.component.scss'],
-    imports: [DatePipe, PercentPipe]
+    imports: [DatePipe, PercentPipe, AmountDirective, BaseChartDirective, ReBarsComponent]
 })
 export class RealEstateComponent implements OnInit {
   private realEstateService = inject(RealEstateService);
@@ -16,15 +19,14 @@ export class RealEstateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
-
   public name: string;
   public data: any;
   
   public options: any = {
-		responsive: true,
-		maintainAspectRatio: true,
-    aspectRatio: 1,
-    plugins: { legend: false }
+		// responsive: true,
+		// maintainAspectRatio: true,
+    // aspectRatio: 1,
+    backgroundColor: ['green', 'red']
 	};
 
   ngOnInit() {

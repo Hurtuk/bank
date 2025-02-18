@@ -15,7 +15,7 @@
         <thead>
           <tr>
             <th></th>
-            @for (d of data; track d) {
+            @for (d of data; track $index) {
               @if (d.year >= minYear) {
                 <th>{{d.year}}</th>
               }
@@ -25,7 +25,7 @@
         <tbody>
           <tr>
             <th>Total</th>
-            @for (d of data; track d) {
+            @for (d of data; track $index) {
               @if (d.year >= minYear) {
                 <td [amount]="[d.total, {color: true, alwaysSign: true}]"></td>
               }
@@ -33,7 +33,7 @@
           </tr>
           <tr>
             <th>Moyenne</th>
-            @for (d of data; track d) {
+            @for (d of data; track $index) {
               @if (d.year >= minYear) {
                 <td [amount]="[d.average, {color: true, alwaysSign: true}]"></td>
               }
@@ -42,10 +42,10 @@
         </tbody>
         @if (data) {
           <tbody>
-            @for (m of data[0].months; track m; let i = $index) {
+            @for (m of data[0].months; track $index; let i = $index) {
               <tr>
                 <th>{{getMonth(m.month)}}</th>
-                @for (d of data; track d) {
+                @for (d of data; track $index) {
                   @if (d.year >= minYear) {
                     <td [amount]="[d.months[i] ? d.months[i].value : '', {color: true, alwaysSign: true}]"></td>
                   }

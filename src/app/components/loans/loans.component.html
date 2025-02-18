@@ -1,5 +1,5 @@
 <h1>Prêts</h1>
-@for (loan of loans | async; track loan) {
+@for (loan of loans | async; track $index) {
   <div class="loan-row">
     <div class="image-container">
       <img [src]="'assets/images/loans/' + loan.image"/>

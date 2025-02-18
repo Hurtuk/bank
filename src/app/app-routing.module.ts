@@ -1,31 +1,18 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { SpendingComponent } from './components/spending/spending.component';
-import { MonthEndsComponent } from './components/month-ends/month-ends.component';
-import { TradeComponent } from './components/trade/trade.component';
-import { LoginComponent } from './components/admin/login/login.component';
-import { LoansComponent } from './components/loans/loans.component';
-import { ForecastComponent } from './components/forecast/forecast.component';
-import { RealEstateComponent } from './components/real-estate/real-estate.component';
-import { TaxesComponent } from './components/taxes/taxes.component';
-import { IncomeComponent } from './components/income/income.component';
-import { TravelsComponent } from './components/travels/travels.component';
-import { BillsComponent } from './components/bills/bills.component';
-import { ElectricityComponent } from './components/electricity/electricity.component';
 
 export const PUBLIC_ROUTES: Routes = [
-	{ path: '', component: HomeComponent },
-	{ path: 'spending', component: SpendingComponent },
-	{ path: 'bills', component: BillsComponent },
-	{ path: 'month-ends', component: MonthEndsComponent },
-	{ path: 'loans', component: LoansComponent },
-	{ path: 'trade', component: TradeComponent },
-	{ path: 'forecast', component: ForecastComponent },
-	{ path: 'income', component: IncomeComponent },
-	{ path: 'real-estate/:id', component: RealEstateComponent },
-	{ path: 'travels', component: TravelsComponent },
-	{ path: 'taxes', component: TaxesComponent },
-	{ path: 'electricity', component: ElectricityComponent },
-	{ path: 'login', component: LoginComponent },
+	{ path: '', loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent) },
+	{ path: 'spending', loadComponent: () => import('./components/spending/spending.component').then(m => m.SpendingComponent) },
+	{ path: 'bills', loadComponent: () => import('./components/bills/bills.component').then(m => m.BillsComponent) },
+	{ path: 'month-ends', loadComponent: () => import('./components/month-ends/month-ends.component').then(m => m.MonthEndsComponent) },
+	{ path: 'loans', loadComponent: () => import('./components/loans/loans.component').then(m => m.LoansComponent) },
+	{ path: 'trade', loadComponent: () => import('./components/trade/trade.component').then(m => m.TradeComponent) },
+	{ path: 'forecast', loadComponent: () => import('./components/forecast/forecast.component').then(m => m.ForecastComponent) },
+	{ path: 'income', loadComponent: () => import('./components/income/income.component').then(m => m.IncomeComponent) },
+	{ path: 'real-estate/:id', loadComponent: () => import('./components/real-estate/real-estate.component').then(m => m.RealEstateComponent) },
+	{ path: 'travels', loadComponent: () => import('./components/travels/travels.component').then(m => m.TravelsComponent) },
+	{ path: 'taxes', loadComponent: () => import('./components/taxes/taxes.component').then(m => m.TaxesComponent) },
+	{ path: 'electricity', loadComponent: () => import('./components/electricity/electricity.component').then(m => m.ElectricityComponent) },
+	{ path: 'login', loadComponent: () => import('./components/admin/login/login.component').then(m => m.LoginComponent) },
 	{ path: 'admin', loadChildren: () => import('./admin-routing.module').then(r => r.ADMIN_ROUTES) }
 ];

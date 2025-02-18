@@ -1,7 +1,7 @@
 <div>
   <div>Derniers :</div>
   <ul>
-    @for (item of lastItems; track item) {
+    @for (item of lastItems; track $index) {
       <li>{{ item.date | date:'dd/MM' }} : {{ item.title }} : {{ item.value }}€</li>
     }
   </ul>
@@ -12,12 +12,12 @@
     <label>Depuis :
       <select [(ngModel)]="transferFromAccount">
         <optgroup label="Comptes courants">
-          @for (a of getAccounts(false); track a) {
+          @for (a of getAccounts(false); track $index) {
             <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
           }
         </optgroup>
         <optgroup label="Epargne">
-          @for (a of getAccounts(true); track a) {
+          @for (a of getAccounts(true); track $index) {
             <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
           }
         </optgroup>
@@ -26,12 +26,12 @@
     <label>Vers :
       <select [(ngModel)]="transferToAccount">
         <optgroup label="Comptes courants">
-          @for (a of getAccounts(false); track a) {
+          @for (a of getAccounts(false); track $index) {
             <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
           }
         </optgroup>
         <optgroup label="Epargne">
-          @for (a of getAccounts(true); track a) {
+          @for (a of getAccounts(true); track $index) {
             <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
           }
         </optgroup>
@@ -49,12 +49,12 @@
   <div>Compte :
     <select [(ngModel)]="account">
       <optgroup label="Comptes courants">
-        @for (a of getAccounts(false); track a) {
+        @for (a of getAccounts(false); track $index) {
           <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
         }
       </optgroup>
       <optgroup label="Epargne">
-        @for (a of getAccounts(true); track a) {
+        @for (a of getAccounts(true); track $index) {
           <option [ngValue]="a">{{ a.name }} ({{ a.bank }})</option>
         }
       </optgroup>

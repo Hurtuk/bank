@@ -32,13 +32,14 @@ export class ParserComponent implements OnInit {
 	public account: {id: number, name: string};
 	public lastItems: {date: Date, title: string}[];
 
-	public transferDate: Date;
+	public transferDate: Date = new Date();
 	public transferAmount: number;
 	public transferFromAccount: {id: number, name: string};;
 	public transferToAccount: {id: number, name: string};
 	public transferSaved = false;
 
 	ngOnInit() {
+		this.transferDate.setHours(12);
 		this.accountsService.getAccounts().subscribe(x => this.accounts = x);
 		this.accountsService.getLastItems().subscribe(x => this.lastItems = x);
 	}

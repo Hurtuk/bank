@@ -17,3 +17,30 @@ label {
 update-list {
 	display: block;
 }
+
+#former-accounts {
+	display: none;
+
+	+ label + * {
+		display: none;
+	}
+
+	&:checked + label + * {
+		display: flex;
+	}
+}
+
+.tabs {
+	padding: 0 30px;
+	
+	label {
+		width: 150px;
+		line-height: 30px;
+		font-size: .8em;
+
+		> span {
+			width: 30px; 
+			height: 30px;
+		}
+	}
+}

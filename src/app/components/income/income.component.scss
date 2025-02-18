@@ -11,6 +11,7 @@ bk-chart {
     display: block;
     height: 300px;
     margin: 0 20px;
+    max-width: calc(100vw - 675px);
 }
 
 table {

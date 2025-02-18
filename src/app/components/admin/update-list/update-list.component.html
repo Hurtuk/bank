@@ -1,6 +1,6 @@
 @if (canAdd) {
   <div>
-    @for (lm of loanMonth; track lm) {
+    @for (lm of loanMonth; track $index) {
       <button type="button" (click)="addLoan(lm)">+ {{ lm.title }}</button>
     }
   </div>
@@ -30,14 +30,14 @@
         </td>
       </tr>
     }
-    @for (r of items; track r) {
+    @for (r of items; track $index) {
       @if (show(r)) {
         <tr>
           <td>
             <i (click)="autofill(r)" class="fa fa-refresh" style="cursor: pointer"></i>
           </td>
           <td>
-            @for (t of r.types; track t) {
+            @for (t of r.types; track $index) {
               <type [icon]="t.image"></type>
             }
             <type (click)="openPopup(r)"></type>
@@ -64,7 +64,7 @@
             @if (refundDisplayIds.indexOf(r.id) !== -1) {
               <select [(ngModel)]="r.refunding" (change)="r.updated = true">
                 <option></option>
-                @for (f of refundable; track f) {
+                @for (f of refundable; track $index) {
                   <option [ngValue]="f.id">{{f.title + ' ' + f.amount + '€'}}</option>
                 }
               </select>
@@ -73,7 +73,7 @@
           <td>
             <select [(ngModel)]="r.loan" (change)="r.updated = true">
               <option></option>
-              @for (l of loans; track l) {
+              @for (l of loans; track $index) {
                 <option [ngValue]="l.id">{{l.title}}</option>
               }
             </select>
@@ -84,7 +84,7 @@
           <td>
             <select [(ngModel)]="r.travel" (change)="r.updated = true">
               <option></option>
-              @for (t of travels; track t) {
+              @for (t of travels; track $index) {
                 <option [ngValue]="t.id">{{t.title}}</option>
               }
             </select>
@@ -113,7 +113,7 @@
   <div class="popup">
     <h1 (click)="closePopup()">{{ popupOpenedFor.title }}</h1>
     <div class="types">
-      @for (t of types; track t) {
+      @for (t of types; track $index) {
         <input type="checkbox" [id]="'type-' + t.id" name="types" [checked]="currentHasType(t)" (change)="toggleType(t)" />
         <label [for]="'type-' + t.id">
           <type [icon]="t" size="big"></type>

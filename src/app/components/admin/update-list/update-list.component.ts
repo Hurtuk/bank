@@ -80,7 +80,7 @@ export class UpdateListComponent implements OnInit {
 		this.items.unshift({
 			id: -1,
 			types: [],
-			date: null,
+			date: new Date(),
 			title: '',
 			amount: 0,
 			variable: 0,
@@ -90,6 +90,7 @@ export class UpdateListComponent implements OnInit {
 			travel: null,
 			updated: true
 		});
+		this.items[this.items.length - 1].date.setHours(12);
 	}
 
 	public save() {
@@ -146,43 +147,51 @@ export class UpdateListComponent implements OnInit {
 		if (!this.items) {
 			this.items = [];
 		}
-		this.items.push({
-			id: -1,
-			types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
-			date: new Date(lm.date),
-			title: 'Prêt',
-			amount: -lm.capital,
-			variable: 0,
-			refunding: null,
-			loan: lm.idLoan,
-			profitability: false,
-			travel: null,
-			updated: true
-		},{
-			id: -1,
-			types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
-			date: new Date(lm.date),
-			title: 'Intérêts prêt',
-			amount: -lm.interests,
-			variable: 0,
-			refunding: null,
-			loan: lm.idLoan,
-			profitability: true,
-			travel: null,
-			updated: true
-		},{
-			id: -1,
-			types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
-			date: new Date(lm.date),
-			title: 'Assurance prêt',
-			amount: -lm.tools,
-			variable: 0,
-			refunding: null,
-			loan: null,
-			profitability: true,
-			travel: null,
-			updated: true
-		});
+		if (lm.capital !== "0.00") {
+			this.items.push({
+				id: -1,
+				types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
+				date: new Date(lm.date),
+				title: 'Prêt',
+				amount: -lm.capital,
+				variable: 0,
+				refunding: null,
+				loan: lm.idLoan,
+				profitability: false,
+				travel: null,
+				updated: true
+			});
+		}
+		if (lm.interests !== "0.00") {
+			this.items.push({
+				id: -1,
+				types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
+				date: new Date(lm.date),
+				title: 'Intérêts prêt',
+				amount: -lm.interests,
+				variable: 0,
+				refunding: null,
+				loan: lm.idLoan,
+				profitability: true,
+				travel: null,
+				updated: true
+			});
+		}
+		if (lm.tools !== "0.00") {
+			this.items.push({
+				id: -1,
+				types: this.types.filter(t => t.id == 4 || t.id == 26 || t.id == lm.relatedTag),
+				date: new Date(lm.date),
+				title: 'Assurance prêt',
+				amount: -lm.tools,
+				variable: 0,
+				refunding: null,
+				loan: null,
+				profitability: true,
+				travel: null,
+				updated: true
+			});
+		}
 	}
 
 	ngOnInit() {

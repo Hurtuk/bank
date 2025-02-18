@@ -3,11 +3,12 @@ import { AmountsService } from 'src/app/shared/services/amounts.service';
 import { ChartsService } from 'src/app/shared/services/charts.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { PercentPipe } from '@angular/common';
+import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 
 @Component({
     selector: 'app-income',
     templateUrl: './income.component.html',
-    imports: [BkChartComponent, PercentPipe],
+    imports: [BkChartComponent, PercentPipe, AmountDirective],
     styleUrls: ['./income.component.scss']
 })
 export class IncomeComponent implements OnInit {
@@ -109,7 +110,7 @@ export class IncomeComponent implements OnInit {
             const s = income[entity].filter(e => e.date.getFullYear() === y).reduce((prev, cur) => prev + parseFloat(cur.value.toString()), 0);
             yearData.data.push({ label: entity, value: s, evolution: null });
             if (entity != 'Divers') {
-              yearData.sum += s;
+              yearData.sum += Math.max(0, s);
             }
           }
         }
@@ -144,7 +145,7 @@ export class IncomeComponent implements OnInit {
         year: py.year,
         data: py.data.filter(d => d.label != 'Divers').map(d => ({
           label: d.label,
-          value: d.value / py.sum
+          value: Math.max(0, d.value / py.sum)
         }))
       }));
 		});

@@ -1,4 +1,4 @@
-@import '../../shared/styles/colors';
+@use '../../shared/styles/colors' as colors;
 
 $bar-height: 20px;
 
@@ -22,7 +22,7 @@ $bar-height: 20px;
 
 .current-length {
     height: $bar-height;
-    background-color: $color-tertiary;
+    background-color: colors.$color-tertiary;
     position: absolute;
     top: 0;
     left: 0;
