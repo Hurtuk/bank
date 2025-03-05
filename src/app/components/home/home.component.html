@@ -45,34 +45,37 @@
           <h1>Actions</h1>
           <ul class="actions">
             @for (sto of stocks; track $index; let i = $index) {
-              <li>
-                <i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
-                  @if (sto.indexBefore !== -1) {
-                    @if (sto.indexBefore > i) {
-                      <span class="up">▲</span>
+              @if (i < 13) {
+                <li>
+                  <i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
+                    @if (sto.indexBefore !== -1) {
+                      @if (sto.indexBefore > i) {
+                        <span class="up">▲</span>
+                      }
+                      @if (sto.indexBefore < i) {
+                        <span class="down">▼</span>
+                      }
                     }
-                    @if (sto.indexBefore < i) {
-                      <span class="down">▼</span>
-                    }
-                  }
-                </i>
-                <div class="account-sum">
-                  <span [amount]="[sto.value * sto.count]"></span>
-                  <span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
-                  <div class="evolutions">
-                    @if (sto.d1) {
-                      <span><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                    }
-                    @if (sto.d7) {
-                      <span> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                    }
-                    @if (sto.d30) {
-                      <span> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                    }
+                  </i>
+                  <div class="account-sum">
+                    <span [amount]="[sto.value * sto.count]"></span>
+                    <span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
+                    <div class="evolutions">
+                      @if (sto.d1) {
+                        <span><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                      }
+                      @if (sto.d7) {
+                        <span> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                      }
+                      @if (sto.d30) {
+                        <span> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                      }
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              }
             }
+            <li>…</li>
           </ul>
         }
       </div>

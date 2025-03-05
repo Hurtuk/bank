@@ -25,3 +25,11 @@ menu-bar {
 	text-align: left;
 	z-index: 100;
 }
+
+h1,
+h1 ~ * {
+	max-width: 200px;
+	text-align: center;
+	display: block;
+	margin: 2rem auto;
+}
