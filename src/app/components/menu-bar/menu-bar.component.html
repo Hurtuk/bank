@@ -26,43 +26,48 @@
     <!--<li>
     <a routerLink="/forecast" class="fa-calculator">Prévisions</a>
   </li>-->
-  @if (options['income']) {
-    <li>
-      <a routerLink="/income" class="fa-money">Revenus</a>
-    </li>
+    @if (options['income']) {
+      <li>
+        <a routerLink="/income" class="fa-money">Revenus</a>
+      </li>
+    }
+    @if (options['trade']) {
+      <li>
+        <a routerLink="/trade" class="fa-globe">Bourse</a>
+      </li>
+    }
+    @if (options['retirement']) {
+      <li>
+        <a routerLink="/retirement" class="fa-suitcase">Retraite</a>
+      </li>
+    }
+    @if (options['real-estate']) {
+      <li>
+        <a routerLink="/real-estate/29" class="fa-building">Arpège</a>
+      </li>
+    }
+    @if (options['real-estate']) {
+      <li>
+        <a routerLink="/real-estate/30" class="fa-building">Boléro</a>
+      </li>
+    }
+    @if (options['taxes']) {
+      <li>
+        <a routerLink="/taxes" class="fa-file-text">Impôts</a>
+      </li>
+    }
+    @if (options['electricity']) {
+      <li>
+        <a routerLink="/electricity" class="fa-plug">Electricité</a>
+      </li>
+    }
+    @if (options['travels']) {
+      <li>
+        <a routerLink="/travels" class="fa-plane">Voyages</a>
+      </li>
+    }
   }
-  @if (options['trade']) {
-    <li>
-      <a routerLink="/trade" class="fa-globe">Bourse</a>
-    </li>
-  }
-  @if (options['real-estate']) {
-    <li>
-      <a routerLink="/real-estate/29" class="fa-building">Arpège</a>
-    </li>
-  }
-  @if (options['real-estate']) {
-    <li>
-      <a routerLink="/real-estate/30" class="fa-building">Boléro</a>
-    </li>
-  }
-  @if (options['taxes']) {
-    <li>
-      <a routerLink="/taxes" class="fa-file-text">Impôts</a>
-    </li>
-  }
-  @if (options['electricity']) {
-    <li>
-      <a routerLink="/electricity" class="fa-plug">Electricité</a>
-    </li>
-  }
-  @if (options['travels']) {
-    <li>
-      <a routerLink="/travels" class="fa-plane">Voyages</a>
-    </li>
-  }
-}
-<li>
+  <li>
   <a routerLink="/admin" class="fa-cog">Admin</a>
 </li>
 </ul>

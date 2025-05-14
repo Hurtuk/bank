@@ -8,5 +8,6 @@
     "real-estate": true,
     "taxes": true,
     "electricity": true,
-    "travels": true
+    "travels": true,
+    "retirement": true
 }

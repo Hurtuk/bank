@@ -1,0 +1,36 @@
+.content {
+  display: flex;
+  justify-content: space-around;
+  gap: 4rem;
+  padding: 4rem;
+
+  div + div {
+    flex: 1;
+  }
+}
+
+table {
+  margin: 0 auto;
+}
+
+td, th {
+  text-align: right;
+  min-width: 130px;
+  vertical-align: top;
+}
+
+tfoot {
+  td {
+    padding-top: 1rem;
+    font-size: 1.2em;
+  }
+}
+
+bk-chart {
+  display: block;
+  height: 500px;
+}
+
+h2:not(:first-child) {
+  margin-top: 2rem;
+}

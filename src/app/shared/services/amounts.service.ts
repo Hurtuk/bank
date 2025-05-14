@@ -35,7 +35,7 @@ export class AmountsService {
 		return this.http.get<{code: string, value: number, d1: number, d7: number, d30: number}[]>(this.urlBuilder.buildUrl('getStocksByPerf'));
 	}
 
-	public getTransactionsByAccountAndYear(idAccount: number, year: number): Observable<{
+	public getTransactionsByAccountAndYear(idAccount: number, year?: number): Observable<{
 		id: number, date: Date, title: string, amount: number, variable: number, refunding: number, loan: number,
 		types: {image: string, id: number, name: string}[]
 	}[]> {

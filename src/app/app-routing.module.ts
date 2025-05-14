@@ -8,6 +8,7 @@ export const PUBLIC_ROUTES: Routes = [
 	{ path: 'loans', loadComponent: () => import('./components/loans/loans.component').then(m => m.LoansComponent) },
 	{ path: 'trade', loadComponent: () => import('./components/trade/trade.component').then(m => m.TradeComponent) },
 	{ path: 'forecast', loadComponent: () => import('./components/forecast/forecast.component').then(m => m.ForecastComponent) },
+	{ path: 'retirement', loadComponent: () => import('./components/retirement-plan/retirement-plan.component').then(m => m.RetirementPlanComponent) },
 	{ path: 'income', loadComponent: () => import('./components/income/income.component').then(m => m.IncomeComponent) },
 	{ path: 'real-estate/:id', loadComponent: () => import('./components/real-estate/real-estate.component').then(m => m.RealEstateComponent) },
 	{ path: 'travels', loadComponent: () => import('./components/travels/travels.component').then(m => m.TravelsComponent) },
