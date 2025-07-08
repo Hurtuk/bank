@@ -20,7 +20,7 @@ export class InfoBarComponent implements OnInit {
 		this.amountsService.totals.subscribe(data => {
 			if (data) {
 				this.totals = data;
-				this.total = this.totals.fixed + this.totals.thrift + this.totals.stocks + this.totals.income;
+				this.total = this.totals.fixed + this.totals.thrift + this.totals.stockThrift + this.totals.stocks + this.totals.income;
 			}
 		});
 		this.amountsService.updateTotals().subscribe();

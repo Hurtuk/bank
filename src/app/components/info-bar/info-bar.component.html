@@ -7,9 +7,13 @@
 		<div>A venir</div>
 		<div [amount]="[totals.income, {alwaysSign: true, color: true}]"></div>
 	</li>
+	<li class="security">
+		<div>Sécurité</div>
+		<div [amount]="[totals.thrift]"></div>
+	</li>
 	<li class="epargne">
 		<div>Epargne</div>
-		<div [amount]="[totals.thrift]"></div>
+		<div [amount]="[totals.stockThrift]"></div>
 	</li>
 	<li class="variable">
 		<div>Actions</div>

@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
 	public fixAccounts: {bank: string, name: string, amount: number}[];
 	public income: {date: Date, types: string[], title: string, amount: number}[];
 	public thriftAccounts: {bank: string, name: string, amount: number}[];
+	public stockThriftAccounts: {bank: string, name: string, amount: number}[];
 	public stocks: {code: string, value: number, count: number}[];
 
 	public chartOptions = [
@@ -32,6 +33,9 @@ export class HomeComponent implements OnInit {
 			{option: 'backgroundColor', value: '#5FB5EF'},
 			{option: 'fill', value: false},
 			{option: 'borderWidth', value: 1}],
+		[{option: 'borderColor', value: '#baddf5'},
+			{option: 'backgroundColor', value: '#baddf5'},
+			{option: 'borderWidth', value: 2}],
 		[{option: 'borderColor', value: '#FFCE56'},
 			{option: 'backgroundColor', value: '#FFCE56'},
 			{option: 'fill', value: false},
@@ -50,6 +54,7 @@ export class HomeComponent implements OnInit {
 				this.fixAccounts = val.fixed;
 				this.income = val.income;
 				this.thriftAccounts = val.thrift;
+				this.stockThriftAccounts = val.stockThrift;
 				this.stocks = val.stocks;
 			}
 		});
@@ -58,7 +63,8 @@ export class HomeComponent implements OnInit {
 				[
 					{ label: 'Fixe', data: val.fixed },
 					{ label: 'A venir', data: val.income.map(i => ({date: i.date, value: -i.value})) },
-					{ label: 'Epargne', data: val.thrift },
+					{ label: 'Sécurité', data: val.thrift },
+					{ label: 'Epargne', data: val.variableEpargne },
 					{ label: 'Actions', data: val.variable }
 				]
 			)

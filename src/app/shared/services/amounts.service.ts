@@ -10,22 +10,24 @@ export class AmountsService {
 	private http = inject(HttpClient);
 	private urlBuilder = inject(UrlBuilderService);
 
-	public totals = new BehaviorSubject({fixed: 0, thrift: 0, income: 0, stocks: 0});
+	public totals = new BehaviorSubject({fixed: 0, thrift: 0, stockThrift: 0, income: 0, stocks: 0});
 
-	public updateTotals(): Observable<{fixed: number, thrift: number, income: number, stocks: number}> {
-		return this.http.get<{fixed: number, thrift: number, income: number, stocks: number}>(this.urlBuilder.buildUrl('getTotals'))
+	public updateTotals(): Observable<{fixed: number, thrift: number, stockThrift: number, income: number, stocks: number}> {
+		return this.http.get<{fixed: number, thrift: number, stockThrift: number, income: number, stocks: number}>(this.urlBuilder.buildUrl('getTotals'))
 			.pipe(tap(totals => this.totals.next(totals)));
 	}
 
 	public getHomeValues(): Observable<{
 		fixed: {amount: number, bank: string, name: string}[],
 		thrift: {amount: number, bank: string, name: string}[],
+		stockThrift: {amount: number, bank: string, name: string}[],
 		income: {id: number, date: Date, amount: number, types: string[], title: string}[],
 		stocks: {code: string, count: number, value: number}[]
 	}> {
 		return this.http.get<{
 			fixed: {amount: number, bank: string, name: string}[],
 			thrift: {amount: number, bank: string, name: string}[],
+			stockThrift: {amount: number, bank: string, name: string}[],
 			income: {id: number, date: Date, amount: number, types: string[], title: string}[],
 			stocks: {code: string, count: number, value: number}[]
 		}>(this.urlBuilder.buildUrl('getHomeValues'));
@@ -65,8 +67,8 @@ export class AmountsService {
 		return this.http.get<{year: string, month: number, plus: number, minus: number}[]>(this.urlBuilder.buildUrl('getRanges'));
 	}
 
-	public getTotalData(): Observable<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[]}> {
-		return this.http.get<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[]}>(this.urlBuilder.buildUrl('getTotalData'));
+	public getTotalData(): Observable<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[], variableEpargne: {date: Date, value: number}[]}> {
+		return this.http.get<{fixed: {date: Date, value: number}[], income: {date: Date, value: number}[], thrift: {date: Date, value: number}[], variable: {date: Date, value: number}[], variableEpargne: {date: Date, value: number}[]}>(this.urlBuilder.buildUrl('getTotalData'));
 	}
 
 	public getCurrentsData(): Observable<{ actionCode: string, quantity: number, sumneg: number, sumpos: number, total: number, totalneg: number, totalpos: number, value: number, initial: number }[]> {

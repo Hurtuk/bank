@@ -29,7 +29,7 @@
   <div class="top-panel">
     <div>
       <div class="panel thrift">
-        <h1>Epargne</h1>
+        <h1>Sécurité</h1>
         <ul>
           @for (thr of thriftAccounts; track $index) {
             <li [class.big]="thr.amount > 1000">
@@ -40,9 +40,21 @@
           }
         </ul>
       </div>
-      <div class="panel">
+      <div class="panel thrift">
+        <h1>Epargne</h1>
+        <ul>
+          @for (thr of stockThriftAccounts; track $index) {
+            <li [class.big]="thr.amount > 1000">
+              <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
+              <div class="account-name">{{ thr.name }}</div>
+              <div class="account-sum" [amount]="[thr.amount]"></div>
+            </li>
+          }
+        </ul>
+      </div>
+      <div class="panel" style="margin-right: 2rem">
         @if (stocks?.length) {
-          <h1>Actions</h1>
+          <h1>Ordres</h1>
           <ul class="actions">
             @for (sto of stocks; track $index; let i = $index) {
               <li>
@@ -85,7 +97,7 @@
         [add]="true"
         [minDate]="minDate"
         [minimum]="0"
-      [chartOptions]="chartOptions"></bk-chart>
+        [chartOptions]="chartOptions"></bk-chart>
     </div>
   </div>
 </div>
