@@ -1,16 +1,18 @@
-<div class="content home">
-  <div class="panel">
-    <h1>Fixe</h1>
-    <ul class="fix">
+<div>
+  <div class="card">
+    <div class="title">Fixe <fa-icon [icon]="faCoins"></fa-icon></div>
+    <div class="content">
       @for (fix of fixAccounts; track $index) {
-        <li [class.big]="fix.amount > 300">
+        <div class="card" [class.big]="$index < 3">
           <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + fix.bank + '.png)'"></span>
           <div class="account-name">{{ fix.name }}</div>
           <div class="account-sum" [amount]="[fix.amount]"></div>
-        </li>
+        </div>
       }
-    </ul>
-    <h2>Remboursements à venir</h2>
+    </div>
+  </div>
+  <div class="card waiting-wrapper">
+    <div class="title">Remboursements à venir <fa-icon [icon]="faHourglassHalf"></fa-icon></div>
     <ol class="waiting">
       @for (inc of income; track $index) {
         <li>
@@ -26,78 +28,80 @@
       }
     </ol>
   </div>
-  <div class="top-panel">
-    <div>
-      <div class="panel thrift">
-        <h1>Sécurité</h1>
-        <ul>
-          @for (thr of thriftAccounts; track $index) {
-            <li [class.big]="thr.amount > 1000">
-              <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
-              <div class="account-name">{{ thr.name }}</div>
-              <div class="account-sum" [amount]="[thr.amount]"></div>
-            </li>
-          }
-        </ul>
-      </div>
-      <div class="panel thrift">
-        <h1>Epargne</h1>
-        <ul>
-          @for (thr of stockThriftAccounts; track $index) {
-            <li [class.big]="thr.amount > 1000">
-              <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
-              <div class="account-name">{{ thr.name }}</div>
-              <div class="account-sum" [amount]="[thr.amount]"></div>
-            </li>
-          }
-        </ul>
-      </div>
-      <div class="panel" style="margin-right: 2rem">
-        @if (stocks?.length) {
-          <h1>Ordres</h1>
-          <ul class="actions">
-            @for (sto of stocks; track $index; let i = $index) {
-              <li>
-                <i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
-                  @if (sto.indexBefore !== -1) {
-                    @if (sto.indexBefore > i) {
-                      <span class="up">▲</span>
-                    }
-                    @if (sto.indexBefore < i) {
-                      <span class="down">▼</span>
-                    }
-                  }
-                </i>
-                <div class="account-sum">
-                  <span [amount]="[sto.value * sto.count]"></span>
-                  <span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>
-                  <div class="evolutions">
-                    @if (sto.d1) {
-                      <span><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                    }
-                    @if (sto.d7) {
-                      <span> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                    }
-                    @if (sto.d30) {
-                      <span> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
-                    }
-                  </div>
-                </div>
-              </li>
-            }
-          </ul>
+</div>
+<div>
+  <div style="height: 350px; align-items: flex-start;">
+    <div class="thrift card">
+      <div class="title">Sécurité <fa-icon [icon]="faVault"></fa-icon></div>
+      <div class="content">
+        @for (thr of thriftAccounts; track $index) {
+          <div class="card" [class.big]="$index < 2">
+            <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
+            <div class="account-name">{{ thr.name }}</div>
+            <div class="account-sum" [amount]="[thr.amount]"></div>
+          </div>
         }
       </div>
     </div>
-    <div>
-      <bk-chart
-        initialData="totalData"
-        fillWith="prev"
-        [offFilters]="['Mois', 'Année']"
-        [add]="true"
-        [minDate]="minDate"
-        [minimum]="0"
-        [chartOptions]="chartOptions"></bk-chart>
+    <div class="thrift card">
+      <div class="title">Épargne <fa-icon [icon]="faLock"></fa-icon></div>
+      <div class="content">
+        @for (thr of stockThriftAccounts; track $index) {
+          <div class="card big">
+            <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
+            <div class="account-name">{{ thr.name }}</div>
+            <div class="account-sum" [amount]="[thr.amount]"></div>
+          </div>
+        }
+      </div>
     </div>
+    <div class="card">
+      @if (stocks?.length) {
+        <div class="title">Ordres <fa-icon [icon]="faChartLine"></fa-icon></div>
+        <ul class="actions">
+          @for (sto of stocks; track $index; let i = $index) {
+            <li>
+              <i class="icon" [title]="sto.code" [style.backgroundImage]="'url(./assets/images/structures/' + getActionIcon(sto.code) + '.png)'">
+                @if (sto.indexBefore !== -1) {
+                  @if (sto.indexBefore > i) {
+                    <span class="up">▲</span>
+                  }
+                  @if (sto.indexBefore < i) {
+                    <span class="down">▼</span>
+                  }
+                }
+              </i>
+              <div class="account-sum">
+                <span [amount]="[sto.value * sto.count]"></span>
+                <span>
+                  <span [amount]="[sto.profit | percent:'1.2', { alwaysSign: true, sign: '%', color: true, tag: true }]"></span>
+                </span>
+                <div class="evolutions">
+                  @if (sto.d1) {
+                    <span><span [amount]="[(sto.value / sto.d1 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                  }
+                  @if (sto.d7) {
+                    <span> / <span [amount]="[(sto.value / sto.d7 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                  }
+                  @if (sto.d30) {
+                    <span> / <span [amount]="[(sto.value / sto.d30 - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span></span>
+                  }
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+  <div>
+    <bk-chart
+      initialData="totalData"
+      fillWith="prev"
+      [offFilters]="['Mois', 'Année']"
+      [add]="true"
+      [minDate]="minDate"
+      [minimum]="0"
+      [chartOptions]="chartOptions"></bk-chart>
   </div>
 </div>

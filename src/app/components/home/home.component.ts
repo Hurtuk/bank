@@ -5,17 +5,25 @@ import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { DatePipe, PercentPipe } from '@angular/common';
 import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 import { TypeComponent } from '../type/type.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faChartLine, faCoins, faHourglassHalf, faLock, faVault } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'home',
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.scss'],
-	imports: [BkChartComponent, DatePipe, PercentPipe, AmountDirective, TypeComponent]
+	imports: [BkChartComponent, DatePipe, PercentPipe, AmountDirective, TypeComponent, FontAwesomeModule]
 })
 
 export class HomeComponent implements OnInit {
 	private amountsService = inject(AmountsService);
 	private chartsService = inject(ChartsService);
+
+	faCoins = faCoins;
+	faHourglassHalf = faHourglassHalf;
+	faVault = faVault;
+	faLock = faLock;
+	faChartLine = faChartLine;
 
 	private YEARS_BACK = 3;
 

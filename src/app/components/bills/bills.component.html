@@ -1,11 +1,11 @@
-<h1>Dépenses mensuelles</h1>
+<h1><fa-icon [icon]="faCalendarMinus"></fa-icon>Dépenses mensuelles</h1>
 @if ((data | async); as bills) {
   <div class="columned">
-    <div>
+    <div class="card">
       <h2>Appartement</h2>
       <app-bills-table [data]="bills.home" />
     </div>
-    <div>
+    <div class="card">
       <h2>Autres</h2>
       <app-bills-table [data]="bills.others" />
     </div>

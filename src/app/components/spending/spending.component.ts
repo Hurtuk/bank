@@ -7,12 +7,14 @@ import { DatePipe } from '@angular/common';
 import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 import { TypeComponent } from '../type/type.component';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'spending',
     templateUrl: 'spending.component.html',
     styleUrls: ['spending.component.scss'],
-	imports: [BkChartComponent, DatePipe, AmountDirective, TypeComponent, FormsModule],
+	imports: [BkChartComponent, DatePipe, AmountDirective, TypeComponent, FormsModule, FontAwesomeModule],
 })
 
 export class SpendingComponent implements OnInit {
@@ -30,6 +32,8 @@ export class SpendingComponent implements OnInit {
 
 	public groups = ['Comparaison', 'Addition'];
 	public group = 'Comparaison';
+
+	faCreditCard = faCreditCard;
 
 	public isSelectedType(type, types = this.selectedTypes) {
 		return types.some(x => x.id === type.id);

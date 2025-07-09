@@ -1,26 +1,26 @@
 <ul>
   @if ((options$ | async); as options) {
     <li>
-      <a routerLink="/" class="fa-home">Accueil</a>
+      <a routerLink="/"><fa-icon [icon]="faHome"></fa-icon> Accueil</a>
     </li>
     @if (options['spending']) {
       <li>
-        <a routerLink="/spending" class="fa-credit-card">Dépenses</a>
+        <a routerLink="/spending" class="fa-credit-card"><fa-icon [icon]="faCreditCard"></fa-icon> Dépenses</a>
       </li>
     }
     @if (options['bills']) {
       <li>
-        <a routerLink="/bills" class="fa-calendar-minus-o">Mensuelles</a>
+        <a routerLink="/bills" class="fa-calendar-minus-o"><fa-icon [icon]="faCalendarMinus"></fa-icon> Mensuelles</a>
       </li>
     }
     @if (options['month-ends']) {
       <li>
-        <a routerLink="/month-ends" class="fa-calendar-plus-o">Fins de mois</a>
+        <a routerLink="/month-ends" class="fa-calendar-plus-o"><fa-icon [icon]="faCalendarPlus"></fa-icon> Fins de mois</a>
       </li>
     }
     @if (options['loans']) {
       <li>
-        <a routerLink="/loans" class="fa-university">Prêts</a>
+        <a routerLink="/loans" class="fa-university"><fa-icon [icon]="faUniversity"></fa-icon> Prêts</a>
       </li>
     }
     <!--<li>
@@ -28,46 +28,46 @@
   </li>-->
     @if (options['income']) {
       <li>
-        <a routerLink="/income" class="fa-money">Revenus</a>
+        <a routerLink="/income" class="fa-money"><fa-icon [icon]="faMoneyBill"></fa-icon> Revenus</a>
       </li>
     }
     @if (options['trade']) {
       <li>
-        <a routerLink="/trade" class="fa-globe">Bourse</a>
+        <a routerLink="/trade" class="fa-globe"><fa-icon [icon]="faGlobe"></fa-icon> Bourse</a>
       </li>
     }
     @if (options['retirement']) {
       <li>
-        <a routerLink="/retirement" class="fa-suitcase">Retraite</a>
+        <a routerLink="/retirement" class="fa-suitcase"><fa-icon [icon]="faSuitcase"></fa-icon> Retraite</a>
       </li>
     }
     @if (options['real-estate']) {
       <li>
-        <a routerLink="/real-estate/29" class="fa-building">Arpège</a>
+        <a routerLink="/real-estate/29" class="fa-building"><fa-icon [icon]="faBuilding"></fa-icon> Arpège</a>
       </li>
     }
     @if (options['real-estate']) {
       <li>
-        <a routerLink="/real-estate/30" class="fa-building">Boléro</a>
+        <a routerLink="/real-estate/30" class="fa-building"><fa-icon [icon]="faBuilding"></fa-icon> Boléro</a>
       </li>
     }
     @if (options['taxes']) {
       <li>
-        <a routerLink="/taxes" class="fa-file-text">Impôts</a>
+        <a routerLink="/taxes" class="fa-file-text"><fa-icon [icon]="faFileText"></fa-icon> Impôts</a>
       </li>
     }
     @if (options['electricity']) {
       <li>
-        <a routerLink="/electricity" class="fa-plug">Electricité</a>
+        <a routerLink="/electricity" class="fa-plug"><fa-icon [icon]="faPlug"></fa-icon> Electricité</a>
       </li>
     }
     @if (options['travels']) {
       <li>
-        <a routerLink="/travels" class="fa-plane">Voyages</a>
+        <a routerLink="/travels" class="fa-plane"><fa-icon [icon]="faPlane"></fa-icon> Voyages</a>
       </li>
     }
   }
   <li>
-  <a routerLink="/admin" class="fa-cog">Admin</a>
+  <a routerLink="/admin" class="fa-cog"><fa-icon [icon]="faCog"></fa-icon> Admin</a>
 </li>
 </ul>

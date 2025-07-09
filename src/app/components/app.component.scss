@@ -8,13 +8,11 @@ info-bar {
 	flex: 0 0 auto;
 }
 
-.main-content {
-	flex: 1 0 auto;
+main {
+	flex: 1 0 100%;
 	position: relative;
-	padding-left: 62.2px;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
+	padding-left: 66px;
+	overflow: hidden;
 }
 
 menu-bar {

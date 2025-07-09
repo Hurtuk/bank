@@ -1,10 +1,10 @@
 @if (logged) {
 	<info-bar></info-bar>
-	<div class="main-content">
+	<main>
 		<menu-bar></menu-bar>
 
 		<router-outlet></router-outlet>
-	</div>
+	</main>
 } @else {
 	<h1>Connexion</h1>
 	<input type="password" [(ngModel)]="password">

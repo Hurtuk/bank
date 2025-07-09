@@ -6,6 +6,7 @@ import { Directive, ElementRef, Input, OnChanges, inject } from '@angular/core';
  * 	- noSpaces: boolean
  *  - sign: string
  * 	- color: boolean
+ *  - tag: boolean
  */
 @Directive({
     selector: '[amount]'
@@ -67,6 +68,17 @@ export class AmountDirective implements OnChanges {
 
 				// Sign
 				this.elementRef.nativeElement.innerHTML = result.replace(/\./gi, ',') + '&nbsp;' + (options.sign ? options.sign : '€');
+
+				// Tag
+				if (options.tag) {
+					this.elementRef.nativeElement.style.fontSize = '0.7em';
+					this.elementRef.nativeElement.style.backgroundColor = integer >= 0 ? '#d4f5d4' : '#f5d4d4';
+					this.elementRef.nativeElement.style.padding = '0.1em 0.3em';
+					this.elementRef.nativeElement.style.borderRadius = '0.3em';
+					this.elementRef.nativeElement.style.marginBottom = '.1em';
+					this.elementRef.nativeElement.style.position = 'relative';
+					this.elementRef.nativeElement.style.top = '-0.3em';
+				}
 
 				this.elementRef.nativeElement.classList.add('amount');
 			}

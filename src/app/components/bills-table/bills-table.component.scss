@@ -6,21 +6,46 @@ table {
 
 thead {
     th {
-        font-family: 'Sofia Sans Extra Condensed';
+        font-weight: 200;
     }
 }
 
 tbody {
+    tr {
+        position: relative;
+
+        &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            position: absolute;
+            top: .25rem;
+            bottom: .25rem;
+            left: 0;
+            z-index: 0;
+            background-color: #f6f6f6;
+            border-radius: 1rem;
+        }
+    }
+
     th {
         text-transform: uppercase;
-        font-weight: 500;
-        font-size: .9em;
-        font-family: 'Sofia Sans Extra Condensed';
+        font-size: .7em;
+        font-weight: 200;
         width: 70px;
+        position: relative;
+        z-index: 1;
+
+        span {
+            display: block;
+            margin-top: .5rem;
+        }
     }
 
     td {
-        padding: 2em 1em;
+        padding: 1.5em 1em;
+        position: relative;
+        z-index: 1;
 
         div {
             height: 100%;
@@ -36,23 +61,24 @@ tbody {
             font-size: .85em;
         }
     }
-
-    tr:nth-child(even) {
-        background-color: rgba(0, 0, 0, .025);
-    }
 }
 
 .evolution {
     font-size: .75em;
     color: red;
     font-weight: bold;
-    position: absolute;
-    left: 0;
-    right: 0;
     top: 1.6em;
+    background-color: #f5d4d4;
+    padding: 0.1em 0.3em;
+    border-radius: 0.3em;
+    position: relative;
+    top: -0.3em;
+    width: 50px;
+    margin: -.5rem auto .25rem;
 
     &.better {
         color: green;
+        background-color: #d4f5d4;
     }
 }
 
