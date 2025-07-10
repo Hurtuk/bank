@@ -17,6 +17,7 @@
 
 .tables {
 	flex: 1;
+	font-size: .95em;
 
 	td,
 	th {
@@ -30,10 +31,7 @@
 
 	thead {
 		th {
-			color: colors.$color-tertiary;
-			text-transform: uppercase;
-			font-weight: 100;
-			font-size: 1.2em;
+			font-weight: 200;
 		}
 	}
 
@@ -41,6 +39,8 @@
 		td,
 		th {
 			font-size: 1.2em;
+			position: relative;
+			z-index: 0;
 		}
 
 		&:not(:first-of-type) {
@@ -55,6 +55,22 @@
 				> * {
 					padding-top: 10px;
 				}
+
+				td {
+					&::before {
+						content: '';
+						display: block;
+						background-color: white;
+						position: absolute;
+						top: 6px;
+						left: 2px;
+						right: 2px;
+						bottom: -32px;
+						border-radius: .5rem;
+						border-bottom-right-radius: 0;
+						z-index: -1;
+					}
+				}
 			}
 		}
 
@@ -62,6 +78,16 @@
 			td, th {
 				padding-top: 4px;
 				padding-bottom: 4px;
+
+				&::before {
+					height: 322px;
+					left: auto !important;
+					width: 100px;
+					top: -6px !important;
+					border-top-left-radius: 0 !important;
+					border-top-right-radius: 0 !important;
+					border-bottom-right-radius: .5rem !important;
+				}
 			}
 		}
 	}

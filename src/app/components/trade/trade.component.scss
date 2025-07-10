@@ -8,11 +8,8 @@ h2 {
 	margin-top: 20px;
 }
 
-.content {
-	display: flex;
-	flex: 1 1 auto;
-	flex-direction: column;
-	align-items: center;
+.card:first-child {
+	margin-top: 0;
 }
 
 table {
@@ -39,15 +36,31 @@ tfoot {
 
 .columned {
 	display: flex;
-	gap: 100px;
+	text-align: center;
+	padding-left: 20px;
+	gap: 1rem;
+	align-items: flex-start;
+
+	h2 {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+
+	h3 {
+		color: darkgray;
+		font-weight: bold;
+		font-weight: normal;
+		font-size: .9em;
+	}
 
 	.columned {
-		gap: 50px;
+		gap: 70px;
 	}
 
 	ul {
 		list-style: none;
 		text-align: right;
+		padding-left: 0;
 	}
 
 	li {
@@ -62,12 +75,13 @@ tfoot {
 			gap: .5rem;
 			align-items: center;
 
-			> * {
+			> :first-child {
 				flex: 1;
+				text-align: right;
 			}
 
 			span:last-child {
-				font-size: 1.2em;
+				top: 0 !important;
 			}
 		}
 	}

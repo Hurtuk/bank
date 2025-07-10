@@ -72,8 +72,8 @@ export class HomeComponent implements OnInit {
 					{ label: 'Fixe', data: val.fixed },
 					{ label: 'A venir', data: val.income.map(i => ({date: i.date, value: -i.value})) },
 					{ label: 'Sécurité', data: val.thrift },
-					{ label: 'Epargne', data: val.variableEpargne },
-					{ label: 'Actions', data: val.variable }
+					{ label: 'Epargne', data: val.variableEpargne ?? [] },
+					{ label: 'Actions', data: val.variable ?? [] }
 				]
 			)
 		);

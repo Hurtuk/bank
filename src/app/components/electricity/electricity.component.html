@@ -1,4 +1,4 @@
-<h1>Consommation électrique</h1>
+<h1><fa-icon [icon]="faPlug"></fa-icon>Consommation électrique</h1>
 
 <div class="chart">
   <bk-chart
@@ -9,14 +9,14 @@
   [chartOptions]="chartOptions"></bk-chart>
 </div>
 
-<div>
+<div class="card">
   @if (years) {
     <table>
       <thead>
         <tr class="years">
           <th></th>
           @for (y of years; track $index) {
-            <th>{{ y.year }}</th>
+            <th><h2>{{ y.year }}</h2></th>
           }
         </tr>
       </thead>
@@ -26,9 +26,7 @@
           @for (y of years; track $index; let first = $first; let last = $last; let i = $index) {
             <td class="total">{{ Math.ceil(y.total) }}
               @if (!last && !first) {
-                <span class="evolution" [class.better]="y.total < years[i - 1].total">
-                  {{ y.total > years[i - 1].total ? '+' : '' }}{{ (y.total / years[i - 1].total - 1) | percent:'1.0' }}
-                </span>
+                <span class="evolution" [amount]="[(y.total / years[i - 1].total - 1) | percent:'1.0', { alwaysSign: true, sign: '%', color: true, tag: true }]"></span>
               }
             </td>
           }

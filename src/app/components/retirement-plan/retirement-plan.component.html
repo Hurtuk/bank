@@ -1,52 +1,57 @@
-<h1>Plan épargne retraite</h1>
+<h1><fa-icon [icon]="faSuitecase"></fa-icon>Plan épargne retraite</h1>
 @if (data) {
   <div class="content">
     <div>
-      <h2>Injectés</h2>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Versement</th>
-            <th>Crédit d'impôt</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (year of byYear; track $index) {
-            <tr>
-              <td>{{ year.year }}</td>
-              <td><span [amount]="[year.amount, { alwaysSign: true, color: true }]"></span></td>
-              <td><span [amount]="[year.taxCredit]"></span></td>
-            </tr>
-          }
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>Total</td>
-            <td><span [amount]="[totalAmount, { alwaysSign: true, color: true }]"></span></td>
-            <td><span [amount]="[totalTaxCredit]"></span></td>
-          </tr>
-        </tfoot>
-      </table>
-      <h2>Evolutions</h2>
-      <p>Valeur aujourd'hui : <span [amount]="[totalAmount + interests]"></span> (<span [amount]="[((totalAmount + interests) / totalAmount - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true }]"></span>)</p>
-      <h2>Rente brute</h2>
-      <table>
-        <tbody>
-            <tr>
-              <td>Sur 10 ans : </td>
-              <td><span [amount]="[(totalAmount + interests) / 10 / 12]"></span> par mois</td>
-            </tr>
-            <tr>
-              <td>Sur 15 ans : </td>
-              <td><span [amount]="[(totalAmount + interests) / 15 / 12]"></span> par mois</td>
-            </tr>
-            <tr>
-              <td>Sur 20 ans : </td>
-              <td><span [amount]="[(totalAmount + interests) / 20 / 12]"></span> par mois</td>
-            </tr>
-        </tbody>
-      </table>
+      <div class="card">
+        <div class="title"><fa-icon [icon]="faCalendarCheck"></fa-icon>Rente brute</div>
+        <div class="content">
+          <div class="card">
+            Sur 10 ans : <span [amount]="[(totalAmount + interests) / 10 / 12]"></span> par mois
+          </div>
+          <div class="card">
+            Sur 15 ans : <span [amount]="[(totalAmount + interests) / 15 / 12]"></span> par mois
+          </div>
+          <div class="card">
+            Sur 20 ans : <span [amount]="[(totalAmount + interests) / 20 / 12]"></span> par mois
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="title"><fa-icon [icon]="faChartLine"></fa-icon>Valeur actuelle</div>
+        <div class="content current">
+          <span [amount]="[totalAmount + interests]"></span> <span [amount]="[((totalAmount + interests) / totalAmount - 1) | percent:'1.2', { alwaysSign: true, sign: '%', color: true, tag: true }]"></span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="title"><fa-icon [icon]="faCircleDollarToSlot"></fa-icon>Injectés</div>
+        <div class="content">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Versement</th>
+                <th>Crédit d'impôt</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (year of byYear; track $index) {
+                <tr>
+                  <td>{{ year.year }}</td>
+                  <td><span [amount]="[year.amount, { alwaysSign: true, color: true }]"></span></td>
+                  <td><span [amount]="[year.taxCredit]"></span></td>
+                </tr>
+              }
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td><span [amount]="[totalAmount, { alwaysSign: true, color: true }]"></span></td>
+                <td><span [amount]="[totalTaxCredit]"></span></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
     </div>
     <div>
       <h2>Performance</h2>

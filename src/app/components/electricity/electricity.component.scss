@@ -4,8 +4,13 @@ bk-chart {
 }
 
 table {
-    margin: 80px auto;
+    margin: 0 auto;
     border-collapse: collapse;
+}
+
+.card {
+    width: fit-content;
+    margin: 5rem auto 0;
 }
 
 tr:nth-child(even) {
@@ -28,24 +33,11 @@ td, th {
 
 .total {
     position: relative;
-    padding-bottom: 1.3em;
     font-weight: bold;
 }
 
 .evolution {
-    font-size: .75em;
-    color: red;
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 2.3em;
-
-    &.better {
-        color: green;
-    }
-}
-
-.years {
-    font-family: 'Sofia Sans Extra Condensed';
+    display: block;
+    width: fit-content;
+    margin: .5rem auto 0;
 }

@@ -11,12 +11,11 @@ bk-chart {
     display: block;
     height: 300px;
     margin: 0 20px;
-    max-width: calc(100vw - 675px);
+    max-width: calc(100vw - 760px);
 }
 
 table {
     font-size: .9rem;
-    margin: 0 20px;
 
     td {
         text-align: right;
@@ -36,16 +35,70 @@ table {
 
     .evolution {
         display: block;
-        font-size: .8rem;
-        
-        &.minus {
-            color: red;
-        }
-        &:not(.minus) {
-            color: green;
+        width: fit-content;
+        margin-left: auto;
+        top: 1px !important;
+    }
+}
 
-            &:not(:empty)::before {
-                content: '+';
+.card {
+    margin-top: 0;
+}
+
+.manual-chart {
+    width: 100%;
+
+    .card {
+        width: 100%;
+
+        .header {
+            justify-content: space-between;
+
+            > :first-child {
+                flex: 0 0 auto;
+            }
+
+            > :not(:first-child) {
+                padding: 5px 10px;
+                vertical-align: top;
+                color: darkgray;
+                font-weight: bold;
+
+                &:nth-child(2) { color: #CF022B; }
+                &:nth-child(3) { color: #008000; }
+                &:nth-child(4) { color: #00A490; }
+                &:nth-child(5) { color: #222F42; }
+            }
+        }
+
+        .row {
+            display: flex;
+
+            > :first-child {
+                width: 50px;
+            }
+
+            &.body {
+                > :nth-child(2) { background-color: #CF022B; }
+                > :nth-child(3) { background-color: #008000; }
+                > :nth-child(4) { background-color: #00A490; }
+                > :nth-child(5) { background-color: #222F42; }
+
+                > * {
+                    position: relative;
+                    overflow: visible;
+                }
+
+                span {
+                    position: absolute;
+                    width: 50px;
+                    color: white;
+                    left: calc(50% - 25px);
+                    top: 3px;
+                    font-weight: 200;
+                    font-size: .8em;
+                    text-align: center;
+                }
             }
         }
     }

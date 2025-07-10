@@ -67,7 +67,7 @@ export class AmountDirective implements OnChanges {
 				}
 
 				// Sign
-				this.elementRef.nativeElement.innerHTML = result.replace(/\./gi, ',') + '&nbsp;' + (options.sign ? options.sign : '€');
+				this.elementRef.nativeElement.innerHTML = result.replace(/\./gi, ',') + (options.sign ? options.sign : '&nbsp;€');
 
 				// Tag
 				if (options.tag) {

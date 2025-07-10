@@ -3,3 +3,7 @@
     overflow: auto;
     max-height: calc(100vh - 38px);
 }
+
+h1 ~ * {
+    text-align: center;
+}

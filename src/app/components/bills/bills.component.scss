@@ -1,6 +1,7 @@
 .columned {
     display: flex;
     text-align: center;
+    align-items: flex-start;
 
     > div {
         flex: 1;

@@ -43,20 +43,22 @@
         }
       </div>
     </div>
-    <div class="thrift card">
-      <div class="title">Épargne <fa-icon [icon]="faLock"></fa-icon></div>
-      <div class="content">
-        @for (thr of stockThriftAccounts; track $index) {
-          <div class="card big">
-            <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
-            <div class="account-name">{{ thr.name }}</div>
-            <div class="account-sum" [amount]="[thr.amount]"></div>
-          </div>
-        }
+    @if (stockThriftAccounts?.length) {
+      <div class="thrift card">
+        <div class="title">Épargne <fa-icon [icon]="faLock"></fa-icon></div>
+        <div class="content">
+          @for (thr of stockThriftAccounts; track $index) {
+            <div class="card big">
+              <span class="icon" [style.backgroundImage]="'url(./assets/images/structures/' + thr.bank + '.png)'"></span>
+              <div class="account-name">{{ thr.name }}</div>
+              <div class="account-sum" [amount]="[thr.amount]"></div>
+            </div>
+          }
+        </div>
       </div>
-    </div>
-    <div class="card">
-      @if (stocks?.length) {
+    }
+    @if (stocks?.length) {
+      <div class="card">
         <div class="title">Ordres <fa-icon [icon]="faChartLine"></fa-icon></div>
         <ul class="actions">
           @for (sto of stocks; track $index; let i = $index) {
@@ -89,10 +91,10 @@
                 </div>
               </div>
             </li>
-          }
+            }
         </ul>
-      }
-    </div>
+      </div>
+    }
   </div>
   <div>
     <bk-chart

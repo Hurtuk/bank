@@ -1,27 +1,29 @@
-<h1>Voyages</h1>
+<h1><fa-icon [icon]="faPlane"></fa-icon>Voyages</h1>
 <div class="content">
   @if (travels) {
-    <table>
-      <thead>
-        <tr>
-          <th>Dates</th>
-          <th>Nom</th>
-          <th>Coût total</th>
-          <th>Commentaire</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (t of travels; track $index) {
-          <tr [class]="(t.ended == '0' ? 'ongoing' : '') + ' ' + (t.start.getFullYear() % 2 ? 'odd' : 'even')">
-            <td>{{ t.start | date:'dd/MM/yyyy' }} - {{ t.end | date:'dd/MM/yyyy' }}</td>
-            <td>{{ t.title }}</td>
-            <td>
-              <span [amount]="[-t.cost]"></span>
-            </td>
-            <td class="comment">{{ t.comment }}</td>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Dates</th>
+            <th>Nom</th>
+            <th>Coût total</th>
+            <th>Commentaire</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (t of travels; track $index) {
+            <tr [class]="(t.ended == '0' ? 'ongoing' : '') + ' ' + (t.start.getFullYear() % 2 ? 'odd' : 'even')">
+              <td>{{ t.start | date:'dd/MM/yyyy' }} - {{ t.end | date:'dd/MM/yyyy' }}</td>
+              <td>{{ t.title }}</td>
+              <td>
+                <span [amount]="[-t.cost]"></span>
+              </td>
+              <td class="comment">{{ t.comment }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   }
 </div>

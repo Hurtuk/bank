@@ -6,12 +6,14 @@ import { AmountDirective } from 'src/app/shared/directives/amount.directive';
 import { DateService } from 'src/app/shared/services/date.service';
 import { RealEstateService } from 'src/app/shared/services/real-estate.service';
 import { ReBarsComponent } from './re-bars/re-bars.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faBuilding } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-real-estate',
     templateUrl: './real-estate.component.html',
     styleUrls: ['./real-estate.component.scss'],
-    imports: [DatePipe, PercentPipe, AmountDirective, BaseChartDirective, ReBarsComponent]
+    imports: [DatePipe, PercentPipe, AmountDirective, BaseChartDirective, ReBarsComponent, FontAwesomeModule]
 })
 export class RealEstateComponent implements OnInit {
   private realEstateService = inject(RealEstateService);
@@ -21,6 +23,8 @@ export class RealEstateComponent implements OnInit {
 
   public name: string;
   public data: any;
+
+  faBuilding = faBuilding;
   
   public options: any = {
 		// responsive: true,

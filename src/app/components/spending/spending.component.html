@@ -28,24 +28,26 @@
       }
     </ul>
     @if (spendings) {
-      <table class="spendings-list">
-        <thead>
-          <tr>
-            <td></td>
-            <td><input type="text" [(ngModel)]="searchSpending" (change)="search()" /></td>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          @for (spending of displaySpendings; track $index; let i = $index) {
-            <tr class="{{'month-' + (i >= 1 && (displaySpendings[i].date.getMonth() != displaySpendings[i-1].date.getMonth() || displaySpendings[i].date.getFullYear() != displaySpendings[i-1].date.getFullYear()) ? '1' : '0')}}">
-              <td>{{spending.date | date:'dd/MM/yy'}}</td>
-              <td>{{spending.title}}</td>
-              <td [amount]="[spending.amount, {alwaysSign: true, color: true}]"></td>
+      <div class="card">
+        <table class="spendings-list">
+          <thead>
+            <tr>
+              <td></td>
+              <td><input type="text" [(ngModel)]="searchSpending" (change)="search()" /></td>
+              <td></td>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @for (spending of displaySpendings; track $index; let i = $index) {
+              <tr class="{{'month-' + (i >= 1 && (displaySpendings[i].date.getMonth() != displaySpendings[i-1].date.getMonth() || displaySpendings[i].date.getFullYear() != displaySpendings[i-1].date.getFullYear()) ? '1' : '0')}}">
+                <td>{{spending.date | date:'dd/MM/yy'}}</td>
+                <td>{{spending.title}}</td>
+                <td [amount]="[spending.amount, {alwaysSign: true, color: true}]"></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     }
   </div>
   <bk-chart initialData="typesChartData"></bk-chart>

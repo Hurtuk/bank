@@ -4,17 +4,20 @@ import { ChartsService } from 'src/app/shared/services/charts.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { PercentPipe } from '@angular/common';
 import { AmountDirective } from 'src/app/shared/directives/amount.directive';
+import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'app-income',
     templateUrl: './income.component.html',
-    imports: [BkChartComponent, PercentPipe, AmountDirective],
+    imports: [BkChartComponent, PercentPipe, AmountDirective, FontAwesomeModule],
     styleUrls: ['./income.component.scss']
 })
 export class IncomeComponent implements OnInit {
 	private amountsService = inject(AmountsService);
 	private chartsService = inject(ChartsService);
 
+  faMoneyBill = faMoneyBill;
 
 	public chartOptions = [
 		[{option: 'backgroundColor', value: '#CF022B'}, // Travail
@@ -157,7 +160,7 @@ export class IncomeComponent implements OnInit {
 
   public getLabels(): string[] {
     if (!this.labels) {
-      const order = ["Travail", "Immobilier", "CESI", "Ecriture", "Divers"];
+      const order = ["Travail", "Immobilier", "Enseignement", "Ecriture", "Divers"];
       const labels = [];
       for (const py of this.perYear) {
         for (const data of py.data) {

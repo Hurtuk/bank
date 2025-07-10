@@ -1,3 +1,19 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+}
+
+.content {
+    overflow: auto;
+    flex: 1;
+}
+
+.card {
+    width: fit-content;
+    margin: 0 auto;
+}
+
 table {
     margin: 20px auto;
     border-collapse: collapse;

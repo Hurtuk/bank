@@ -4,10 +4,12 @@ import { AmountsService } from 'src/app/shared/services/amounts.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { ChartsService } from 'src/app/shared/services/charts.service';
 import { PercentPipe } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCalendarCheck, faChartLine, faCircleDollarToSlot, faSuitcase } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-retirement-plan',
-  imports: [AmountDirective, BkChartComponent, PercentPipe],
+  imports: [AmountDirective, BkChartComponent, PercentPipe, FontAwesomeModule],
   templateUrl: './retirement-plan.component.html',
   styleUrl: './retirement-plan.component.scss'
 })
@@ -21,7 +23,12 @@ export class RetirementPlanComponent implements OnInit {
   public interests = 0;
   public totalTaxCredit = 0;
 
-  public minDate = new Date(2023, 9, 1)
+  public minDate = new Date(2023, 9, 1);
+
+  faSuitecase = faSuitcase;
+  faCalendarCheck = faCalendarCheck;
+  faChartLine = faChartLine;
+  faCircleDollarToSlot = faCircleDollarToSlot;
 
 	public chartOptions = [
 		[{option: 'borderColor', value: '#FFCE56'},

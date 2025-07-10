@@ -1,77 +1,76 @@
-<h1>Fins de mois</h1>
-<div class="content">
-  <div class="wrapper">
-    <div class="chart">
-      <div class="tabs">
-        <input type="radio" name="tab" id="total-chart" value="Total" [(ngModel)]="operation" (change)="refresh()"/>
-        <label for="total-chart">Total</label>
-        <input type="radio" name="tab" id="compare-chart" value="Superposés" [(ngModel)]="operation" (change)="refresh()"/>
-        <label for="compare-chart">Superposés</label>
-      </div>
-      <bk-chart initialData="monthEndsData" [offFilters]="['Jour']" [comparison]="true"></bk-chart>
+<h1><fa-icon [icon]="faCalendarPlus"></fa-icon>Fins de mois</h1>
+
+<div class="wrapper">
+  <div class="chart">
+    <div class="tabs">
+      <input type="radio" name="tab" id="total-chart" value="Total" [(ngModel)]="operation" (change)="refresh()"/>
+      <label for="total-chart">Total</label>
+      <input type="radio" name="tab" id="compare-chart" value="Superposés" [(ngModel)]="operation" (change)="refresh()"/>
+      <label for="compare-chart">Superposés</label>
     </div>
-    <div class="tables">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            @for (d of data; track $index) {
-              @if (d.year >= minYear) {
-                <th>{{d.year}}</th>
-              }
+    <bk-chart initialData="monthEndsData" [offFilters]="['Jour']" [comparison]="true"></bk-chart>
+  </div>
+  <div class="card tables">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          @for (d of tableData; track $index) {
+            @if (d.year >= minYear) {
+              <th>{{d.year}}</th>
             }
-          </tr>
-        </thead>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Total</th>
+          @for (d of tableData; track $index) {
+            @if (d.year >= minYear) {
+              <td [amount]="[d.total, {color: true, alwaysSign: true}]"></td>
+            }
+          }
+        </tr>
+        <tr>
+          <th>Moyenne</th>
+          @for (d of tableData; track $index) {
+            @if (d.year >= minYear) {
+              <td [amount]="[d.average, {color: true, alwaysSign: true}]"></td>
+            }
+          }
+        </tr>
+      </tbody>
+      @if (tableData) {
         <tbody>
-          <tr>
-            <th>Total</th>
-            @for (d of data; track $index) {
-              @if (d.year >= minYear) {
-                <td [amount]="[d.total, {color: true, alwaysSign: true}]"></td>
-              }
-            }
-          </tr>
-          <tr>
-            <th>Moyenne</th>
-            @for (d of data; track $index) {
-              @if (d.year >= minYear) {
-                <td [amount]="[d.average, {color: true, alwaysSign: true}]"></td>
-              }
-            }
-          </tr>
-        </tbody>
-        @if (data) {
-          <tbody>
-            @for (m of data[0].months; track $index; let i = $index) {
-              <tr>
-                <th>{{getMonth(m.month)}}</th>
-                @for (d of data; track $index) {
-                  @if (d.year >= minYear) {
-                    <td [amount]="[d.months[i] ? d.months[i].value : '', {color: true, alwaysSign: true}]"></td>
-                  }
+          @for (m of data[0].months; track $index; let i = $index) {
+            <tr>
+              <th>{{getMonth(m.month)}}</th>
+              @for (d of tableData; track $index) {
+                @if (d.year >= minYear) {
+                  <td [amount]="[d.months[i] ? d.months[i].value : '', {color: true, alwaysSign: true}]"></td>
                 }
-              </tr>
-            }
-          </tbody>
-        }
-      </table>
-    </div>
+              }
+            </tr>
+          }
+        </tbody>
+      }
+    </table>
   </div>
-  <div class="ranges">
-    <bk-chart
-      initialData="rangesDataP"
-      [offFilters]="['Jour', 'Mois', 'Année']"
-      [header]="false"
-      type="bar"
-      [maximum]="RANGE"
-      [hideX]="true"
-    bgColor="#008000"></bk-chart>
-    <bk-chart
-      initialData="rangesDataM"
-      [offFilters]="['Jour', 'Mois', 'Année']"
-      [header]="false"
-      type="bar"
-      [minimum]="-RANGE"
-    bgColor="rgba(255, 0, 0, 0.8)"></bk-chart>
-  </div>
+</div>
+<div class="ranges">
+  <bk-chart
+    initialData="rangesDataP"
+    [offFilters]="['Jour', 'Mois', 'Année']"
+    [header]="false"
+    type="bar"
+    [maximum]="RANGE"
+    [hideX]="true"
+  bgColor="#008000"></bk-chart>
+  <bk-chart
+    initialData="rangesDataM"
+    [offFilters]="['Jour', 'Mois', 'Année']"
+    [header]="false"
+    type="bar"
+    [minimum]="-RANGE"
+  bgColor="rgba(255, 0, 0, 0.8)"></bk-chart>
 </div>

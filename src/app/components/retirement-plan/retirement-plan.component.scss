@@ -1,8 +1,9 @@
-.content {
+:host > .content {
   display: flex;
   justify-content: space-around;
   gap: 4rem;
-  padding: 4rem;
+  padding: 2rem 4rem;
+  text-align: center;
 
   div + div {
     flex: 1;
@@ -15,8 +16,12 @@ table {
 
 td, th {
   text-align: right;
-  min-width: 130px;
+  min-width: 140px;
   vertical-align: top;
+
+  &:first-child {
+    min-width: 0;
+  }
 }
 
 tfoot {
@@ -31,6 +36,12 @@ bk-chart {
   height: 500px;
 }
 
-h2:not(:first-child) {
-  margin-top: 2rem;
+.current {
+  font-size: 1.8em;
+
+  span:last-child {
+    margin-left: 1rem;
+    top: -4px !important;
+    margin-right: -20%;
+  }
 }

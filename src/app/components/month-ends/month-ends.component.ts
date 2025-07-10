@@ -5,12 +5,14 @@ import { DateService } from '../../shared/services/date.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
 import { FormsModule } from '@angular/forms';
 import { AmountDirective } from 'src/app/shared/directives/amount.directive';
+import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'month-ends',
     templateUrl: 'month-ends.component.html',
     styleUrls: ['month-ends.component.scss'],
-	imports: [BkChartComponent, FormsModule, AmountDirective],
+	imports: [BkChartComponent, FormsModule, AmountDirective, FontAwesomeModule],
 })
 
 export class MonthEndsComponent implements OnInit {
@@ -21,9 +23,12 @@ export class MonthEndsComponent implements OnInit {
 	public RANGE = 12000;
 
 	public data: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
+	public tableData: {year: string, total?: number, average?: number, months: {month: number, value: number}[]}[];
 	public operation = 'Total';
 
 	public minYear = (new Date()).getFullYear() - 5;
+
+	faCalendarPlus = faCalendarPlus;
 
 	public refresh() {
 		switch (this.operation) {
@@ -55,6 +60,7 @@ export class MonthEndsComponent implements OnInit {
 				d.total = d.months.reduce((prev, current) => prev + current.value, 0);
 				d.average = d.total / d.months.length;
 			});
+			this.tableData = [...this.data].reverse();
 			this.refresh();
 		});
 		this.amountsService.getPlusMinus().subscribe(x => {

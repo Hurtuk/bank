@@ -3,14 +3,16 @@ import { ChartsService } from 'src/app/shared/services/charts.service';
 import { DateService } from 'src/app/shared/services/date.service';
 import { ElectricityService } from 'src/app/shared/services/electricity.service';
 import { BkChartComponent } from '../bk-chart/bk-chart.component';
-import { PercentPipe } from '@angular/common';
 import { AmountDirective } from 'src/app/shared/directives/amount.directive';
+import { PercentPipe } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPlug } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-electricity',
     templateUrl: './electricity.component.html',
     styleUrls: ['./electricity.component.scss'],
-	imports: [BkChartComponent, PercentPipe, AmountDirective]
+	imports: [BkChartComponent, AmountDirective, PercentPipe, FontAwesomeModule]
 })
 export class ElectricityComponent implements OnInit {
 	private chartsService = inject(ChartsService);
@@ -30,6 +32,8 @@ export class ElectricityComponent implements OnInit {
 	];
 
 	private today = new Date();
+
+	faPlug = faPlug;
 
 	ngOnInit() {
 		this.electricityService.getElecData().subscribe(x => {

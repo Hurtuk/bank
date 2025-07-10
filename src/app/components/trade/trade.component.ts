@@ -3,12 +3,14 @@ import { AmountsService } from '../../shared/services/amounts.service';
 import { ChartsService } from '../../shared/services/charts.service';
 import { PercentPipe } from '@angular/common';
 import { AmountDirective } from 'src/app/shared/directives/amount.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'trade',
     templateUrl: 'trade.component.html',
     styleUrls: ['trade.component.scss'],
-	imports: [PercentPipe, AmountDirective]
+	imports: [PercentPipe, AmountDirective, FontAwesomeModule]
 })
 
 export class TradeComponent implements OnInit {
@@ -20,6 +22,8 @@ export class TradeComponent implements OnInit {
 	public bestPerfs = { today: [],	week: [], month: []	};
 	public worstPerfs = { today: [], week: [], month: [] };
 	private MAX_PERF_TO_SHOW = 6;
+
+	faGlobe = faGlobe;
 
 	ngOnInit() {
 		this.chartsService.currentsData.subscribe(x => this.currents = x.sort((a1, a2) => a2.value * a2.quantity - a1.value * a1.quantity));

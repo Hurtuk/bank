@@ -1,14 +1,14 @@
-<h1>{{name}}</h1>
+<h1><fa-icon [icon]="faBuilding"></fa-icon>{{name}}</h1>
 @if (data) {
   <div class="content">
     <div class="current-year">
-      <div>
+      <div class="card total">
         <h3>{{ data.per_year[0].year }}</h3>
         <span class="renta">{{ data.per_year[0].value >= 0 ? '+' : '' }}{{ data.per_year[0].value | percent:'1.2-3' }}</span>
         <span [amount]="[data.per_year[0].plus, {alwaysSign: true, color: true}]"></span>
         <span [amount]="[data.per_year[0].minus, {alwaysSign: true, color: true}]"></span>
       </div>
-      <div class="months" height="300">
+      <div class="card months" height="300">
         @for (m of data.per_month; track $index) {
           @if (m.year === data.per_year[0].year) {
             <div class="month">
@@ -34,9 +34,9 @@
     <div class="previous-years">
       @for (py of data.per_year; track $index; let i = $index) {
         @if (i > 0) {
-          <div>
+          <div class="card">
             <h3>{{ py.year }}</h3>
-            <span class="renta">{{ py.value >= 0 ? '+' : '' }}{{ py.value | percent:'1.2-3' }}</span>
+            <span class="renta" [amount]="[py.value | percent:'1.2-2', { alwaysSign: true, sign: '%', color: true, tag: true }]"></span>
             <span [amount]="[py.plus, {alwaysSign: true, color: true}]"></span>
             <span [amount]="[py.minus, {alwaysSign: true, color: true}]"></span>
           </div>
@@ -44,8 +44,8 @@
       }
     </div>
     <div class="down-data">
-      <div>
-        <h2>Dépenses de base</h2>
+      <div class="card">
+        <div class="title">Dépenses de base</div>
         <table>
           <tbody>
             @for (row of data.start; track $index) {
@@ -63,8 +63,8 @@
           </tfoot>
         </table>
       </div>
-      <div>
-        <h2>Dernières transactions</h2>
+      <div class="card">
+        <div class="title">Dernières transactions</div>
         <table>
           <tbody>
             @for (row of data.last; track $index) {
@@ -77,8 +77,8 @@
           </tbody>
         </table>
       </div>
-      <div>
-        <h2>Occupations</h2>
+      <div class="card">
+        <div class="title">Occupations</div>
         <app-re-bars [data]="data.occupied"></app-re-bars>
       </div>
     </div>
