@@ -1,7 +1,15 @@
 @use '../../shared/styles/colors.scss' as colors;
 
+:host {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 35px);
+}
+
 .content {
     text-align: left;
+    flex: 1;
+    overflow: auto;
 
     .year {
         display: inline-block;

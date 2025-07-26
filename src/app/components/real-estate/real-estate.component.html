@@ -4,7 +4,7 @@
     <div class="current-year">
       <div class="card total">
         <h3>{{ data.per_year[0].year }}</h3>
-        <span class="renta">{{ data.per_year[0].value >= 0 ? '+' : '' }}{{ data.per_year[0].value | percent:'1.2-3' }}</span>
+        <span class="renta">{{ data.per_year[0].value | percent:'1.2-3' }}</span>
         <span [amount]="[data.per_year[0].plus, {alwaysSign: true, color: true}]"></span>
         <span [amount]="[data.per_year[0].minus, {alwaysSign: true, color: true}]"></span>
       </div>
@@ -36,7 +36,7 @@
         @if (i > 0) {
           <div class="card">
             <h3>{{ py.year }}</h3>
-            <span class="renta" [amount]="[py.value | percent:'1.2-2', { alwaysSign: true, sign: '%', color: true, tag: true }]"></span>
+            <span class="renta" [amount]="[py.value | percent:'1.2-2', { sign: '%', color: true, tag: true }]"></span>
             <span [amount]="[py.plus, {alwaysSign: true, color: true}]"></span>
             <span [amount]="[py.minus, {alwaysSign: true, color: true}]"></span>
           </div>

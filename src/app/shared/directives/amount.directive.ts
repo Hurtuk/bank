@@ -7,6 +7,7 @@ import { Directive, ElementRef, Input, OnChanges, inject } from '@angular/core';
  *  - sign: string
  * 	- color: boolean
  *  - tag: boolean
+ *  - invert: boolean
  */
 @Directive({
     selector: '[amount]'
@@ -61,7 +62,7 @@ export class AmountDirective implements OnChanges {
 
 				// Color
 				if (options.color) {
-					this.elementRef.nativeElement.style.color = integer >= 0 ? 'green' : 'red';
+					this.elementRef.nativeElement.style.color = integer >= 0 === !options.invert ? 'green' : 'red';
 				} else {
 					this.elementRef.nativeElement.style.color = 'inherit';
 				}
@@ -72,7 +73,7 @@ export class AmountDirective implements OnChanges {
 				// Tag
 				if (options.tag) {
 					this.elementRef.nativeElement.style.fontSize = '0.7em';
-					this.elementRef.nativeElement.style.backgroundColor = integer >= 0 ? '#d4f5d4' : '#f5d4d4';
+					this.elementRef.nativeElement.style.backgroundColor = integer >= 0 === !options.invert ? '#d4f5d4' : '#f5d4d4';
 					this.elementRef.nativeElement.style.padding = '0.1em 0.3em';
 					this.elementRef.nativeElement.style.borderRadius = '0.3em';
 					this.elementRef.nativeElement.style.marginBottom = '.1em';
